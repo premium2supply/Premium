@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premium Supply — Confidentialité</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page">
+  <div class="container">
+    <h1 class="page-title">Confidentialité</h1>
+    <p class="muted" style="margin-top:10px;max-width:860px;line-height:1.7">
+      Site statique (GitHub Pages). Le panier et la dernière commande sont stockés dans le navigateur de l’utilisateur via
+      <b>localStorage</b>. Aucune donnée n’est envoyée à un serveur par défaut.
+      <br><br>
+      Remplace cette page par ta vraie politique si tu ajoutes un backend, un paiement en ligne, des analytics, etc.
+    </p>
+
+    <div class="panel" style="margin-top:16px">
+      <h3>Données stockées localement</h3>
+      <ul class="details-list">
+        <li>Contenu du panier</li>
+        <li>Dernière commande (confirmation)</li>
+      </ul>
+
+      <hr class="sep">
+
+      <h3>Suppression</h3>
+      <p class="muted" style="line-height:1.7;margin:0">
+        L’utilisateur peut vider le panier via la page “Panier” ou supprimer les données de site dans son navigateur.
+      </p>
+    </div>
+
+    <div style="height:12px"></div>
+    <a class="btn primary" href="index.html">Retour accueil</a>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module">
+  import { initLayout } from './assets/js/core.js';
+  initLayout();
+</script>
+</body>
+</html>
