@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>Premium Supply — Botanical & Wellness</title>
+  <title>Premium Supply — Neon Future Market</title>
 
   <!-- Fonts (free) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,251 +15,451 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Animated background FX -->
+  <canvas id="stars" aria-hidden="true"></canvas>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <span class="brand-logo logo-3d" data-text="Premium Supply" aria-label="Premium Supply">
-          Premium Supply
-        </span>
-        <span class="brand-tagline">Botanical &amp; Wellness</span>
-      </div>
+  <a class="skip" href="#main">Skip to content</a>
 
-      <nav class="site-nav" aria-label="Primary navigation">
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#">
+        <span class="brand__name neon-3d" data-text="Premium Supply">Premium Supply</span>
+        <span class="brand__tag">Neon Future Market</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#drops">Drops</a>
         <a href="#collections">Collections</a>
-        <a href="#bestsellers">Best sellers</a>
-        <a href="#about">About</a>
+        <a href="#featured">Featured</a>
         <a href="#visit">Visit</a>
-        <a class="nav-cta" href="#newsletter">Get updates</a>
+        <a class="nav__cta" href="#newsletter">Get updates</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
+    <!-- HERO -->
     <section class="hero">
-      <!-- Optional: add your image as assets/hero.jpg -->
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero__bg" aria-hidden="true"></div>
 
-      <div class="container hero-inner">
-        <p class="eyebrow">New drops every week</p>
-
-        <h1 class="hero-title logo-3d" data-text="Premium Supply">
-          Premium Supply
-        </h1>
-
-        <p class="hero-subtitle">
-          A neon storefront template for curated botanicals, aroma goods, and accessories.
-          Mobile-first and ready for GitHub Pages.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn primary" href="#collections">Browse collections</a>
-          <a class="btn ghost" href="#visit">Find a store</a>
-        </div>
-
-        <div class="hero-stats" role="list">
-          <div class="stat" role="listitem">
-            <span class="stat-num">★★★★★</span>
-            <span class="stat-label">4.9 average rating</span>
-          </div>
-          <div class="stat" role="listitem">
-            <span class="stat-num">Pickup + local</span>
-            <span class="stat-label">delivery options</span>
-          </div>
-          <div class="stat" role="listitem">
-            <span class="stat-num">100+</span>
-            <span class="stat-label">curated items</span>
-          </div>
-        </div>
+      <!-- Floating asteroids -->
+      <div class="rocks" aria-hidden="true">
+        <span class="rock r1"></span>
+        <span class="rock r2"></span>
+        <span class="rock r3"></span>
+        <span class="rock r4"></span>
+        <span class="rock r5"></span>
       </div>
-    </section>
 
-    <section id="collections" class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Featured collections</h2>
-          <p>Swap these for your real categories anytime.</p>
-        </div>
+      <div class="container hero__inner">
+        <div class="hero__copy" data-reveal>
+          <p class="eyebrow">PURPLE NEON • SPACE MARKET • PREMIUM DROPS</p>
 
-        <div class="grid cards">
-          <article class="card">
-            <h3>Night Market</h3>
-            <p>Herbal blends + ritual accessories for evenings in.</p>
-            <a class="card-link" href="#">Shop Night Market →</a>
-          </article>
+          <h1 class="title glitch" data-text="Premium Supply">
+            Premium Supply
+          </h1>
 
-          <article class="card">
-            <h3>Galaxy Essentials</h3>
-            <p>Daily items with clean design and premium materials.</p>
-            <a class="card-link" href="#">Shop Essentials →</a>
-          </article>
-
-          <article class="card">
-            <h3>Glow-Up Kits</h3>
-            <p>Bundles built for gifting (or treating yourself).</p>
-            <a class="card-link" href="#">Shop Kits →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="bestsellers" class="section alt">
-      <div class="container">
-        <div class="section-head">
-          <h2>Best sellers</h2>
-          <p>These are placeholders (static template — no checkout).</p>
-        </div>
-
-        <div class="grid products">
-          <article class="product">
-            <div class="product-badge">New</div>
-            <div class="product-media" aria-hidden="true"></div>
-            <h3 class="product-title">Midnight Herbal Blend</h3>
-            <p class="product-meta">Loose leaf • 30g</p>
-            <div class="product-row">
-              <span class="price">$18</span>
-              <button class="btn small" type="button">Add</button>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product-badge">Popular</div>
-            <div class="product-media" aria-hidden="true"></div>
-            <h3 class="product-title">Aroma Diffuser Oil</h3>
-            <p class="product-meta">Lavender + citrus • 10ml</p>
-            <div class="product-row">
-              <span class="price">$14</span>
-              <button class="btn small" type="button">Add</button>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product-badge">Bundle</div>
-            <div class="product-media" aria-hidden="true"></div>
-            <h3 class="product-title">Glow Ritual Set</h3>
-            <p class="product-meta">3 items • gift-ready</p>
-            <div class="product-row">
-              <span class="price">$42</span>
-              <button class="btn small" type="button">Add</button>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product-badge">Limited</div>
-            <div class="product-media" aria-hidden="true"></div>
-            <h3 class="product-title">Glass Storage Jar</h3>
-            <p class="product-meta">Smell-proof • 250ml</p>
-            <div class="product-row">
-              <span class="price">$16</span>
-              <button class="btn small" type="button">Add</button>
-            </div>
-          </article>
-        </div>
-
-        <div class="note">
-          <p><strong>Note:</strong> The “Add” buttons are visual only. If you want real cart/checkout later, tell me what platform you want (Shopify, Stripe, etc.) and I’ll suggest a safe approach.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container split">
-        <div>
-          <h2>Premium quality, neon energy</h2>
-          <p>
-            This template is made to work great on iPhone and can be hosted on GitHub Pages.
-            Just keep <code>index.html</code> and <code>styles.css</code> in the repo root.
+          <p class="subtitle">
+            A futuristic animated storefront inspired by your galaxy/neon artwork:
+            glowing planet, rotating ring, twinkling stars, floating asteroids, and holographic cards.
           </p>
 
-          <ul class="checklist">
-            <li>Mobile-first layout</li>
-            <li>3D/glow headline like your image</li>
-            <li>Easy to customize colors &amp; sections</li>
-          </ul>
-        </div>
-
-        <div class="panel">
-          <h3>Store hours</h3>
-          <p class="muted">Edit these anytime.</p>
-
-          <div class="hours">
-            <div><span>Mon–Thu</span><span>11am–8pm</span></div>
-            <div><span>Fri–Sat</span><span>11am–10pm</span></div>
-            <div><span>Sun</span><span>12pm–6pm</span></div>
+          <div class="actions">
+            <a class="btn btn--primary" href="#collections">Enter the market</a>
+            <a class="btn btn--ghost" href="#featured">See featured</a>
           </div>
 
-          <a class="btn ghost full" href="#visit">Get directions</a>
+          <div class="stats" role="list">
+            <div class="stat" role="listitem">
+              <span class="stat__num">LIVE</span>
+              <span class="stat__label">animated neon UI</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat__num">FAST</span>
+              <span class="stat__label">mobile-friendly</span>
+            </div>
+            <div class="stat" role="listitem">
+              <span class="stat__num">FREE</span>
+              <span class="stat__label">GitHub Pages ready</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ART: planet + ring + plane -->
+        <div class="hero__art" aria-hidden="true" data-reveal>
+          <div class="planet-wrap">
+            <div class="ring ring--back"></div>
+
+            <div class="planet">
+              <div class="planet__shine"></div>
+              <div class="planet__texture"></div>
+            </div>
+
+            <div class="ring ring--front"></div>
+
+            <!-- Curved logo like your image -->
+            <svg class="arc" viewBox="0 0 600 260" role="img" aria-label="">
+              <defs>
+                <path id="arcPath" d="M 40 200 C 150 40, 450 40, 560 200" />
+                <linearGradient id="txtGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff"/>
+                  <stop offset="0.45" stop-color="#efe6ff"/>
+                  <stop offset="1" stop-color="#b48cff"/>
+                </linearGradient>
+                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feColorMatrix in="blur" type="matrix"
+                    values="1 0 0 0 0
+                            0 0.6 0 0 0
+                            0 0 1 0 0
+                            0 0 0 0.9 0" result="glow"/>
+                  <feMerge>
+                    <feMergeNode in="glow"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <text class="arc__text" filter="url(#softGlow)">
+                <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
+                  PREMIUM SUPPLY
+                </textPath>
+              </text>
+            </svg>
+
+            <!-- Paper plane + trail (animated) -->
+            <div class="plane">
+              <svg viewBox="0 0 120 70" width="120" height="70" aria-hidden="true">
+                <path d="M5 35 L115 5 L80 65 L58 44 L40 52 L48 40 Z" fill="#f7eaff"/>
+                <path d="M58 44 L115 5 L70 42 Z" fill="#e3c7ff" opacity="0.95"/>
+              </svg>
+              <span class="trail"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Neon ticker -->
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span>NEON DROPS</span><span>•</span>
+          <span>GALAXY EDITION</span><span>•</span>
+          <span>LIMITED RUNS</span><span>•</span>
+          <span>PREMIUM QUALITY</span><span>•</span>
+          <span>FUTURE MARKET</span><span>•</span>
+          <span>NEON DROPS</span><span>•</span>
+          <span>GALAXY EDITION</span><span>•</span>
+          <span>LIMITED RUNS</span><span>•</span>
+          <span>PREMIUM QUALITY</span><span>•</span>
+          <span>FUTURE MARKET</span><span>•</span>
+        </div>
+      </div>
+
+      <div class="scrollhint" aria-hidden="true">Scroll</div>
+    </section>
+
+    <!-- DROPS -->
+    <section id="drops" class="section">
+      <div class="container">
+        <div class="head" data-reveal>
+          <h2>Hot drops</h2>
+          <p>These are placeholders — swap in your real items.</p>
+        </div>
+
+        <div class="grid grid--4">
+          <article class="card card--product" data-reveal>
+            <div class="card__media"></div>
+            <h3>Nova Night Kit</h3>
+            <p class="muted">Limited • Glow finish</p>
+            <div class="row">
+              <span class="price">$29</span>
+              <button class="chip" type="button">Add</button>
+            </div>
+          </article>
+
+          <article class="card card--product" data-reveal>
+            <div class="card__media"></div>
+            <h3>Cosmic Aroma Oil</h3>
+            <p class="muted">10ml • Calm blend</p>
+            <div class="row">
+              <span class="price">$14</span>
+              <button class="chip" type="button">Add</button>
+            </div>
+          </article>
+
+          <article class="card card--product" data-reveal>
+            <div class="card__media"></div>
+            <h3>Holo Storage Jar</h3>
+            <p class="muted">Glass • Premium seal</p>
+            <div class="row">
+              <span class="price">$18</span>
+              <button class="chip" type="button">Add</button>
+            </div>
+          </article>
+
+          <article class="card card--product" data-reveal>
+            <div class="card__media"></div>
+            <h3>Neon Sticker Pack</h3>
+            <p class="muted">10 pcs • UV glow</p>
+            <div class="row">
+              <span class="price">$9</span>
+              <button class="chip" type="button">Add</button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="visit" class="section alt">
+    <!-- COLLECTIONS -->
+    <section id="collections" class="section section--alt">
       <div class="container">
-        <div class="section-head">
-          <h2>Visit us</h2>
-          <p>Add your address + socials here.</p>
+        <div class="head" data-reveal>
+          <h2>Collections</h2>
+          <p>Built for the “neon market under a purple planet” vibe.</p>
         </div>
 
-        <div class="grid visit">
-          <div class="card">
+        <div class="grid grid--3">
+          <article class="card card--glow" data-reveal>
+            <h3>Night Market</h3>
+            <p class="muted">Street lights, neon signs, premium finds.</p>
+            <a class="link" href="#featured">Browse →</a>
+          </article>
+
+          <article class="card card--glow" data-reveal>
+            <h3>Galaxy Essentials</h3>
+            <p class="muted">Daily items with cosmic color and clean design.</p>
+            <a class="link" href="#featured">Browse →</a>
+          </article>
+
+          <article class="card card--glow" data-reveal>
+            <h3>Limited Drops</h3>
+            <p class="muted">Small batches, fast sell-through energy.</p>
+            <a class="link" href="#featured">Browse →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section id="featured" class="section">
+      <div class="container">
+        <div class="head" data-reveal>
+          <h2>Featured neon picks</h2>
+          <p>Hover/tap cards — they lift and glow.</p>
+        </div>
+
+        <div class="grid grid--2">
+          <article class="feature" data-reveal>
+            <div class="feature__panel">
+              <h3>Holographic UI</h3>
+              <p class="muted">Glowing borders, animated gradients, and glass panels.</p>
+              <ul class="list">
+                <li>Twinkling star background</li>
+                <li>Floating asteroids</li>
+                <li>Animated planet ring + plane</li>
+              </ul>
+              <a class="btn btn--ghost" href="#newsletter">Get updates</a>
+            </div>
+          </article>
+
+          <article class="feature" data-reveal>
+            <div class="feature__panel">
+              <h3>Use your images</h3>
+              <p class="muted">
+                Upload your artwork into <code>assets/</code> to match the vibe even harder.
+              </p>
+              <div class="codebox">
+                <code>assets/hero.jpg</code><br>
+                <code>assets/market.jpg</code>
+              </div>
+              <a class="btn btn--primary" href="#visit">Set it live</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section id="visit" class="section section--alt">
+      <div class="container">
+        <div class="head" data-reveal>
+          <h2>Visit / Contact</h2>
+          <p>Add your real info here.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card" data-reveal>
             <h3>Location</h3>
             <p class="muted">
               123 Neon Ave<br>
               Your City, ST 00000
             </p>
-            <p class="muted">Parking available • Walk-ins welcome</p>
           </div>
 
-          <div class="card">
-            <h3>Contact</h3>
+          <div class="card" data-reveal>
+            <h3>Hours</h3>
+            <p class="muted">Mon–Thu 11–8<br>Fri–Sat 11–10<br>Sun 12–6</p>
+          </div>
+
+          <div class="card" data-reveal>
+            <h3>Social</h3>
             <p class="muted">
-              (000) 000‑0000<br>
+              Instagram • TikTok • X<br>
               hello@premiumsupply.example
             </p>
-            <div class="social">
-              <a href="#" aria-label="Instagram">Instagram</a>
-              <a href="#" aria-label="TikTok">TikTok</a>
-              <a href="#" aria-label="X">X</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>FAQ</h3>
-            <details>
-              <summary>Do you ship?</summary>
-              <p class="muted">Yes—local delivery and pickup options available.</p>
-            </details>
-            <details>
-              <summary>What’s your return policy?</summary>
-              <p class="muted">Unused items in original packaging within 14 days.</p>
-            </details>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- NEWSLETTER -->
     <section id="newsletter" class="section">
-      <div class="container newsletter">
+      <div class="container newsletter" data-reveal>
         <div>
           <h2>Get drops + deals</h2>
-          <p class="muted">No spam. Just new arrivals and limited releases.</p>
+          <p class="muted">No spam — just releases and specials.</p>
         </div>
 
         <form class="form" action="#" method="get">
-          <label class="sr-only" for="email">Email</label>
+          <label class="sr" for="email">Email</label>
           <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
-          <button class="btn primary" type="submit">Subscribe</button>
+          <button class="btn btn--primary" type="submit">Subscribe</button>
         </form>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© Premium Supply. All rights reserved.</p>
-      <p class="muted">Static template for GitHub Pages.</p>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© Premium Supply — Neon Future Market</p>
+      <p class="muted">Static template • GitHub Pages ready</p>
     </div>
   </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+
+      // Respect accessibility settings
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Touch/mouse neon "spotlight"
+      const setGlow = (x, y) => {
+        root.style.setProperty('--mx', (x * 100).toFixed(2) + '%');
+        root.style.setProperty('--my', (y * 100).toFixed(2) + '%');
+      };
+
+      setGlow(0.55, 0.25);
+
+      window.addEventListener('mousemove', (e) => {
+        setGlow(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+      }, { passive: true });
+
+      window.addEventListener('touchstart', (e) => {
+        const t = e.touches && e.touches[0];
+        if (!t) return;
+        setGlow(t.clientX / window.innerWidth, t.clientY / window.innerHeight);
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        const t = e.touches && e.touches[0];
+        if (!t) return;
+        setGlow(t.clientX / window.innerWidth, t.clientY / window.innerHeight);
+      }, { passive: true });
+
+      // Scroll reveal
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(en => {
+            if (en.isIntersecting) {
+              en.target.classList.add('in');
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => io.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('in'));
+      }
+
+      // Canvas starfield (real animation)
+      const canvas = document.getElementById('stars');
+      const ctx = canvas.getContext('2d', { alpha: true });
+
+      let w = 0, h = 0, dpr = 1, stars = [];
+
+      const rand = (min, max) => Math.random() * (max - min) + min;
+
+      const resize = () => {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth;
+        h = window.innerHeight;
+
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const target = Math.round((w * h) / 14000);
+        const count = Math.max(90, Math.min(220, target));
+
+        stars = Array.from({ length: count }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: rand(0.25, 1.6),
+          sp: rand(0.08, 0.55),
+          a: rand(0.15, 0.95),
+          tw: rand(0, Math.PI * 2),
+          tws: rand(0.008, 0.04),
+        }));
+
+        // Draw once if reduced motion
+        if (reduceMotion) {
+          ctx.clearRect(0, 0, w, h);
+          for (const s of stars) {
+            const alpha = s.a * 0.7;
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      };
+
+      const tick = () => {
+        if (reduceMotion) return;
+
+        ctx.clearRect(0, 0, w, h);
+
+        for (const s of stars) {
+          // Drift
+          s.x -= s.sp * 0.55;
+          s.y += s.sp * 0.14;
+
+          if (s.x < -10) { s.x = w + 10; s.y = Math.random() * h; }
+          if (s.y > h + 10) { s.y = -10; s.x = Math.random() * w; }
+
+          // Twinkle
+          s.tw += s.tws;
+          const tw = 0.45 + 0.55 * Math.sin(s.tw);
+          const alpha = s.a * tw;
+
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(tick);
+      };
+
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+      requestAnimationFrame(tick);
+    })();
+  </script>
 </body>
 </html>
