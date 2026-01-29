@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premium Supply — Shop</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="page">
+  <div class="container">
+    <h1 class="page-title" id="shop-title">Shop</h1>
+    <div class="toolbar" role="region" aria-label="Filtres">
+      <div class="group">
+        <div class="field" style="width:100%">
+          <label for="filter-search">Recherche</label>
+          <input class="input" id="filter-search" type="search" placeholder="Tape un nom, mot-clé...">
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="field" style="width:100%">
+          <label for="filter-category">Catégorie</label>
+          <select id="filter-category"></select>
+        </div>
+      </div>
+
+      <div class="group" style="flex:0 0 auto">
+        <label class="pill" style="cursor:pointer">
+          <input id="filter-sale" type="checkbox" style="margin:0">
+          <span style="font-weight:900">SALE uniquement</span>
+        </label>
+      </div>
+
+      <div class="group" style="flex:0 0 auto">
+        <button class="btn" id="go-promo" type="button">🔥 Promos</button>
+        <button class="btn" id="filter-reset" type="button">Réinitialiser</button>
+      </div>
+
+      <div class="group" style="flex:0 0 auto">
+        <span class="badge" id="results-count">0 produit(s)</span>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <div class="grid" id="shop-grid" aria-label="Liste des produits"></div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script type="module" src="assets/js/pages/shop.js"></script>
+</body>
+</html>
