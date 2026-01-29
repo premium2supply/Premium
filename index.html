@@ -3,462 +3,1300 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark" />
-  <title>Premium Supply — Neon Future Market</title>
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#0b4d3b" />
+  <title>Premium — Boutique</title>
 
-  <!-- Fonts (free) -->
+  <!-- Empêche d'afficher le site avant la vérification d'âge (très tôt) -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("premium_age_ok") === "1") {
+          document.documentElement.classList.add("age-ok");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts (luxe + lisible) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <!-- Animated background FX -->
-  <canvas id="stars" aria-hidden="true"></canvas>
+  <!-- FX très discret -->
+  <canvas id="sky" aria-hidden="true"></canvas>
 
-  <a class="skip" href="#main">Skip to content</a>
+  <!-- AGE GATE (avant tout contenu) -->
+  <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
+    <div class="age-card">
+      <div class="age-top">
+        <div class="wordmark">
+          <span class="wordmark__name">Premium</span>
+          <span class="wordmark__tag" data-i18n="brandTag">Boutique premium</span>
+        </div>
 
-  <header class="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="#">
-        <span class="brand__name neon-3d" data-text="Premium Supply">Premium Supply</span>
-        <span class="brand__tag">Neon Future Market</span>
-      </a>
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button class="lang-btn" type="button" data-set-lang="fr" aria-pressed="false">FR</button>
+          <button class="lang-btn" type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
 
-      <nav class="nav" aria-label="Primary">
-        <a href="#drops">Drops</a>
-        <a href="#collections">Collections</a>
-        <a href="#featured">Featured</a>
-        <a href="#visit">Visit</a>
-        <a class="nav__cta" href="#newsletter">Get updates</a>
-      </nav>
+      <h1 id="ageTitle" class="age-title" data-i18n="ageTitle">Age verification</h1>
+      <p class="age-body" data-i18n="ageBody">
+        You must be of legal age in your location to enter this site.
+      </p>
+
+      <div class="age-actions">
+        <button id="ageEnter" class="btn btn--primary" type="button" data-i18n="ageEnter">Enter</button>
+        <button id="ageLeave" class="btn btn--ghost" type="button" data-i18n="ageLeave">Leave</button>
+      </div>
+
+      <p class="age-note" data-i18n="ageNote">
+        By clicking “Enter”, you confirm you meet the legal age requirement in your location.
+      </p>
     </div>
-  </header>
+  </div>
 
-  <main id="main">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero__bg" aria-hidden="true"></div>
+  <!-- APP (cachée tant que l'âge n'est pas validé) -->
+  <div id="app" class="app">
+    <header class="header">
+      <div class="container header__inner">
+        <a class="brand" href="#shop" data-nav="shop" aria-label="Premium home">
+          <span class="brand__name">Premium</span>
+          <span class="brand__tag" data-i18n="brandTag">Boutique premium</span>
+        </a>
 
-      <!-- Floating asteroids -->
-      <div class="rocks" aria-hidden="true">
-        <span class="rock r1"></span>
-        <span class="rock r2"></span>
-        <span class="rock r3"></span>
-        <span class="rock r4"></span>
-        <span class="rock r5"></span>
-      </div>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#shop" data-nav="shop" data-i18n="navShop">Shop</a>
+          <a href="#about" data-scroll="about" data-i18n="navAbout">About</a>
+          <a href="#faq" data-scroll="faq" data-i18n="navFAQ">FAQ</a>
+          <a href="#checkout" data-nav="checkout" data-i18n="navCheckout">Checkout</a>
+        </nav>
 
-      <div class="container hero__inner">
-        <div class="hero__copy" data-reveal>
-          <p class="eyebrow">PURPLE NEON • SPACE MARKET • PREMIUM DROPS</p>
-
-          <h1 class="title glitch" data-text="Premium Supply">
-            Premium Supply
-          </h1>
-
-          <p class="subtitle">
-            A futuristic animated storefront inspired by your galaxy/neon artwork:
-            glowing planet, rotating ring, twinkling stars, floating asteroids, and holographic cards.
-          </p>
-
-          <div class="actions">
-            <a class="btn btn--primary" href="#collections">Enter the market</a>
-            <a class="btn btn--ghost" href="#featured">See featured</a>
+        <div class="header__actions">
+          <div class="lang-switch" role="group" aria-label="Language switch">
+            <button class="lang-btn" type="button" data-set-lang="fr" aria-pressed="false">FR</button>
+            <button class="lang-btn" type="button" data-set-lang="en" aria-pressed="false">EN</button>
           </div>
 
-          <div class="stats" role="list">
-            <div class="stat" role="listitem">
-              <span class="stat__num">LIVE</span>
-              <span class="stat__label">animated neon UI</span>
-            </div>
-            <div class="stat" role="listitem">
-              <span class="stat__num">FAST</span>
-              <span class="stat__label">mobile-friendly</span>
-            </div>
-            <div class="stat" role="listitem">
-              <span class="stat__num">FREE</span>
-              <span class="stat__label">GitHub Pages ready</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- ART: planet + ring + plane -->
-        <div class="hero__art" aria-hidden="true" data-reveal>
-          <div class="planet-wrap">
-            <div class="ring ring--back"></div>
-
-            <div class="planet">
-              <div class="planet__shine"></div>
-              <div class="planet__texture"></div>
-            </div>
-
-            <div class="ring ring--front"></div>
-
-            <!-- Curved logo like your image -->
-            <svg class="arc" viewBox="0 0 600 260" role="img" aria-label="">
-              <defs>
-                <path id="arcPath" d="M 40 200 C 150 40, 450 40, 560 200" />
-                <linearGradient id="txtGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#ffffff"/>
-                  <stop offset="0.45" stop-color="#efe6ff"/>
-                  <stop offset="1" stop-color="#b48cff"/>
-                </linearGradient>
-                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="blur"/>
-                  <feColorMatrix in="blur" type="matrix"
-                    values="1 0 0 0 0
-                            0 0.6 0 0 0
-                            0 0 1 0 0
-                            0 0 0 0.9 0" result="glow"/>
-                  <feMerge>
-                    <feMergeNode in="glow"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <text class="arc__text" filter="url(#softGlow)">
-                <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
-                  PREMIUM SUPPLY
-                </textPath>
-              </text>
-            </svg>
-
-            <!-- Paper plane + trail (animated) -->
-            <div class="plane">
-              <svg viewBox="0 0 120 70" width="120" height="70" aria-hidden="true">
-                <path d="M5 35 L115 5 L80 65 L58 44 L40 52 L48 40 Z" fill="#f7eaff"/>
-                <path d="M58 44 L115 5 L70 42 Z" fill="#e3c7ff" opacity="0.95"/>
-              </svg>
-              <span class="trail"></span>
-            </div>
-          </div>
+          <button id="cartButton" class="cart-btn" type="button" aria-haspopup="dialog">
+            <span data-i18n="cart">Cart</span>
+            <span class="cart-badge" id="cartCount" aria-live="polite">0</span>
+          </button>
         </div>
       </div>
+    </header>
 
-      <!-- Neon ticker -->
-      <div class="ticker" aria-hidden="true">
-        <div class="ticker__track">
-          <span>NEON DROPS</span><span>•</span>
-          <span>GALAXY EDITION</span><span>•</span>
-          <span>LIMITED RUNS</span><span>•</span>
-          <span>PREMIUM QUALITY</span><span>•</span>
-          <span>FUTURE MARKET</span><span>•</span>
-          <span>NEON DROPS</span><span>•</span>
-          <span>GALAXY EDITION</span><span>•</span>
-          <span>LIMITED RUNS</span><span>•</span>
-          <span>PREMIUM QUALITY</span><span>•</span>
-          <span>FUTURE MARKET</span><span>•</span>
-        </div>
-      </div>
+    <main class="main" id="main">
+      <!-- VIEW: SHOP -->
+      <section class="view" data-view="shop">
+        <section class="hero">
+          <div class="container hero__inner">
+            <div class="hero__copy">
+              <p class="eyebrow" data-i18n="heroEyebrow">LUXE • SIMPLE • RAPIDE</p>
 
-      <div class="scrollhint" aria-hidden="true">Scroll</div>
-    </section>
+              <h1 class="hero__title" data-i18n="heroHeadline">A premium buying experience</h1>
 
-    <!-- DROPS -->
-    <section id="drops" class="section">
-      <div class="container">
-        <div class="head" data-reveal>
-          <h2>Hot drops</h2>
-          <p>These are placeholders — swap in your real items.</p>
-        </div>
-
-        <div class="grid grid--4">
-          <article class="card card--product" data-reveal>
-            <div class="card__media"></div>
-            <h3>Nova Night Kit</h3>
-            <p class="muted">Limited • Glow finish</p>
-            <div class="row">
-              <span class="price">$29</span>
-              <button class="chip" type="button">Add</button>
-            </div>
-          </article>
-
-          <article class="card card--product" data-reveal>
-            <div class="card__media"></div>
-            <h3>Cosmic Aroma Oil</h3>
-            <p class="muted">10ml • Calm blend</p>
-            <div class="row">
-              <span class="price">$14</span>
-              <button class="chip" type="button">Add</button>
-            </div>
-          </article>
-
-          <article class="card card--product" data-reveal>
-            <div class="card__media"></div>
-            <h3>Holo Storage Jar</h3>
-            <p class="muted">Glass • Premium seal</p>
-            <div class="row">
-              <span class="price">$18</span>
-              <button class="chip" type="button">Add</button>
-            </div>
-          </article>
-
-          <article class="card card--product" data-reveal>
-            <div class="card__media"></div>
-            <h3>Neon Sticker Pack</h3>
-            <p class="muted">10 pcs • UV glow</p>
-            <div class="row">
-              <span class="price">$9</span>
-              <button class="chip" type="button">Add</button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- COLLECTIONS -->
-    <section id="collections" class="section section--alt">
-      <div class="container">
-        <div class="head" data-reveal>
-          <h2>Collections</h2>
-          <p>Built for the “neon market under a purple planet” vibe.</p>
-        </div>
-
-        <div class="grid grid--3">
-          <article class="card card--glow" data-reveal>
-            <h3>Night Market</h3>
-            <p class="muted">Street lights, neon signs, premium finds.</p>
-            <a class="link" href="#featured">Browse →</a>
-          </article>
-
-          <article class="card card--glow" data-reveal>
-            <h3>Galaxy Essentials</h3>
-            <p class="muted">Daily items with cosmic color and clean design.</p>
-            <a class="link" href="#featured">Browse →</a>
-          </article>
-
-          <article class="card card--glow" data-reveal>
-            <h3>Limited Drops</h3>
-            <p class="muted">Small batches, fast sell-through energy.</p>
-            <a class="link" href="#featured">Browse →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED -->
-    <section id="featured" class="section">
-      <div class="container">
-        <div class="head" data-reveal>
-          <h2>Featured neon picks</h2>
-          <p>Hover/tap cards — they lift and glow.</p>
-        </div>
-
-        <div class="grid grid--2">
-          <article class="feature" data-reveal>
-            <div class="feature__panel">
-              <h3>Holographic UI</h3>
-              <p class="muted">Glowing borders, animated gradients, and glass panels.</p>
-              <ul class="list">
-                <li>Twinkling star background</li>
-                <li>Floating asteroids</li>
-                <li>Animated planet ring + plane</li>
-              </ul>
-              <a class="btn btn--ghost" href="#newsletter">Get updates</a>
-            </div>
-          </article>
-
-          <article class="feature" data-reveal>
-            <div class="feature__panel">
-              <h3>Use your images</h3>
-              <p class="muted">
-                Upload your artwork into <code>assets/</code> to match the vibe even harder.
+              <p class="hero__sub" data-i18n="heroSub">
+                A clean beige interface with a subtle cosmic signature: an animated planet, soft stars, and minimal motion.
               </p>
-              <div class="codebox">
-                <code>assets/hero.jpg</code><br>
-                <code>assets/market.jpg</code>
+
+              <div class="hero__cta">
+                <button class="btn btn--primary" type="button" data-scroll="shopSection" data-i18n="heroCta">
+                  Browse products
+                </button>
+                <button class="btn btn--ghost" type="button" data-nav="checkout" data-i18n="heroCta2">
+                  Go to checkout
+                </button>
               </div>
-              <a class="btn btn--primary" href="#visit">Set it live</a>
+
+              <div class="hero__trust">
+                <div class="trust">
+                  <span class="trust__k" data-i18n="trust1k">Fast</span>
+                  <span class="trust__v" data-i18n="trust1v">Mobile-first UI</span>
+                </div>
+                <div class="trust">
+                  <span class="trust__k" data-i18n="trust2k">Secure</span>
+                  <span class="trust__v" data-i18n="trust2v">Checkout flow ready</span>
+                </div>
+                <div class="trust">
+                  <span class="trust__k" data-i18n="trust3k">Clean</span>
+                  <span class="trust__v" data-i18n="trust3v">Luxury palette</span>
+                </div>
+              </div>
             </div>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <!-- VISIT -->
-    <section id="visit" class="section section--alt">
-      <div class="container">
-        <div class="head" data-reveal>
-          <h2>Visit / Contact</h2>
-          <p>Add your real info here.</p>
-        </div>
+            <!-- PLANET (signature animée) -->
+            <div class="hero__visual" aria-hidden="true">
+              <div class="planet-scene">
+                <div class="ring ring--back"></div>
+                <div class="planet"></div>
+                <div class="ring ring--front"></div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <div class="grid grid--3">
-          <div class="card" data-reveal>
-            <h3>Location</h3>
-            <p class="muted">
-              123 Neon Ave<br>
-              Your City, ST 00000
+        <!-- SHOP -->
+        <section class="shop" id="shopSection">
+          <div class="container">
+            <div class="section-head">
+              <h2 data-i18n="shopTitle">Shop</h2>
+              <p class="muted" data-i18n="shopSub">Search, filter, add to cart — then checkout.</p>
+            </div>
+
+            <div class="filters">
+              <div class="field">
+                <label class="label" for="searchInput" data-i18n="searchLabel">Search</label>
+                <input id="searchInput" class="input" type="search"
+                       data-i18n-placeholder="searchPlaceholder"
+                       placeholder="Search products..." autocomplete="off" />
+              </div>
+
+              <div class="field">
+                <label class="label" for="categorySelect" data-i18n="categoryLabel">Category</label>
+                <select id="categorySelect" class="input"></select>
+              </div>
+
+              <button id="clearFilters" class="btn btn--ghost btn--small" type="button" data-i18n="clearFilters">
+                Clear
+              </button>
+            </div>
+
+            <div id="productGrid" class="product-grid" aria-live="polite"></div>
+
+            <div class="fineprint" data-i18n="fineprint">
+              Tip: This is a static checkout demo. For real card payments on GitHub Pages, connect a provider (Shopify/Stripe/etc.).
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="info" id="about">
+          <div class="container info__inner">
+            <div class="card">
+              <h3 data-i18n="aboutTitle">About</h3>
+              <p class="muted" data-i18n="aboutBody">
+                Built for clarity: beige background, luxury green accent, big tap targets, and a minimal cosmic animation.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3 data-i18n="deliveryTitle">Delivery</h3>
+              <p class="muted" data-i18n="deliveryBody">
+                Choose shipping or pickup during checkout (demo).
+              </p>
+            </div>
+
+            <div class="card">
+              <h3 data-i18n="supportTitle">Support</h3>
+              <p class="muted" data-i18n="supportBody">
+                Add your email/phone in the footer. Replace demo products with your catalog.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+          <div class="container">
+            <div class="section-head">
+              <h2 data-i18n="faqTitle">FAQ</h2>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary data-i18n="faqQ1">Is this a real payment checkout?</summary>
+                <p class="muted" data-i18n="faqA1">
+                  The flow is complete (cart → form → confirmation), but payments require a provider/back-end.
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary data-i18n="faqQ2">How does the language switch work?</summary>
+                <p class="muted" data-i18n="faqA2">
+                  It auto-detects French devices and lets users switch anytime. Preference is saved.
+                </p>
+              </details>
+
+              <details class="faq-item">
+                <summary data-i18n="faqQ3">Can I change the legal age?</summary>
+                <p class="muted" data-i18n="faqA3">
+                  Yes. In the script, edit LEGAL_AGE. The gate is a self-attestation.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- VIEW: CHECKOUT -->
+      <section class="view" data-view="checkout" hidden>
+        <div class="container checkout">
+          <div class="section-head">
+            <h2 data-i18n="checkoutTitle">Checkout</h2>
+            <p class="muted" data-i18n="checkoutSub">Enter your info, confirm, and place the order (demo).</p>
+          </div>
+
+          <div class="checkout__grid">
+            <form id="checkoutForm" class="panel" novalidate>
+              <h3 class="panel__title" data-i18n="contactTitle">Contact</h3>
+
+              <div class="grid2">
+                <div class="field">
+                  <label class="label" for="email" data-i18n="emailLabel">Email</label>
+                  <input class="input" id="email" name="email" type="email" autocomplete="email" required />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="phone" data-i18n="phoneLabel">Phone</label>
+                  <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" />
+                </div>
+              </div>
+
+              <h3 class="panel__title" data-i18n="shippingTitle">Shipping</h3>
+
+              <div class="grid2">
+                <div class="field">
+                  <label class="label" for="firstName" data-i18n="firstNameLabel">First name</label>
+                  <input class="input" id="firstName" name="firstName" autocomplete="given-name" required />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="lastName" data-i18n="lastNameLabel">Last name</label>
+                  <input class="input" id="lastName" name="lastName" autocomplete="family-name" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="address" data-i18n="addressLabel">Address</label>
+                <input class="input" id="address" name="address" autocomplete="street-address" required />
+              </div>
+
+              <div class="grid3">
+                <div class="field">
+                  <label class="label" for="city" data-i18n="cityLabel">City</label>
+                  <input class="input" id="city" name="city" autocomplete="address-level2" required />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="region" data-i18n="regionLabel">Province/State</label>
+                  <input class="input" id="region" name="region" autocomplete="address-level1" required />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="postal" data-i18n="postalLabel">Postal code</label>
+                  <input class="input" id="postal" name="postal" autocomplete="postal-code" required />
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="country" data-i18n="countryLabel">Country</label>
+                <input class="input" id="country" name="country" autocomplete="country-name" value="Canada" />
+              </div>
+
+              <h3 class="panel__title" data-i18n="deliveryMethodTitle">Delivery method</h3>
+
+              <div class="radio-row">
+                <label class="radio">
+                  <input type="radio" name="delivery" value="ship" checked />
+                  <span data-i18n="deliveryShip">Shipping</span>
+                </label>
+
+                <label class="radio">
+                  <input type="radio" name="delivery" value="pickup" />
+                  <span data-i18n="deliveryPickup">Pickup</span>
+                </label>
+              </div>
+
+              <h3 class="panel__title" data-i18n="paymentTitle">Payment</h3>
+
+              <div class="radio-row">
+                <label class="radio">
+                  <input type="radio" name="payment" value="inperson" checked />
+                  <span data-i18n="payInPerson">Pay on pickup / delivery</span>
+                </label>
+
+                <label class="radio">
+                  <input type="radio" name="payment" value="card" />
+                  <span data-i18n="payCard">Card (connect provider)</span>
+                </label>
+              </div>
+
+              <div class="notice" data-i18n="paymentNote">
+                Card payments need Stripe/Shopify/etc. This demo places an order without charging a card.
+              </div>
+
+              <label class="check">
+                <input id="terms" type="checkbox" required />
+                <span data-i18n="termsLabel">I agree to the terms and confirm I meet the legal age requirement.</span>
+              </label>
+
+              <div class="checkout-actions">
+                <button class="btn btn--ghost" type="button" data-nav="shop" data-i18n="backToShop">Back to shop</button>
+                <button id="placeOrder" class="btn btn--primary" type="submit" data-i18n="placeOrder">Place order</button>
+              </div>
+            </form>
+
+            <aside class="panel summary" aria-label="Order summary">
+              <h3 class="panel__title" data-i18n="summaryTitle">Order summary</h3>
+
+              <div id="summaryItems" class="summary-items"></div>
+
+              <div class="summary-line">
+                <span data-i18n="subtotal">Subtotal</span>
+                <strong id="summarySubtotal">$0.00</strong>
+              </div>
+
+              <div class="summary-line muted">
+                <span data-i18n="taxesNote">Taxes/shipping calculated later (demo)</span>
+                <span></span>
+              </div>
+
+              <div class="summary-total">
+                <span data-i18n="total">Total</span>
+                <strong id="summaryTotal">$0.00</strong>
+              </div>
+
+              <div class="notice" data-i18n="checkoutHint">
+                If your cart is empty, go back and add products.
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: THANK YOU -->
+      <section class="view" data-view="thanks" hidden>
+        <div class="container thanks">
+          <div class="card thanks__card">
+            <h2 data-i18n="thanksTitle">Order confirmed</h2>
+            <p class="muted" data-i18n="thanksBody">
+              Thanks! Your order has been created (demo).
             </p>
-          </div>
 
-          <div class="card" data-reveal>
-            <h3>Hours</h3>
-            <p class="muted">Mon–Thu 11–8<br>Fri–Sat 11–10<br>Sun 12–6</p>
-          </div>
+            <div class="order-box">
+              <span class="muted" data-i18n="orderNumberLabel">Order number</span>
+              <strong id="orderNumber">PREM-000000</strong>
+            </div>
 
-          <div class="card" data-reveal>
-            <h3>Social</h3>
-            <p class="muted">
-              Instagram • TikTok • X<br>
-              hello@premiumsupply.example
-            </p>
+            <div class="checkout-actions">
+              <button class="btn btn--primary" type="button" data-nav="shop" data-i18n="thanksCta">
+                Continue shopping
+              </button>
+            </div>
           </div>
         </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <p class="footer__brand">Premium</p>
+        <p class="muted" data-i18n="footerNote">
+          Replace demo products with your catalog. For real payments, connect a checkout provider.
+        </p>
       </div>
-    </section>
+    </footer>
+  </div>
 
-    <!-- NEWSLETTER -->
-    <section id="newsletter" class="section">
-      <div class="container newsletter" data-reveal>
-        <div>
-          <h2>Get drops + deals</h2>
-          <p class="muted">No spam — just releases and specials.</p>
-        </div>
+  <!-- CART DRAWER -->
+  <div id="backdrop" class="backdrop" hidden></div>
 
-        <form class="form" action="#" method="get">
-          <label class="sr" for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
-          <button class="btn btn--primary" type="submit">Subscribe</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p>© Premium Supply — Neon Future Market</p>
-      <p class="muted">Static template • GitHub Pages ready</p>
+  <aside id="cartDrawer" class="cart" role="dialog" aria-modal="true" aria-label="Cart" aria-hidden="true">
+    <div class="cart__head">
+      <h3 class="cart__title" data-i18n="cartTitle">Cart</h3>
+      <button id="closeCart" class="icon-btn" type="button" aria-label="Close">✕</button>
     </div>
-  </footer>
+
+    <div id="cartItems" class="cart__items"></div>
+
+    <div class="cart__foot">
+      <div class="cart__line">
+        <span data-i18n="subtotal">Subtotal</span>
+        <strong id="cartSubtotal">$0.00</strong>
+      </div>
+
+      <button id="goCheckout" class="btn btn--primary btn--full" type="button" data-i18n="toCheckout">
+        Go to checkout
+      </button>
+
+      <button id="clearCart" class="btn btn--ghost btn--full" type="button" data-i18n="clearCart">
+        Clear cart
+      </button>
+    </div>
+  </aside>
 
   <script>
     (() => {
-      const root = document.documentElement;
-
-      // Respect accessibility settings
-      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // Touch/mouse neon "spotlight"
-      const setGlow = (x, y) => {
-        root.style.setProperty('--mx', (x * 100).toFixed(2) + '%');
-        root.style.setProperty('--my', (y * 100).toFixed(2) + '%');
+      // =========================
+      // SETTINGS
+      // =========================
+      const STORAGE = {
+        AGE: "premium_age_ok",
+        LANG: "premium_lang",
+        CART: "premium_cart"
       };
 
-      setGlow(0.55, 0.25);
+      // IMPORTANT: ajuste l'âge légal ici si besoin
+      const LEGAL_AGE = 19; // exemple (modifie selon ta réalité)
 
-      window.addEventListener('mousemove', (e) => {
-        setGlow(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
-      }, { passive: true });
+      // =========================
+      // I18N
+      // =========================
+      const I18N = {
+        en: {
+          brandTag: "Premium boutique",
+          navShop: "Shop",
+          navAbout: "About",
+          navFAQ: "FAQ",
+          navCheckout: "Checkout",
 
-      window.addEventListener('touchstart', (e) => {
-        const t = e.touches && e.touches[0];
-        if (!t) return;
-        setGlow(t.clientX / window.innerWidth, t.clientY / window.innerHeight);
-      }, { passive: true });
+          ageTitle: "Age verification",
+          ageBody: `You must be of legal age (${LEGAL_AGE}+) in your location to enter this site.`,
+          ageEnter: "Enter",
+          ageLeave: "Leave",
+          ageNote: "By clicking “Enter”, you confirm you meet the legal age requirement in your location.",
 
-      window.addEventListener('touchmove', (e) => {
-        const t = e.touches && e.touches[0];
-        if (!t) return;
-        setGlow(t.clientX / window.innerWidth, t.clientY / window.innerHeight);
-      }, { passive: true });
+          heroEyebrow: "LUXURY • SIMPLE • FAST",
+          heroHeadline: "A premium buying experience",
+          heroSub: "A clean beige interface with a subtle cosmic signature: an animated planet, soft stars, and minimal motion.",
+          heroCta: "Browse products",
+          heroCta2: "Go to checkout",
+          trust1k: "Fast", trust1v: "Mobile-first UI",
+          trust2k: "Secure", trust2v: "Checkout flow ready",
+          trust3k: "Clean", trust3v: "Luxury palette",
 
-      // Scroll reveal
-      const revealEls = document.querySelectorAll('[data-reveal]');
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(en => {
-            if (en.isIntersecting) {
-              en.target.classList.add('in');
-              io.unobserve(en.target);
-            }
-          });
-        }, { threshold: 0.12 });
-        revealEls.forEach(el => io.observe(el));
-      } else {
-        revealEls.forEach(el => el.classList.add('in'));
+          shopTitle: "Shop",
+          shopSub: "Search, filter, add to cart — then checkout.",
+          searchLabel: "Search",
+          searchPlaceholder: "Search products...",
+          categoryLabel: "Category",
+          clearFilters: "Clear",
+
+          fineprint: "Tip: This is a static checkout demo. For real card payments on GitHub Pages, connect a provider (Shopify/Stripe/etc.).",
+
+          aboutTitle: "About",
+          aboutBody: "Built for clarity: beige background, luxury green accent, big tap targets, and a minimal cosmic animation.",
+          deliveryTitle: "Delivery",
+          deliveryBody: "Choose shipping or pickup during checkout (demo).",
+          supportTitle: "Support",
+          supportBody: "Add your email/phone in the footer. Replace demo products with your catalog.",
+
+          faqTitle: "FAQ",
+          faqQ1: "Is this a real payment checkout?",
+          faqA1: "The flow is complete (cart → form → confirmation), but payments require a provider/back-end.",
+          faqQ2: "How does the language switch work?",
+          faqA2: "It auto-detects French devices and lets users switch anytime. Preference is saved.",
+          faqQ3: "Can I change the legal age?",
+          faqA3: "Yes. In the script, edit LEGAL_AGE. The gate is a self-attestation.",
+
+          cart: "Cart",
+          cartTitle: "Cart",
+          clearCart: "Clear cart",
+          toCheckout: "Go to checkout",
+          subtotal: "Subtotal",
+          total: "Total",
+          taxesNote: "Taxes/shipping calculated later (demo)",
+
+          add: "Add",
+          remove: "Remove",
+          qty: "Qty",
+          emptyCart: "Your cart is empty.",
+
+          checkoutTitle: "Checkout",
+          checkoutSub: "Enter your info, confirm, and place the order (demo).",
+          contactTitle: "Contact",
+          emailLabel: "Email",
+          phoneLabel: "Phone",
+          shippingTitle: "Shipping",
+          firstNameLabel: "First name",
+          lastNameLabel: "Last name",
+          addressLabel: "Address",
+          cityLabel: "City",
+          regionLabel: "Province/State",
+          postalLabel: "Postal code",
+          countryLabel: "Country",
+          deliveryMethodTitle: "Delivery method",
+          deliveryShip: "Shipping",
+          deliveryPickup: "Pickup",
+          paymentTitle: "Payment",
+          payInPerson: "Pay on pickup / delivery",
+          payCard: "Card (connect provider)",
+          paymentNote: "Card payments need Stripe/Shopify/etc. This demo places an order without charging a card.",
+          termsLabel: "I agree to the terms and confirm I meet the legal age requirement.",
+          placeOrder: "Place order",
+          backToShop: "Back to shop",
+          summaryTitle: "Order summary",
+          checkoutHint: "If your cart is empty, go back and add products.",
+
+          thanksTitle: "Order confirmed",
+          thanksBody: "Thanks! Your order has been created (demo).",
+          orderNumberLabel: "Order number",
+          thanksCta: "Continue shopping",
+
+          footerNote: "Replace demo products with your catalog. For real payments, connect a checkout provider.",
+
+          alertEmptyCart: "Your cart is empty.",
+          alertAgeRequired: "You must confirm the age gate to continue.",
+          alertAdded: "Added to cart"
+        },
+
+        fr: {
+          brandTag: "Boutique premium",
+          navShop: "Boutique",
+          navAbout: "À propos",
+          navFAQ: "FAQ",
+          navCheckout: "Paiement",
+
+          ageTitle: "Vérification d’âge",
+          ageBody: `Vous devez avoir l’âge légal (${LEGAL_AGE}+) dans votre région pour entrer sur ce site.`,
+          ageEnter: "Entrer",
+          ageLeave: "Quitter",
+          ageNote: "En cliquant sur « Entrer », vous confirmez respecter l’âge légal requis dans votre région.",
+
+          heroEyebrow: "LUXE • SIMPLE • RAPIDE",
+          heroHeadline: "Une expérience d’achat premium",
+          heroSub: "Une interface beige très lisible avec une signature cosmique discrète : planète animée, étoiles douces, mouvements minimalistes.",
+          heroCta: "Voir les produits",
+          heroCta2: "Aller au paiement",
+          trust1k: "Rapide", trust1v: "UI pensée mobile",
+          trust2k: "Serein", trust2v: "Flux de paiement prêt",
+          trust3k: "Clair", trust3v: "Palette luxe",
+
+          shopTitle: "Boutique",
+          shopSub: "Cherche, filtre, ajoute au panier — puis passe au paiement.",
+          searchLabel: "Recherche",
+          searchPlaceholder: "Rechercher un produit...",
+          categoryLabel: "Catégorie",
+          clearFilters: "Réinitialiser",
+
+          fineprint: "Astuce : démo checkout statique. Pour un vrai paiement carte sur GitHub Pages, connecte un provider (Shopify/Stripe/etc.).",
+
+          aboutTitle: "À propos",
+          aboutBody: "Pensé pour la clarté : fond beige, accent vert luxe, gros boutons, et animation cosmique minimale.",
+          deliveryTitle: "Livraison",
+          deliveryBody: "Choisis livraison ou collecte au paiement (démo).",
+          supportTitle: "Support",
+          supportBody: "Ajoute ton email/téléphone dans le footer. Remplace les produits démo par ton catalogue.",
+
+          faqTitle: "FAQ",
+          faqQ1: "Est-ce un vrai paiement carte ?",
+          faqA1: "Le flux est complet (panier → formulaire → confirmation), mais le paiement réel nécessite un provider/back-end.",
+          faqQ2: "Comment marche le bilingue ?",
+          faqA2: "Détection auto des appareils FR + bouton pour changer. La préférence est sauvegardée.",
+          faqQ3: "Je peux changer l’âge légal ?",
+          faqA3: "Oui. Dans le script, modifie LEGAL_AGE. La vérification est une auto-déclaration.",
+
+          cart: "Panier",
+          cartTitle: "Panier",
+          clearCart: "Vider le panier",
+          toCheckout: "Aller au paiement",
+          subtotal: "Sous-total",
+          total: "Total",
+          taxesNote: "Taxes/livraison calculées plus tard (démo)",
+
+          add: "Ajouter",
+          remove: "Retirer",
+          qty: "Qté",
+          emptyCart: "Ton panier est vide.",
+
+          checkoutTitle: "Paiement",
+          checkoutSub: "Entre tes infos, confirme, puis passe la commande (démo).",
+          contactTitle: "Contact",
+          emailLabel: "Email",
+          phoneLabel: "Téléphone",
+          shippingTitle: "Adresse",
+          firstNameLabel: "Prénom",
+          lastNameLabel: "Nom",
+          addressLabel: "Adresse",
+          cityLabel: "Ville",
+          regionLabel: "Province / État",
+          postalLabel: "Code postal",
+          countryLabel: "Pays",
+          deliveryMethodTitle: "Mode de réception",
+          deliveryShip: "Livraison",
+          deliveryPickup: "Collecte",
+          paymentTitle: "Paiement",
+          payInPerson: "Paiement à la livraison / collecte",
+          payCard: "Carte (connecter un provider)",
+          paymentNote: "Le paiement carte nécessite Stripe/Shopify/etc. Cette démo crée une commande sans débiter de carte.",
+          termsLabel: "J’accepte les conditions et je confirme respecter l’âge légal requis.",
+          placeOrder: "Passer la commande",
+          backToShop: "Retour boutique",
+          summaryTitle: "Récapitulatif",
+          checkoutHint: "Si ton panier est vide, retourne ajouter des produits.",
+
+          thanksTitle: "Commande confirmée",
+          thanksBody: "Merci ! Ta commande a été créée (démo).",
+          orderNumberLabel: "Numéro de commande",
+          thanksCta: "Continuer les achats",
+
+          footerNote: "Remplace les produits démo par ton catalogue. Pour paiement réel, connecte un provider checkout.",
+
+          alertEmptyCart: "Ton panier est vide.",
+          alertAgeRequired: "Tu dois confirmer la vérification d’âge pour continuer.",
+          alertAdded: "Ajouté au panier"
+        }
+      };
+
+      // =========================
+      // HELPERS
+      // =========================
+      const $ = (sel, el = document) => el.querySelector(sel);
+      const $$ = (sel, el = document) => Array.from(el.querySelectorAll(sel));
+
+      function detectLang() {
+        try {
+          const langs = navigator.languages || [navigator.language || "en"];
+          return langs.some(l => String(l).toLowerCase().startsWith("fr")) ? "fr" : "en";
+        } catch (e) {
+          return "en";
+        }
       }
 
-      // Canvas starfield (real animation)
-      const canvas = document.getElementById('stars');
-      const ctx = canvas.getContext('2d', { alpha: true });
+      function loadLang() {
+        try { return localStorage.getItem(STORAGE.LANG); } catch (e) { return null; }
+      }
 
-      let w = 0, h = 0, dpr = 1, stars = [];
+      function saveLang(lang) {
+        try { localStorage.setItem(STORAGE.LANG, lang); } catch (e) {}
+      }
 
-      const rand = (min, max) => Math.random() * (max - min) + min;
+      function moneyFmt(lang) {
+        const locale = lang === "fr" ? "fr-CA" : "en-CA";
+        return new Intl.NumberFormat(locale, { style: "currency", currency: "CAD" });
+      }
 
-      const resize = () => {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        w = window.innerWidth;
-        h = window.innerHeight;
+      // =========================
+      // DEMO CATALOG (neutre)
+      // Remplace par ton catalogue
+      // =========================
+      const PRODUCTS = [
+        {
+          id: "p1",
+          category: "essentials",
+          price: 2900,
+          name: { en: "Nova Starter Kit", fr: "Kit Départ Nova" },
+          desc: { en: "Minimal premium set for everyday use.", fr: "Ensemble premium minimal pour le quotidien." }
+        },
+        {
+          id: "p2",
+          category: "essentials",
+          price: 1800,
+          name: { en: "Clean Storage Jar", fr: "Bocal de rangement" },
+          desc: { en: "Airtight glass — clean, discreet.", fr: "Verre hermétique — propre, discret." }
+        },
+        {
+          id: "p3",
+          category: "accessories",
+          price: 2400,
+          name: { en: "Hush Travel Case", fr: "Étui de transport Hush" },
+          desc: { en: "Compact case with premium finish.", fr: "Étui compact avec finition premium." }
+        },
+        {
+          id: "p4",
+          category: "accessories",
+          price: 1200,
+          name: { en: "Precision Tool", fr: "Outil de précision" },
+          desc: { en: "Designed for clean handling.", fr: "Pensé pour une manipulation propre." }
+        },
+        {
+          id: "p5",
+          category: "gifts",
+          price: 4200,
+          name: { en: "Signature Gift Set", fr: "Coffret signature" },
+          desc: { en: "Curated essentials in a premium box.", fr: "Essentiels sélectionnés dans une boîte premium." }
+        },
+        {
+          id: "p6",
+          category: "gifts",
+          price: 1600,
+          name: { en: "Neat Sticker Pack", fr: "Pack de stickers" },
+          desc: { en: "Minimal marks, clean look.", fr: "Style minimal, look propre." }
+        }
+      ];
 
-        canvas.width = Math.floor(w * dpr);
-        canvas.height = Math.floor(h * dpr);
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
+      const CATEGORY_LABELS = {
+        all: { en: "All", fr: "Tout" },
+        essentials: { en: "Essentials", fr: "Essentiels" },
+        accessories: { en: "Accessories", fr: "Accessoires" },
+        gifts: { en: "Gifts", fr: "Cadeaux" }
+      };
 
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // =========================
+      // STATE
+      // =========================
+      const state = {
+        lang: loadLang() || detectLang(),
+        cart: loadCart(),
+        query: "",
+        category: "all"
+      };
 
-        const target = Math.round((w * h) / 14000);
-        const count = Math.max(90, Math.min(220, target));
+      function t(key) {
+        return (I18N[state.lang] && I18N[state.lang][key]) || I18N.en[key] || key;
+      }
 
-        stars = Array.from({ length: count }, () => ({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: rand(0.25, 1.6),
-          sp: rand(0.08, 0.55),
-          a: rand(0.15, 0.95),
-          tw: rand(0, Math.PI * 2),
-          tws: rand(0.008, 0.04),
-        }));
+      function setLang(lang) {
+        state.lang = lang;
+        saveLang(lang);
+        document.documentElement.lang = lang;
+        updateLangButtons();
+        applyI18n();
+        renderAll();
+      }
 
-        // Draw once if reduced motion
-        if (reduceMotion) {
+      function updateLangButtons() {
+        $$(".lang-btn").forEach(btn => {
+          const isOn = btn.dataset.setLang === state.lang;
+          btn.setAttribute("aria-pressed", isOn ? "true" : "false");
+        });
+      }
+
+      function applyI18n() {
+        $$("[data-i18n]").forEach(el => {
+          const key = el.dataset.i18n;
+          el.textContent = t(key);
+        });
+
+        $$("[data-i18n-placeholder]").forEach(el => {
+          const key = el.dataset.i18nPlaceholder;
+          el.setAttribute("placeholder", t(key));
+        });
+      }
+
+      // =========================
+      // AGE GATE
+      // =========================
+      function isAgeOk() {
+        try { return localStorage.getItem(STORAGE.AGE) === "1"; } catch (e) { return false; }
+      }
+
+      function acceptAge() {
+        try { localStorage.setItem(STORAGE.AGE, "1"); } catch (e) {}
+        document.documentElement.classList.add("age-ok");
+        $("#ageEnter")?.blur();
+      }
+
+      // =========================
+      // CART
+      // =========================
+      function loadCart() {
+        try {
+          const raw = localStorage.getItem(STORAGE.CART);
+          const parsed = raw ? JSON.parse(raw) : null;
+          if (!parsed || !Array.isArray(parsed.items)) return { items: [] };
+          return parsed;
+        } catch (e) {
+          return { items: [] };
+        }
+      }
+
+      function saveCart() {
+        try { localStorage.setItem(STORAGE.CART, JSON.stringify(state.cart)); } catch (e) {}
+      }
+
+      function cartCount() {
+        return state.cart.items.reduce((n, it) => n + it.qty, 0);
+      }
+
+      function findProduct(id) {
+        return PRODUCTS.find(p => p.id === id);
+      }
+
+      function addToCart(id) {
+        const existing = state.cart.items.find(it => it.id === id);
+        if (existing) existing.qty += 1;
+        else state.cart.items.push({ id, qty: 1 });
+
+        saveCart();
+        renderCart();
+        renderCartBadge();
+      }
+
+      function setQty(id, qty) {
+        const q = Math.max(1, Math.min(99, qty));
+        const it = state.cart.items.find(x => x.id === id);
+        if (!it) return;
+        it.qty = q;
+        saveCart();
+        renderCart();
+        renderCartBadge();
+      }
+
+      function removeFromCart(id) {
+        state.cart.items = state.cart.items.filter(it => it.id !== id);
+        saveCart();
+        renderCart();
+        renderCartBadge();
+      }
+
+      function clearCart() {
+        state.cart.items = [];
+        saveCart();
+        renderCart();
+        renderCartBadge();
+      }
+
+      function subtotalCents() {
+        let sum = 0;
+        for (const it of state.cart.items) {
+          const p = findProduct(it.id);
+          if (p) sum += p.price * it.qty;
+        }
+        return sum;
+      }
+
+      // =========================
+      // RENDER
+      // =========================
+      function renderCategorySelect() {
+        const sel = $("#categorySelect");
+        if (!sel) return;
+
+        const keys = ["all", "essentials", "accessories", "gifts"];
+        sel.innerHTML = keys.map(k => {
+          const lbl = CATEGORY_LABELS[k][state.lang] || CATEGORY_LABELS[k].en;
+          return `<option value="${k}">${lbl}</option>`;
+        }).join("");
+
+        sel.value = state.category;
+      }
+
+      function filteredProducts() {
+        const q = state.query.trim().toLowerCase();
+        return PRODUCTS.filter(p => {
+          const inCategory = state.category === "all" ? true : p.category === state.category;
+          const name = (p.name[state.lang] || p.name.en).toLowerCase();
+          const desc = (p.desc[state.lang] || p.desc.en).toLowerCase();
+          const inQuery = !q ? true : (name.includes(q) || desc.includes(q));
+          return inCategory && inQuery;
+        });
+      }
+
+      function renderProducts() {
+        const grid = $("#productGrid");
+        if (!grid) return;
+
+        const fmt = moneyFmt(state.lang);
+        const items = filteredProducts();
+
+        grid.innerHTML = items.map(p => {
+          const name = p.name[state.lang] || p.name.en;
+          const desc = p.desc[state.lang] || p.desc.en;
+          const price = fmt.format(p.price / 100);
+
+          return `
+            <article class="product">
+              <div class="product__media" aria-hidden="true"></div>
+              <div class="product__body">
+                <h3 class="product__name">${escapeHtml(name)}</h3>
+                <p class="product__desc">${escapeHtml(desc)}</p>
+                <div class="product__row">
+                  <strong class="product__price">${price}</strong>
+                  <button class="btn btn--primary btn--small" type="button" data-add="${p.id}">
+                    ${t("add")}
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        // bind add buttons
+        $$("[data-add]", grid).forEach(btn => {
+          btn.addEventListener("click", () => {
+            addToCart(btn.dataset.add);
+            openCart(); // UX: ouvre le panier après ajout
+          }, { passive: true });
+        });
+      }
+
+      function renderCartBadge() {
+        const badge = $("#cartCount");
+        if (!badge) return;
+        badge.textContent = String(cartCount());
+      }
+
+      function renderCart() {
+        const wrap = $("#cartItems");
+        const subEl = $("#cartSubtotal");
+        if (!wrap || !subEl) return;
+
+        const fmt = moneyFmt(state.lang);
+
+        if (state.cart.items.length === 0) {
+          wrap.innerHTML = `<p class="muted">${t("emptyCart")}</p>`;
+          subEl.textContent = fmt.format(0);
+          renderSummary();
+          return;
+        }
+
+        wrap.innerHTML = state.cart.items.map(it => {
+          const p = findProduct(it.id);
+          if (!p) return "";
+          const name = p.name[state.lang] || p.name.en;
+          const line = fmt.format((p.price * it.qty) / 100);
+          const unit = fmt.format(p.price / 100);
+
+          return `
+            <div class="cart-item">
+              <div class="cart-item__meta">
+                <strong class="cart-item__name">${escapeHtml(name)}</strong>
+                <span class="muted">${unit}</span>
+              </div>
+
+              <div class="cart-item__controls">
+                <label class="muted small" aria-label="${t("qty")}">
+                  ${t("qty")}
+                  <input class="qty" type="number" min="1" max="99" value="${it.qty}" data-qty="${it.id}" />
+                </label>
+                <strong>${line}</strong>
+              </div>
+
+              <button class="link-btn" type="button" data-remove="${it.id}">
+                ${t("remove")}
+              </button>
+            </div>
+          `;
+        }).join("");
+
+        // bind qty + remove
+        $$("[data-remove]", wrap).forEach(btn => {
+          btn.addEventListener("click", () => removeFromCart(btn.dataset.remove));
+        });
+
+        $$("[data-qty]", wrap).forEach(inp => {
+          inp.addEventListener("change", () => {
+            const id = inp.dataset.qty;
+            const qty = parseInt(inp.value, 10);
+            if (Number.isFinite(qty)) setQty(id, qty);
+          });
+        });
+
+        subEl.textContent = fmt.format(subtotalCents() / 100);
+        renderSummary();
+      }
+
+      function renderSummary() {
+        const itemsEl = $("#summaryItems");
+        const subEl = $("#summarySubtotal");
+        const totEl = $("#summaryTotal");
+        if (!itemsEl || !subEl || !totEl) return;
+
+        const fmt = moneyFmt(state.lang);
+        const sub = subtotalCents();
+        const total = sub; // demo: pas de taxes/livraison
+
+        if (state.cart.items.length === 0) {
+          itemsEl.innerHTML = `<p class="muted">${t("emptyCart")}</p>`;
+          subEl.textContent = fmt.format(0);
+          totEl.textContent = fmt.format(0);
+          return;
+        }
+
+        itemsEl.innerHTML = state.cart.items.map(it => {
+          const p = findProduct(it.id);
+          if (!p) return "";
+          const name = p.name[state.lang] || p.name.en;
+          return `
+            <div class="summary-item">
+              <span>${escapeHtml(name)} <span class="muted">× ${it.qty}</span></span>
+              <strong>${fmt.format((p.price * it.qty) / 100)}</strong>
+            </div>
+          `;
+        }).join("");
+
+        subEl.textContent = fmt.format(sub / 100);
+        totEl.textContent = fmt.format(total / 100);
+      }
+
+      function renderAll() {
+        renderCategorySelect();
+        renderProducts();
+        renderCart();
+        renderCartBadge();
+      }
+
+      // =========================
+      // NAV / VIEWS
+      // =========================
+      function showView(view) {
+        const views = $$("[data-view]");
+        views.forEach(v => v.hidden = v.dataset.view !== view);
+
+        // Ferme panier si on change de view
+        closeCart();
+
+        // Scroll top pour une sensation "page"
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function scrollToId(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // =========================
+      // CART DRAWER
+      // =========================
+      const drawer = () => $("#cartDrawer");
+      const backdrop = () => $("#backdrop");
+
+      function openCart() {
+        const d = drawer(), b = backdrop();
+        if (!d || !b) return;
+        d.classList.add("open");
+        d.setAttribute("aria-hidden", "false");
+        b.hidden = false;
+      }
+
+      function closeCart() {
+        const d = drawer(), b = backdrop();
+        if (!d || !b) return;
+        d.classList.remove("open");
+        d.setAttribute("aria-hidden", "true");
+        b.hidden = true;
+      }
+
+      // =========================
+      // ORDER
+      // =========================
+      function makeOrderId() {
+        const n = Math.floor(100000 + Math.random() * 900000);
+        return `PREM-${n}`;
+      }
+
+      function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, s => ({
+          "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"
+        }[s]));
+      }
+
+      // =========================
+      // SKY (stars + meteors, très léger)
+      // =========================
+      function initSky() {
+        const canvas = $("#sky");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d", { alpha: true });
+        if (!ctx) return;
+
+        const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        let w = 0, h = 0, dpr = 1;
+        let stars = [];
+        let meteors = [];
+        let lastMeteor = 0;
+
+        const rand = (min, max) => Math.random() * (max - min) + min;
+
+        function resize() {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          w = window.innerWidth;
+          h = window.innerHeight;
+
+          canvas.width = Math.floor(w * dpr);
+          canvas.height = Math.floor(h * dpr);
+          canvas.style.width = w + "px";
+          canvas.style.height = h + "px";
+
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          const count = Math.max(70, Math.min(140, Math.round((w * h) / 20000)));
+          stars = Array.from({ length: count }, () => ({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: rand(0.4, 1.6),
+            a: rand(0.05, 0.22),
+            t: rand(0, Math.PI * 2),
+            ts: rand(0.004, 0.02)
+          }));
+        }
+
+        function spawnMeteor(ts) {
+          lastMeteor = ts;
+          const startX = rand(w * 0.2, w * 0.95);
+          const startY = rand(-30, h * 0.25);
+          meteors.push({
+            x: startX,
+            y: startY,
+            vx: rand(-8, -12),
+            vy: rand(5, 8),
+            life: rand(500, 900)
+          });
+        }
+
+        function draw(ts) {
           ctx.clearRect(0, 0, w, h);
+
+          // étoiles
           for (const s of stars) {
-            const alpha = s.a * 0.7;
+            s.t += s.ts;
+            const tw = 0.6 + 0.4 * Math.sin(s.t);
+            const alpha = s.a * tw;
+
             ctx.beginPath();
-            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.fillStyle = `rgba(11,77,59,${alpha})`;
             ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
             ctx.fill();
           }
+
+          // météores (rare)
+          if (!reduceMotion && (ts - lastMeteor) > rand(4500, 8500)) {
+            spawnMeteor(ts);
+          }
+
+          meteors = meteors.filter(m => m.life > 0);
+          for (const m of meteors) {
+            m.life -= 16;
+            m.x += m.vx * 0.9;
+            m.y += m.vy * 0.9;
+
+            const len = 90;
+            const x2 = m.x - m.vx * 2;
+            const y2 = m.y - m.vy * 2;
+
+            const g = ctx.createLinearGradient(m.x, m.y, m.x + len, m.y - len);
+            g.addColorStop(0, "rgba(11,77,59,0.00)");
+            g.addColorStop(0.4, "rgba(11,77,59,0.10)");
+            g.addColorStop(1, "rgba(11,77,59,0.00)");
+
+            ctx.strokeStyle = g;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(m.x, m.y);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+          }
+
+          if (!reduceMotion) requestAnimationFrame(draw);
         }
-      };
 
-      const tick = () => {
-        if (reduceMotion) return;
+        window.addEventListener("resize", resize, { passive: true });
+        resize();
+        if (!reduceMotion) requestAnimationFrame(draw);
+        else draw(performance.now());
+      }
 
-        ctx.clearRect(0, 0, w, h);
+      // =========================
+      // INIT
+      // =========================
+      function init() {
+        // Language
+        setLang(state.lang);
 
-        for (const s of stars) {
-          // Drift
-          s.x -= s.sp * 0.55;
-          s.y += s.sp * 0.14;
+        // Age gate buttons
+        $("#ageEnter")?.addEventListener("click", () => {
+          acceptAge();
+          // si accepté, afficher la boutique
+          showView("shop");
+        });
 
-          if (s.x < -10) { s.x = w + 10; s.y = Math.random() * h; }
-          if (s.y > h + 10) { s.y = -10; s.x = Math.random() * w; }
+        $("#ageLeave")?.addEventListener("click", () => {
+          // tu peux remplacer par ton URL "exit"
+          window.location.href = "https://www.google.com";
+        });
 
-          // Twinkle
-          s.tw += s.tws;
-          const tw = 0.45 + 0.55 * Math.sin(s.tw);
-          const alpha = s.a * tw;
+        // Lang switch buttons
+        $$("[data-set-lang]").forEach(btn => {
+          btn.addEventListener("click", () => setLang(btn.dataset.setLang));
+        });
 
-          ctx.beginPath();
-          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        // Search & filter
+        $("#searchInput")?.addEventListener("input", (e) => {
+          state.query = e.target.value || "";
+          renderProducts();
+        });
 
-        requestAnimationFrame(tick);
-      };
+        $("#categorySelect")?.addEventListener("change", (e) => {
+          state.category = e.target.value;
+          renderProducts();
+        });
 
-      window.addEventListener('resize', resize, { passive: true });
-      resize();
-      requestAnimationFrame(tick);
+        $("#clearFilters")?.addEventListener("click", () => {
+          state.query = "";
+          state.category = "all";
+          const si = $("#searchInput");
+          if (si) si.value = "";
+          renderCategorySelect();
+          renderProducts();
+        });
+
+        // Header nav
+        $$("[data-nav]").forEach(a => {
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            const view = a.dataset.nav;
+            showView(view);
+          });
+        });
+
+        // Scroll links (from nav/CTA)
+        $$("[data-scroll]").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            // si pas dans shop, on revient au shop puis scroll
+            showView("shop");
+            const id = btn.dataset.scroll;
+            setTimeout(() => scrollToId(id), 50);
+          });
+        });
+
+        // Cart open/close
+        $("#cartButton")?.addEventListener("click", openCart);
+        $("#closeCart")?.addEventListener("click", closeCart);
+        backdrop()?.addEventListener("click", closeCart);
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeCart();
+        });
+
+        $("#goCheckout")?.addEventListener("click", () => {
+          if (!isAgeOk()) { alert(t("alertAgeRequired")); return; }
+          if (state.cart.items.length === 0) { alert(t("alertEmptyCart")); return; }
+          showView("checkout");
+        });
+
+        $("#clearCart")?.addEventListener("click", clearCart);
+
+        // Checkout submit
+        $("#checkoutForm")?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!isAgeOk()) { alert(t("alertAgeRequired")); return; }
+          if (state.cart.items.length === 0) { alert(t("alertEmptyCart")); return; }
+
+          const form = e.currentTarget;
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          const id = makeOrderId();
+          $("#orderNumber").textContent = id;
+
+          clearCart();
+          showView("thanks");
+        });
+
+        // Render everything
+        applyI18n();
+        renderAll();
+
+        // Default view:
+        showView("shop");
+
+        // Sky
+        initSky();
+      }
+
+      init();
     })();
   </script>
 </body>
