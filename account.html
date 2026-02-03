@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premium Supply — Account</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__mark">PS</span>
+        <span class="brand__text">
+          <span class="brand__name">Premium Supply</span>
+          <span class="brand__tag">Account • Points • Levels</span>
+        </span>
+      </a>
+
+      <nav class="header__links" aria-label="Primary">
+        <a class="hlink" href="products.html">Catalogue</a>
+        <a class="hlink" href="account.html" aria-current="page">Account</a>
+        <a class="hlink" href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="pagehead">
+        <h1 class="title">Account</h1>
+        <p class="sub">Earn 1 point per $1 CAD spent. Levels unlock as your points grow.</p>
+      </div>
+
+      <div class="acctgrid">
+        <div class="abox">
+          <div class="muted small">Points</div>
+          <div class="big" id="points">0</div>
+        </div>
+
+        <div class="abox">
+          <div class="muted small">Lifetime spend</div>
+          <div class="big" id="spend">$0</div>
+        </div>
+
+        <div class="abox">
+          <div class="muted small">Level</div>
+          <div class="big" id="level">Maple</div>
+          <div class="muted small" id="next"></div>
+        </div>
+      </div>
+
+      <div class="levels">
+        <h2 class="catsec__title">Levels</h2>
+        <div class="ltable">
+          <div class="lrow"><strong>Maple</strong><span>0 – 249 points</span></div>
+          <div class="lrow"><strong>Cedar</strong><span>250 – 749 points</span></div>
+          <div class="lrow"><strong>Aurora</strong><span>750 – 1499 points</span></div>
+          <div class="lrow"><strong>Summit</strong><span>1500 – 2999 points</span></div>
+          <div class="lrow"><strong>Legacy</strong><span>3000+ points</span></div>
+        </div>
+        <p class="muted small">
+          Note: this “account” view is stored on this device/browser. A full login account system requires a backend.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const key = "ps_loyalty_v1";
+    const fmt = (n) => new Intl.NumberFormat(undefined, { style: "currency", currency: "CAD" }).format(Number(n || 0));
+
+    function getLevel(points){
+      if(points >= 3000) return { name:"Legacy", next:null };
+      if(points >= 1500) return { name:"Summit", next:3000 };
+      if(points >= 750)  return { name:"Aurora", next:1500 };
+      if(points >= 250)  return { name:"Cedar", next:750 };
+      return { name:"Maple", next:250 };
+    }
+
+    const data = JSON.parse(localStorage.getItem(key) || "{}");
+    const points = Math.floor(Number(data.points || 0));
+    const spend = Number(data.spend || 0);
+
+    document.getElementById("points").textContent = String(points);
+    document.getElementById("spend").textContent = fmt(spend);
+
+    const lvl = getLevel(points);
+    document.getElementById("level").textContent = lvl.name;
+
+    if(lvl.next){
+      document.getElementById("next").textContent =
+        "Next level at " + lvl.next + " points (" + Math.max(0, lvl.next - points) + " to go).";
+    } else {
+      document.getElementById("next").textContent = "Top level reached.";
+    }
+  </script>
+</body>
+</html>
