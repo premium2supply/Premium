@@ -1,1 +1,215 @@
-j
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premium Supply — Products</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span class="topbar__badge"><i class="fa-solid fa-maple-leaf"></i> Proudly Canadian</span>
+      <p class="topbar__text">Browse products • Order by email • Pay via Interac e‑Transfer</p>
+      <a class="topbar__link" href="index.html#contact">Contact</a>
+    </div>
+  </div>
+
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <details class="nav">
+        <summary class="icon-btn" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </summary>
+        <div class="nav__panel" role="navigation" aria-label="Site navigation">
+          <a href="index.html" class="nav__link">Home</a>
+          <a href="products.html" class="nav__link is-active">Products</a>
+          <a href="index.html#how" class="nav__link">How to Order</a>
+          <a href="index.html#contact" class="nav__link">Contact</a>
+        </div>
+      </details>
+
+      <a class="brand" href="index.html" aria-label="Premium Supply home">
+        <svg class="brand__logo" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <radialGradient id="g2" cx="30%" cy="30%" r="70%">
+              <stop offset="0" stop-color="#E6D7FF"/>
+              <stop offset="1" stop-color="#6A2DFF"/>
+            </radialGradient>
+          </defs>
+          <circle cx="32" cy="32" r="18" fill="url(#g2)"/>
+          <path d="M10 34c10 10 34 10 44 0" fill="none" stroke="#B8F3D0" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 28c10-10 30-10 40 0" fill="none" stroke="#F2D48B" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+        </svg>
+
+        <span class="brand__text">
+          <span class="brand__name">Premium Supply</span>
+          <span class="brand__tag">Product catalog</span>
+        </span>
+      </a>
+
+      <a class="icon-btn" href="index.html" aria-label="Back to home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </div>
+
+    <div class="container header__nav-desktop" aria-label="Primary navigation">
+      <a href="index.html" class="header__link">Home</a>
+      <a href="products.html" class="header__link is-active">Products</a>
+      <a href="index.html#how" class="header__link">How to Order</a>
+      <a href="index.html#contact" class="header__link">Contact</a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h1 class="section-title">Products</h1>
+          <p class="section-sub">Click “Order by Email” to open a pre-filled message.</p>
+        </div>
+      </div>
+
+      <!--
+        ✅ EMPLOYEE INSTRUCTIONS (NO JS)
+        To add a new product:
+        1) Copy one <article class="product-card"> block
+        2) Paste it below
+        3) Update:
+           - SKU in data-sku
+           - Product name, description, price
+           - Image src (optional)
+           - The mailto link (subject + body)
+      -->
+
+      <div class="product-grid">
+        <!-- PRODUCT CARD (COPY/PASTE THIS BLOCK) -->
+        <article class="product-card" data-sku="PS-001">
+          <div class="product-card__img">
+            <!-- Replace with your image (optional) -->
+            <div class="img-placeholder" aria-hidden="true"></div>
+            <!-- Example: <img src="assets/products/product-1.jpg" alt="Orbit Pack — Starter Bundle"> -->
+          </div>
+
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="badge">Limited</span>
+              <span class="sku">SKU: PS-001</span>
+            </div>
+
+            <h2 class="product-card__title">Orbit Pack — Starter Bundle</h2>
+            <p class="product-card__desc">A clean starter option with premium presentation and consistent quality.</p>
+
+            <div class="product-card__meta">
+              <div class="stars" aria-label="4.8 stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                <span class="count">92</span>
+              </div>
+              <p class="price">$24.00 – $189.00 CAD</p>
+            </div>
+
+            <div class="product-card__actions">
+              <a class="btn btn--solid btn--full"
+                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20PS-001&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Orbit%20Pack%20%E2%80%94%20Starter%20Bundle%20(SKU%3A%20PS-001)%0AQuantity%3A%201%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
+                Order by Email <i class="fa-solid fa-paper-plane"></i>
+              </a>
+              <p class="hint">Payment: Interac e‑Transfer after confirmation.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRODUCT CARD -->
+        <article class="product-card" data-sku="PS-002">
+          <div class="product-card__img">
+            <div class="img-placeholder img-placeholder--alt" aria-hidden="true"></div>
+          </div>
+
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="badge badge--mint">Best seller</span>
+              <span class="sku">SKU: PS-002</span>
+            </div>
+
+            <h2 class="product-card__title">Nova Series — Premium Pack</h2>
+            <p class="product-card__desc">Premium pack built for repeat buyers and consistent fulfillment.</p>
+
+            <div class="product-card__meta">
+              <div class="stars" aria-label="4.6 stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                <span class="count">43</span>
+              </div>
+              <p class="price">$16.00 – $299.00 CAD</p>
+            </div>
+
+            <div class="product-card__actions">
+              <a class="btn btn--solid btn--full"
+                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20PS-002&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Nova%20Series%20%E2%80%94%20Premium%20Pack%20(SKU%3A%20PS-002)%0AQuantity%3A%201%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
+                Order by Email <i class="fa-solid fa-paper-plane"></i>
+              </a>
+              <p class="hint">Payment: Interac e‑Transfer after confirmation.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRODUCT CARD -->
+        <article class="product-card" data-sku="PS-003">
+          <div class="product-card__img">
+            <div class="img-placeholder img-placeholder--gold" aria-hidden="true"></div>
+          </div>
+
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="badge badge--soft">New</span>
+              <span class="sku">SKU: PS-003</span>
+            </div>
+
+            <h2 class="product-card__title">Clean Label — Essentials</h2>
+            <p class="product-card__desc">Simple essentials with clean labeling and premium packaging standards.</p>
+
+            <div class="product-card__meta">
+              <div class="stars" aria-label="4.9 stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <span class="count">18</span>
+              </div>
+              <p class="price">$12.00 – $140.00 CAD</p>
+            </div>
+
+            <div class="product-card__actions">
+              <a class="btn btn--solid btn--full"
+                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20PS-003&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Clean%20Label%20%E2%80%94%20Essentials%20(SKU%3A%20PS-003)%0AQuantity%3A%201%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
+                Order by Email <i class="fa-solid fa-paper-plane"></i>
+              </a>
+              <p class="hint">Payment: Interac e‑Transfer after confirmation.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="notice" style="margin-top:16px">
+        <strong>Interac e‑Transfer:</strong> After you email your request, we confirm the total and provide the reference to include with payment.
+        Payment email: <a class="mono" href="mailto:payments@premiumsupply.ca">payments@premiumsupply.ca</a>.
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <h3>Premium Supply</h3>
+        <p>Canada-first storefront • Email ordering • Interac e‑Transfer payments</p>
+      </div>
+
+      <div class="footer__links">
+        <a href="index.html">Home</a>
+        <a href="index.html#how">How to Order</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+
+      <p class="footer__fineprint">© 2026 Premium Supply. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
