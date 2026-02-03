@@ -3,233 +3,57 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Premium Supply — Proudly Canadian Storefront</title>
-
-  <!-- Icons (CSS only) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <title>Premium Supply — Canada</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <span class="topbar__badge"><i class="fa-solid fa-maple-leaf"></i> Proudly Canadian</span>
-      <p class="topbar__text">Ships across Canada • Simple ordering • Pay via Interac e‑Transfer</p>
-      <a class="topbar__link" href="#contact">Contact</a>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="header" role="banner">
+  <header class="header">
     <div class="container header__inner">
-      <!-- No-JS mobile menu using <details> -->
-      <details class="nav">
-        <summary class="icon-btn" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
-        </summary>
-        <div class="nav__panel" role="navigation" aria-label="Site navigation">
-          <a href="index.html" class="nav__link is-active">Home</a>
-          <a href="products.html" class="nav__link">Products</a>
-          <a href="#how" class="nav__link">How to Order</a>
-          <a href="#contact" class="nav__link">Contact</a>
-        </div>
-      </details>
-
-      <a class="brand" href="index.html" aria-label="Premium Supply home">
-        <!-- Replace with your real logo (PNG/SVG). Example:
-             <img class="brand__logo-img" src="assets/logo.png" alt="Premium Supply">
-        -->
-        <svg class="brand__logo" viewBox="0 0 64 64" aria-hidden="true">
-          <defs>
-            <radialGradient id="g" cx="30%" cy="30%" r="70%">
-              <stop offset="0" stop-color="#E6D7FF"/>
-              <stop offset="1" stop-color="#6A2DFF"/>
-            </radialGradient>
-          </defs>
-          <circle cx="32" cy="32" r="18" fill="url(#g)"/>
-          <path d="M10 34c10 10 34 10 44 0" fill="none" stroke="#B8F3D0" stroke-width="3" stroke-linecap="round"/>
-          <path d="M14 28c10-10 30-10 40 0" fill="none" stroke="#F2D48B" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-        </svg>
-
+      <a class="brand" href="index.html">
+        <span class="brand__mark">PS</span>
         <span class="brand__text">
           <span class="brand__name">Premium Supply</span>
-          <span class="brand__tag">Canada-first storefront</span>
+          <span class="brand__tag">100% Canadian • Proud</span>
         </span>
       </a>
 
-      <a class="icon-btn" href="products.html" aria-label="Browse products">
-        <i class="fa-solid fa-store"></i>
-      </a>
-    </div>
+      <nav class="header__links" aria-label="Primary">
+        <a class="hlink" href="products.html">Catalogue</a>
+        <a class="hlink" href="account.html">Account</a>
+      </nav>
 
-    <!-- Desktop nav -->
-    <div class="container header__nav-desktop" aria-label="Primary navigation">
-      <a href="index.html" class="header__link is-active">Home</a>
-      <a href="products.html" class="header__link">Products</a>
-      <a href="#how" class="header__link">How to Order</a>
-      <a href="#contact" class="header__link">Contact</a>
+      <a class="btn btn--solid" href="products.html">Browse</a>
     </div>
   </header>
 
-  <main id="main">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero__bg" aria-hidden="true"></div>
-      <div class="container hero__inner">
-        <p class="hero__eyebrow"><i class="fa-solid fa-maple-leaf"></i> 100% Canadian and proud</p>
-        <h1 class="hero__title">Premium Supply — built for fast, simple ordering.</h1>
-        <p class="hero__sub">
-          Browse products, email your order request, then pay via Interac e‑Transfer.
-          No payment processor, no friction — just clear steps and quick confirmations.
+  <main class="section">
+    <div class="container">
+      <div class="pagehead">
+        <h1 class="title">Premium Supply</h1>
+        <p class="sub">
+          Browse the catalogue, build your cart, then place your order to receive your confirmation number and Interac e‑Transfer instructions.
+          Minimum order is $75 CAD.
         </p>
+      </div>
 
-        <div class="hero__cta">
-          <a class="btn btn--solid" href="products.html">Browse products</a>
-          <a class="btn btn--outline" href="#how">How it works</a>
+      <div class="acctgrid">
+        <div class="abox">
+          <div class="muted small">Catalogue sections</div>
+          <div class="big">6</div>
+          <div class="muted small">Flowers • Oil • Vapes • Extracts • Mushroom • Accessories</div>
         </div>
-
-        <div class="hero__ticker" aria-label="Highlights">
-          <span>Verified inventory</span><span class="dot">•</span>
-          <span>Canada-wide shipping</span><span class="dot">•</span>
-          <span>Interac e‑Transfer</span><span class="dot">•</span>
-          <span>Fast support</span>
+        <div class="abox">
+          <div class="muted small">Payment</div>
+          <div class="big">Interac</div>
+          <div class="muted small">Instructions shown after placing order</div>
+        </div>
+        <div class="abox">
+          <div class="muted small">Rewards</div>
+          <div class="big">Points</div>
+          <div class="muted small">1 point per $1 CAD spent</div>
         </div>
       </div>
-    </section>
-
-    <!-- Trust / Features -->
-    <section class="section">
-      <div class="container">
-        <div class="feature-list">
-          <div class="feature">
-            <div class="feature__icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <div>
-              <h3>Secure ordering</h3>
-              <p>Clear instructions and confirmed fulfillment.</p>
-            </div>
-          </div>
-
-          <div class="feature">
-            <div class="feature__icon"><i class="fa-solid fa-truck-fast"></i></div>
-            <div>
-              <h3>Canada-wide shipping</h3>
-              <p>Fast dispatch with reliable tracking.</p>
-            </div>
-          </div>
-
-          <div class="feature">
-            <div class="feature__icon"><i class="fa-solid fa-maple-leaf"></i></div>
-            <div>
-              <h3>Canadian-first</h3>
-              <p>Built for Canadian customers and workflows.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- How to order -->
-    <section class="section" id="how">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">How ordering works</h2>
-            <p class="section-sub">No processor — payment is handled by Interac e‑Transfer.</p>
-          </div>
-        </div>
-
-        <div class="steps">
-          <article class="step">
-            <div class="step__icon"><i class="fa-solid fa-bag-shopping"></i></div>
-            <h3>1) Choose products</h3>
-            <p>Open the catalog and click “Order by Email” on the item(s) you want.</p>
-          </article>
-
-          <article class="step">
-            <div class="step__icon"><i class="fa-solid fa-envelope"></i></div>
-            <h3>2) Email your request</h3>
-            <p>Your email app opens with a pre-filled message. Add quantity + shipping city/province.</p>
-          </article>
-
-          <article class="step">
-            <div class="step__icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-            <h3>3) Pay by Interac e‑Transfer</h3>
-            <p>We reply with confirmation details and the exact reference to include with your transfer.</p>
-          </article>
-        </div>
-
-        <div class="notice">
-          <strong>Tip:</strong> For larger orders, you can email one message listing multiple SKUs and quantities.
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-      <div class="container">
-        <div class="cta">
-          <div>
-            <h2>Ready to browse?</h2>
-            <p>Visit the full catalog and delegate product updates easily.</p>
-          </div>
-          <a class="btn btn--solid" href="products.html">
-            View products <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="contact">
-          <div>
-            <h2 class="section-title">Contact</h2>
-            <p class="section-sub">Update these emails to your real addresses.</p>
-          </div>
-
-          <div class="contact__grid">
-            <div class="contact__card">
-              <h3>Order requests</h3>
-              <p><a class="mono" href="mailto:orders@premiumsupply.ca">orders@premiumsupply.ca</a></p>
-              <p class="muted">Customers email order details here.</p>
-            </div>
-
-            <div class="contact__card">
-              <h3>Interac e‑Transfer</h3>
-              <p><a class="mono" href="mailto:payments@premiumsupply.ca">payments@premiumsupply.ca</a></p>
-              <p class="muted">Payment destination address (email transfer).</p>
-            </div>
-
-            <div class="contact__card">
-              <h3>Support</h3>
-              <p><a class="mono" href="mailto:support@premiumsupply.ca">support@premiumsupply.ca</a></p>
-              <p class="muted">Questions, shipping updates, and help.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div>
-          <h3>Premium Supply</h3>
-          <p>Canada-first. Simple ordering. Interac e‑Transfer payments.</p>
-        </div>
-
-        <div class="footer__links">
-          <a href="products.html">Products</a>
-          <a href="#how">How to Order</a>
-          <a href="#contact">Contact</a>
-        </div>
-
-        <p class="footer__fineprint">© 2026 Premium Supply. All rights reserved.</p>
-      </div>
-    </footer>
+    </div>
   </main>
 </body>
 </html>
