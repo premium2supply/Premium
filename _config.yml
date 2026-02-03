@@ -1,0 +1,14 @@
+title: Premium Supply
+description: Proudly Canadian storefront
+url: ""
+baseurl: ""
+
+collections:
+  products:
+    output: false
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: null
