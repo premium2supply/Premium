@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ page.name | escape }} — Premium Supply</title>
+
+  <link rel="stylesheet" href="{{ "/styles.css" | relative_url }}" />
+</head>
+
+<body>
+  <!-- Promo band (always on top) -->
+  <div class="adband">
+    <div class="container adband__inner">
+      <div class="adband__tag">PROMO</div>
+      <div class="adband__marquee">
+        <div class="adband__track">
+          <span>Proudly Canadian • CAD</span><span class="sep">•</span>
+          <span>Minimum order $75 CAD</span><span class="sep">•</span>
+          <span>Interac instructions shown after order</span><span class="sep">•</span>
+
+          <span>Proudly Canadian • CAD</span><span class="sep">•</span>
+          <span>Minimum order $75 CAD</span><span class="sep">•</span>
+          <span>Interac instructions shown after order</span><span class="sep">•</span>
+        </div>
+      </div>
+      <a class="adband__cta" href="{{ "/products.html" | relative_url }}">Catalogue</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="{{ "/" | relative_url }}">
+        <img class="brand__logo" src="{{ "/assets/brand/logo-round.png" | relative_url }}" alt="Premium Supply logo">
+        <span class="brand__text">
+          <span class="brand__name">Premium Supply</span>
+          <span class="brand__tag">Product • CAD</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="{{ "/" | relative_url }}">Home</a>
+        <a href="{{ "/products.html" | relative_url }}">Catalogue</a>
+        <a href="{{ "/account.html" | relative_url }}">Account</a>
+      </nav>
+
+      <div class="header__right">
+        <!-- Go to catalogue and open cart -->
+        <a class="btn btn--solid" id="cartLink" href="{{ "/products.html?cart=open" | relative_url }}">
+          Cart (<span id="cartCount">0</span>)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+
+      <div class="pcrumb muted small">
+        <a href="{{ "/products.html" | relative_url }}">Catalogue</a>
+        <span class="sep">•</span>
+        <span>{{ page.category }}</span>
+      </div>
+
+      <section class="pwrap">
+        <div class="pgrid">
+          <!-- Gallery -->
+          <div class="pgallery">
+            {% assign main_img = page.image %}
+            {% if main_img %}
+              <a class="pmain" href="{{ main_img | relative_url }}" target="_blank" rel="noopener">
+                <img id="mainImage" src="{{ main_img | relative_url }}" alt="{{ page.name | escape }}">
+              </a>
+            {% else %}
+              <div class="pmain"><div class="ph" aria-hidden="true"></div></div>
+            {% endif %}
+
+            {% if page.gallery and page.gallery.size > 0 %}
+              <div class="pthumbs">
+                {% if main_img %}
+                  <button class="pthumb" type="button" data-src="{{ main_img | relative_url }}">
+                    <img src="{{ main_img | relative_url }}" alt="Main image">
+                  </button>
+                {% endif %}
+
+                {% for g in page.gallery %}
+                  <button class="pthumb" type="button" data-src="{{ g.image | relative_url }}">
+                    <img src="{{ g.image | relative_url }}" alt="{{ g.alt | default: page.name | escape }}">
+                  </button>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <p class="muted small" style="margin:10px 0 0">
+              Tip: tap an image to open it larger.
+            </p>
+          </div>
+
+          <!-- Product info -->
+          <div class="pinfo">
+            <div class="meta">
+              <span class="badge">{{ page.badge | default: "Standard" }}</span>
+              <span class="sku">SKU: {{ page.sku }}</span>
+            </div>
+
+            <h1 class="ptitle">{{ page.name }}</h1>
+
+            {% if page.description %}
+              <p class="pdesc">{{ page.description }}</p>
+            {% endif %}
+
+            <!-- Variants (sizes/doses) -->
+            {% if page.variants and page.variants.size > 0 %}
+              <div class="pbox">
+                <label class="field">
+                  <span>Choose size</span>
+                  <select id="variantSelect">
+                    {% for v in page.variants %}
+                      <option value="{{ v.label | escape }}" data-price="{{ v.price }}">
+                        {{ v.label }} — ${{ v.price }} CAD
+                      </option>
+                    {% endfor %}
+                  </select>
+                </label>
+
+                <div class="prow">
+                  <span class="muted">Unit price</span>
+                  <strong id="unitPrice"></strong>
+                </div>
+
+                <button class="btn btn--solid btn--full" id="addToCart" type="button">
+                  Add to cart
+                </button>
+
+                <p class="muted small" style="margin:10px 0 0">
+                  Sizes are selected here; checkout happens later in your cart.
+                </p>
+              </div>
+            {% else %}
+              <div class="pbox">
+                <div class="prow">
+                  <span class="muted">Price</span>
+                  <strong id="unitPrice">${{ page.price | default: 0 }} CAD</strong>
+                </div>
+
+                <button class="btn btn--solid btn--full" id="addToCart" type="button">
+                  Add to cart
+                </button>
+
+                <p class="muted small" style="margin:10px 0 0">
+                  Checkout happens later in your cart.
+                </p>
+              </div>
+            {% endif %}
+
+            <div class="divider"></div>
+
+            <div class="pdetail">
+              <h2 class="h3">Details</h2>
+              <div class="pcontent">
+                {{ content }}
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="pactions">
+              <a class="btn btn--outline" href="{{ "/products.html" | relative_url }}">Back to catalogue</a>
+              <a class="btn btn--ghost" href="{{ "/products.html?cart=open" | relative_url }}">View cart</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container footer__inner">
+          <span>© Premium Supply • Product page</span>
+          <span class="muted small">Proudly Canadian • CAD</span>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" hidden>
+    <span>Added to cart</span>
+    <a class="btn btn--outline" href="{{ "/products.html?cart=open" | relative_url }}">View cart</a>
+  </div>
+
+  <!-- Inline JS only -->
+  <script>
+    const cartKey = "ps_cart_v4";
+    const toast = document.getElementById("toast");
+    const cartCountEl = document.getElementById("cartCount");
+
+    function readCart(){
+      return JSON.parse(localStorage.getItem(cartKey) || "{}");
+    }
+    function writeCart(cart){
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
+    function cartCount(cart){
+      return Object.values(cart).reduce((sum, line)=> sum + (Number(line.qty)||0), 0);
+    }
+    function lineKey(sku, variant){
+      return variant ? (sku + "::" + variant) : sku;
+    }
+    function showToast(){
+      toast.hidden = false;
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=> toast.hidden = true, 2200);
+    }
+
+    // Update cart count on load
+    (function(){
+      const cart = readCart();
+      cartCountEl.textContent = cartCount(cart);
+    })();
+
+    // Gallery click (swap main image)
+    (function(){
+      const main = document.getElementById("mainImage");
+      if(!main) return;
+      document.querySelectorAll("[data-src]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const src = btn.getAttribute("data-src");
+          main.src = src;
+          // if wrapped in <a>, update href to open bigger
+          const wrap = main.closest("a");
+          if(wrap) wrap.href = src;
+        });
+      });
+    })();
+
+    // Variant price display
+    const unitPriceEl = document.getElementById("unitPrice");
+    const variantSelect = document.getElementById("variantSelect");
+
+    function currentVariant(){
+      if(!variantSelect) return { label: "", price: {{ page.price | default: 0 }} };
+      const opt = variantSelect.options[variantSelect.selectedIndex];
+      return { label: opt.value, price: Number(opt.dataset.price || 0) };
+    }
+    function renderUnitPrice(){
+      const v = currentVariant();
+      unitPriceEl.textContent = new Intl.NumberFormat(undefined,{style:"currency",currency:"CAD"}).format(v.price) + " CAD";
+    }
+    if(variantSelect){
+      variantSelect.addEventListener("change", renderUnitPrice);
+    }
+    renderUnitPrice();
+
+    // Add to cart
+    document.getElementById("addToCart").addEventListener("click", ()=>{
+      const cart = readCart();
+
+      const sku = "{{ page.sku | escape }}";
+      const name = "{{ page.name | escape }}";
+      const v = currentVariant();
+
+      const key = lineKey(sku, v.label);
+      if(cart[key]){
+        cart[key].qty += 1;
+      }else{
+        cart[key] = {
+          sku,
+          name,
+          variant: v.label || "",
+          unitPrice: Number(v.price || 0),
+          qty: 1
+        };
+      }
+
+      writeCart(cart);
+      cartCountEl.textContent = cartCount(cart);
+      showToast();
+    });
+  </script>
+</body>
+</html>
