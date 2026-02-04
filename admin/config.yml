@@ -1,19 +1,54 @@
-title: Premium Supply
-description: Proudly Canadian storefront
-
-# IMPORTANT:
-# If this is a PROJECT page (repo name Premium), baseurl should be "/Premium"
-# If it’s a USER page (repo name premium2supply.github.io) or a custom domain, keep baseurl ""
-baseurl: "/Premium"
-
 collections:
-  products:
-    output: true
-    permalink: /p/:slug/
+  - name: "products"
+    label: "Products"
+    folder: "_products"
+    create: true
+    slug: "{{fields.sku}}"
+    summary: "{{fields.sku}} — {{fields.name}}"
+    fields:
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+      - { label: "SKU", name: "sku", widget: "string" }
 
-defaults:
-  - scope:
-      path: ""
-      type: products
-    values:
-      layout: product
+      - { label: "Name", name: "name", widget: "string" }
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - Flowers
+          - Oil
+          - Vapes
+          - Extracts
+          - Mushroom
+          - Accessories
+        default: Flowers
+
+      - { label: "Badge (optional)", name: "badge", widget: "string", required: false }
+
+      # For non-variant products (Oil/Vapes/etc), use price.
+      - { label: "Base price (CAD)", name: "price", widget: "number", value_type: "float", required: false, hint: "Used when Variants are empty" }
+
+      # For Flowers: add sizes/doses here.
+      - label: "Variants / Sizes (use for Flowers)"
+        name: "variants"
+        widget: "list"
+        required: false
+        hint: "Add sizes like 3.5g, 7g, 14g, 1oz, 1/2 lb, 1 lb with prices."
+        fields:
+          - { label: "Label", name: "label", widget: "string", default: "3.5g" }
+          - { label: "Price (CAD)", name: "price", widget: "number", value_type: "float" }
+
+      - { label: "Main image (optional)", name: "image", widget: "image", required: false }
+
+      - label: "Gallery (more pictures)"
+        name: "gallery"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Alt text (optional)", name: "alt", widget: "string", required: false }
+
+      - { label: "Short description", name: "description", widget: "text", required: false }
+
+      # This is the detailed product page content
+      - { label: "Detailed description", name: "body", widget: "markdown", required: false }
