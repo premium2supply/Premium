@@ -1,44 +1,19 @@
-backend:
-  name: github
-  repo: premium2supply/Premium
-  branch: main
+title: Premium Supply
+description: Proudly Canadian storefront
 
-  # IMPORTANT (GitHub Pages needs an OAuth proxy)
-  # Fill these after you deploy the Cloudflare Worker proxy (see section 7):
-  base_url: https://premium.bookingsgr1nd00.workers.dev
-  auth_endpoint: /auth
-
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+# IMPORTANT:
+# If this is a PROJECT page (repo name Premium), baseurl should be "/Premium"
+# If it’s a USER page (repo name premium2supply.github.io) or a custom domain, keep baseurl ""
+baseurl: "/Premium"
 
 collections:
-  - name: "products"
-    label: "Products"
-    folder: "_products"
-    create: true
-    slug: "{{fields.sku}}"
-    summary: "{{fields.sku}} — {{fields.name}}"
-    fields:
-      - { label: "Active", name: "active", widget: "boolean", default: true }
-      - { label: "SKU", name: "sku", widget: "string" }
+  products:
+    output: true
+    permalink: /p/:slug/
 
-      - { label: "Name", name: "name", widget: "string" }
-      - label: "Category"
-        name: "category"
-        widget: "select"
-        options:
-          - Flowers
-          - Oil
-          - Vapes
-          - Extracts
-          - Mushroom
-          - Accessories
-        default: Flowers
-
-      - { label: "Badge (optional)", name: "badge", widget: "string", required: false }
-
-      - { label: "Price (CAD) — used for cart total", name: "price", widget: "number", value_type: "float" }
-      - { label: "Display price note (optional)", name: "price_note", widget: "string", required: false, hint: "Example: 'From $25' or 'Price confirmed after review'" }
-
-      - { label: "Image (optional)", name: "image", widget: "image", required: false }
-      - { label: "Short description", name: "description", widget: "text", required: false }
+defaults:
+  - scope:
+      path: ""
+      type: products
+    values:
+      layout: product
