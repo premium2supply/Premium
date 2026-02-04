@@ -1,92 +1,19 @@
-# No approvals required
-publish_mode: simple
+title: Premium Supply
+description: Proudly Canadian storefront
 
-backend:
-  name: github
-  repo: premium2supply/Premium
-  branch: main
-
-  # OAuth Proxy (required for GitHub Pages)
-  base_url: https://bookingsgr1nd00.workers.dev
-  auth_endpoint: /auth
-
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+# IMPORTANT:
+# If this is a PROJECT page (repo name Premium), baseurl should be "/Premium"
+# If it’s a USER page (repo name premium2supply.github.io) or a custom domain, keep baseurl ""
+baseurl: "/Premium"
 
 collections:
-  # -----------------------------
-  # PRODUCTS
-  # -----------------------------
-  - name: "products"
-    label: "Products"
-    folder: "_products"
-    create: true
-    slug: "{{fields.sku}}"
-    summary: "{{fields.sku}} — {{fields.name}}"
-    fields:
-      - { label: "Active", name: "active", widget: "boolean", default: true }
-      - { label: "SKU", name: "sku", widget: "string" }
+  products:
+    output: true
+    permalink: /p/:slug/
 
-      - { label: "Name", name: "name", widget: "string" }
-
-      - label: "Category"
-        name: "category"
-        widget: "select"
-        options: [Flowers, Oil, Vapes, Extracts, Mushroom, Accessories]
-        default: Flowers
-
-      - { label: "Featured on Home", name: "featured", widget: "boolean", default: false }
-      - { label: "Sort Order (optional)", name: "sort", widget: "number", value_type: "int", required: false, hint: "Lower shows first" }
-
-      - { label: "Badge (optional)", name: "badge", widget: "string", required: false }
-
-      - { label: "Price (CAD)", name: "price", widget: "number", value_type: "float" }
-      - { label: "Display price note (optional)", name: "price_note", widget: "string", required: false }
-
-      - { label: "Image (optional)", name: "image", widget: "image", required: false }
-      - { label: "Short description", name: "description", widget: "text", required: false }
-
-  # -----------------------------
-  # SITE SETTINGS / PROMOS (employee-friendly)
-  # -----------------------------
-  - name: "settings"
-    label: "Site Settings"
-    files:
-      - file: "_data/site.yml"
-        label: "Promotions & Store Rules"
-        name: "site"
-        fields:
-          - label: "Top Promo Band"
-            name: "promo_band"
-            widget: "object"
-            fields:
-              - { label: "Tag", name: "tag", widget: "string", default: "PROMO" }
-              - { label: "CTA Label", name: "cta_label", widget: "string", default: "Shop now" }
-              - { label: "CTA Link", name: "cta_link", widget: "string", default: "/products.html" }
-              - label: "Messages"
-                name: "messages"
-                widget: "list"
-                field: { label: "Message", name: "message", widget: "string" }
-
-          - label: "Homepage Promo Cards"
-            name: "home_promos"
-            widget: "list"
-            fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Text", name: "text", widget: "text" }
-              - { label: "Button Label", name: "button_label", widget: "string", required: false }
-              - { label: "Button Link", name: "button_link", widget: "string", required: false }
-
-          - label: "Store Rules"
-            name: "rules"
-            widget: "object"
-            fields:
-              - { label: "Minimum Order (CAD)", name: "min_order_cad", widget: "number", value_type: "int", default: 75 }
-              - { label: "Account close after hours (no payment)", name: "close_after_hours", widget: "number", value_type: "int", default: 24 }
-
-          - label: "Order Emails"
-            name: "emails"
-            widget: "object"
-            fields:
-              - { label: "Orders inbox", name: "orders", widget: "string", default: "orders@premiumsupply.ca" }
-              - { label: "Payments inbox", name: "payments", widget: "string", default: "payments@premiumsupply.ca" }
+defaults:
+  - scope:
+      path: ""
+      type: products
+    values:
+      layout: product
