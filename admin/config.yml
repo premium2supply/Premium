@@ -5,9 +5,8 @@ backend:
   repo: premium2supply/Premium
   branch: main
 
-  # GitHub Pages needs an OAuth proxy (Cloudflare Worker / decap-proxy).
-  # Replace this with your real proxy URL when ready.
-  base_url: https://premium2supply.github.io/Premium/products.html
+  # We'll replace this AFTER we deploy the proxy:
+  base_url: https://YOUR-PROXY-SUBDOMAIN.workers.dev
   auth_endpoint: /auth
 
 media_folder: "assets/uploads"
@@ -23,7 +22,6 @@ collections:
     fields:
       - { label: "Active", name: "active", widget: "boolean", default: true }
       - { label: "SKU", name: "sku", widget: "string" }
-
       - { label: "Name", name: "name", widget: "string" }
 
       - label: "Category"
@@ -40,11 +38,8 @@ collections:
         default: Flowers
 
       - { label: "Badge (optional)", name: "badge", widget: "string", required: false }
-
-      # Used for non-variant products (or as fallback if no variants)
       - { label: "Base price (CAD)", name: "price", widget: "number", value_type: "float", required: false }
 
-      # Flower sizes / doses dropdown (3.5g, 7g, 14g, 1oz, 1/2 lb, 1 lb etc.)
       - label: "Variants / Sizes (optional — use for Flowers)"
         name: "variants"
         widget: "list"
@@ -53,7 +48,6 @@ collections:
           - { label: "Label", name: "label", widget: "string", default: "3.5g" }
           - { label: "Price (CAD)", name: "price", widget: "number", value_type: "float" }
 
-      # Easy pictures for your employee
       - { label: "Main image", name: "image", widget: "image", required: false }
 
       - label: "Gallery images (more pictures)"
@@ -64,11 +58,8 @@ collections:
           - { label: "Image", name: "image", widget: "image" }
 
       - { label: "Short description", name: "description", widget: "text", required: false }
-
-      # Product page long description
       - { label: "Detailed description", name: "body", widget: "markdown", required: false }
 
-      # Optional: choose related products
       - label: "Related products (Customers may like)"
         name: "related"
         widget: "relation"
