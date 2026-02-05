@@ -8,33 +8,13 @@
 </head>
 
 <body>
-  <!-- Always-on promo band -->
-  <div class="adband">
-    <div class="container adband__inner">
-      <div class="adband__tag">PROMO</div>
-      <div class="adband__marquee">
-        <div class="adband__track">
-          <span>Proudly Canadian • CAD</span><span class="sep">•</span>
-          <span>Minimum order $75 CAD</span><span class="sep">•</span>
-          <span>Instructions shown after placing order</span><span class="sep">•</span>
-
-          <span>Proudly Canadian • CAD</span><span class="sep">•</span>
-          <span>Minimum order $75 CAD</span><span class="sep">•</span>
-          <span>Instructions shown after placing order</span><span class="sep">•</span>
-        </div>
-      </div>
-      <a class="adband__cta" href="{{ "/products.html" | relative_url }}">Catalogue</a>
-    </div>
-  </div>
-
-  <!-- Header -->
   <header class="header">
     <div class="container header__inner">
       <a class="brand" href="{{ "/" | relative_url }}">
         <img class="brand__logo" src="{{ "/assets/brand/logo-round.png" | relative_url }}" alt="Premium Supply logo">
         <span class="brand__text">
           <span class="brand__name">Premium Supply</span>
-          <span class="brand__tag">Product • CAD</span>
+          <span class="brand__tag">Product page • CAD</span>
         </span>
       </a>
 
@@ -46,7 +26,7 @@
 
       <div class="header__right">
         <a class="btn btn--solid" href="{{ "/products.html" | relative_url }}?cart=open">
-          Cart (<span id="cartCount">0</span>)
+          Cart
         </a>
       </div>
     </div>
@@ -54,193 +34,88 @@
 
   <main class="section">
     <div class="container">
+      <p class="muted small">
+        <a href="{{ "/products.html" | relative_url }}">Catalogue</a> • {{ page.category }}
+      </p>
 
-      <div class="pcrumb muted small">
-        <a href="{{ "/products.html" | relative_url }}">Catalogue</a>
-        <span class="sep">•</span>
-        <span>{{ page.category }}</span>
-      </div>
+      <div class="pgrid">
+        <!-- Images -->
+        <div>
+          {% if page.image %}
+            <a class="pmain" href="{{ page.image | relative_url }}" target="_blank" rel="noopener">
+              <img id="mainImage" src="{{ page.image | relative_url }}" alt="{{ page.name | escape }}">
+            </a>
+          {% else %}
+            <div class="pmain"><div class="ph" aria-hidden="true"></div></div>
+          {% endif %}
 
-      <section class="pwrap">
-        <div class="pgrid">
-          <!-- Gallery -->
-          <div class="pgallery">
-            {% if page.image %}
-              <a class="pmain" href="{{ page.image | relative_url }}" target="_blank" rel="noopener">
-                <img id="mainImage" src="{{ page.image | relative_url }}" alt="{{ page.name | escape }}">
-              </a>
-            {% else %}
-              <div class="pmain"><div class="ph" aria-hidden="true"></div></div>
-            {% endif %}
-
-            {% if page.gallery and page.gallery.size > 0 %}
-              <div class="pthumbs">
-                {% if page.image %}
-                  <button class="pthumb" type="button" data-src="{{ page.image | relative_url }}">
-                    <img src="{{ page.image | relative_url }}" alt="Main image">
-                  </button>
-                {% endif %}
-                {% for g in page.gallery %}
-                  <button class="pthumb" type="button" data-src="{{ g.image | relative_url }}">
-                    <img src="{{ g.image | relative_url }}" alt="{{ page.name | escape }}">
-                  </button>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-
-          <!-- Info -->
-          <div class="pinfo">
-            <div class="meta">
-              <span class="badge">{{ page.badge | default: "Standard" }}</span>
-              <span class="sku">SKU: {{ page.sku }}</span>
-            </div>
-
-            <h1 class="ptitle">{{ page.name }}</h1>
-
-            {% if page.description %}
-              <p class="pdesc">{{ page.description }}</p>
-            {% endif %}
-
-            <div class="pbox">
-              {% if page.variants and page.variants.size > 0 %}
-                <label class="field">
-                  <span>Choose size</span>
-                  <select id="variantSelect">
-                    {% for v in page.variants %}
-                      <option value="{{ v.label | escape }}" data-price="{{ v.price }}">
-                        {{ v.label }} — ${{ v.price }} CAD
-                      </option>
-                    {% endfor %}
-                  </select>
-                </label>
+          {% if page.gallery and page.gallery.size > 0 %}
+            <div class="pthumbs">
+              {% if page.image %}
+                <button class="pthumb" type="button" data-src="{{ page.image | relative_url }}">
+                  <img src="{{ page.image | relative_url }}" alt="Main image">
+                </button>
               {% endif %}
-
-              <div class="prow">
-                <span class="muted">Unit price</span>
-                <strong id="unitPrice"></strong>
-              </div>
-
-              <div class="prow">
-                <span class="muted">Quantity</span>
-                <div class="qtypicker">
-                  <button class="qbtn" id="qtyDec" type="button">−</button>
-                  <input id="qtyInput" type="number" min="1" max="99" value="1">
-                  <button class="qbtn" id="qtyInc" type="button">+</button>
-                </div>
-              </div>
-
-              <button class="btn btn--solid btn--full" id="addToCart" type="button">
-                Add to cart
-              </button>
-
-              <p class="muted small" style="margin:10px 0 0">
-                Checkout happens later in your cart.
-              </p>
+              {% for g in page.gallery %}
+                <button class="pthumb" type="button" data-src="{{ g.image | relative_url }}">
+                  <img src="{{ g.image | relative_url }}" alt="{{ page.name | escape }}">
+                </button>
+              {% endfor %}
             </div>
-
-            <div class="divider"></div>
-
-            <div class="pdetail">
-              <h2 class="h3">Detailed description</h2>
-              <div class="pcontent">
-                {{ content }}
-              </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <!-- Related products -->
-            <section class="relsec">
-              <div class="section__head">
-                <h2 class="h2">Customers may also like</h2>
-                <a class="muted small" href="{{ "/products.html" | relative_url }}">View all</a>
-              </div>
-
-              {% assign related_items = "" | split: "" %}
-
-              {% if page.related and page.related.size > 0 %}
-                {% assign related_items = site.products | where: "active", true | where_exp: "p", "page.related contains p.sku" %}
-              {% else %}
-                {% assign related_items = site.products | where: "active", true | where: "category", page.category | where_exp: "p", "p.sku != page.sku" %}
-              {% endif %}
-
-              {% assign related_items = related_items | slice: 0, 4 %}
-
-              <div class="grid">
-                {% for rp in related_items %}
-                  <article class="card">
-                    <div class="card__img">
-                      {% if rp.image %}
-                        <img src="{{ rp.image | relative_url }}" alt="{{ rp.name | escape }}">
-                      {% else %}
-                        <div class="ph" aria-hidden="true"></div>
-                      {% endif %}
-                    </div>
-                    <div class="card__body">
-                      <h3 class="card__title">{{ rp.name }}</h3>
-                      <p class="card__desc">{{ rp.description | default: "Premium Supply selection." }}</p>
-                      <div class="foot">
-                        <div class="price">
-                          {% if rp.variants and rp.variants.size > 0 %}
-                            <strong>From ${{ rp.variants[0].price }} CAD</strong>
-                          {% else %}
-                            <strong>${{ rp.price | default: 0 }} CAD</strong>
-                          {% endif %}
-                        </div>
-                        <a class="btn btn--outline" href="{{ rp.url | relative_url }}">View</a>
-                      </div>
-                    </div>
-                  </article>
-                {% endfor %}
-              </div>
-            </section>
-
-          </div>
+          {% endif %}
         </div>
-      </section>
 
+        <!-- Info -->
+        <div class="pinfo">
+          <div class="meta">
+            <span class="badge">{{ page.badge | default: "Standard" }}</span>
+            <span class="sku">SKU: {{ page.sku }}</span>
+          </div>
+
+          <h1 class="ptitle">{{ page.name }}</h1>
+          {% if page.description %}<p class="pdesc">{{ page.description }}</p>{% endif %}
+
+          <div class="divider"></div>
+
+          <h2 class="h3">Details</h2>
+          <div class="pcontent">
+            {{ content }}
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Related products -->
+          <h2 class="h3">Customers may also like</h2>
+          {% assign rel = site.products | where: "active", true | where: "category", page.category | where_exp: "p", "p.sku != page.sku" | slice: 0, 4 %}
+          <div class="grid">
+            {% for rp in rel %}
+              <article class="card">
+                <div class="card__img">
+                  {% if rp.image %}<img src="{{ rp.image | relative_url }}" alt="{{ rp.name | escape }}">{% else %}<div class="ph"></div>{% endif %}
+                </div>
+                <div class="card__body">
+                  <h3 class="card__title">{{ rp.name }}</h3>
+                  <p class="card__desc">{{ rp.description | default: "Premium Supply selection." }}</p>
+                  <div class="foot">
+                    <a class="btn btn--outline" href="{{ rp.url | relative_url }}">View</a>
+                  </div>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+
+          <div class="divider"></div>
+
+          <a class="btn btn--outline" href="{{ "/products.html" | relative_url }}">Back to catalogue</a>
+        </div>
+      </div>
     </div>
   </main>
 
-  <div class="toast" id="toast" hidden>
-    <span>Added to cart</span>
-    <a class="btn btn--outline" href="{{ "/products.html" | relative_url }}?cart=open">View cart</a>
-  </div>
-
   <script>
-    const cartKey = "ps_cart_main";
-    const toast = document.getElementById("toast");
-    const cartCountEl = document.getElementById("cartCount");
-
-    const qtyInput = document.getElementById("qtyInput");
-    const qtyDec = document.getElementById("qtyDec");
-    const qtyInc = document.getElementById("qtyInc");
-
-    function readCart(){ return JSON.parse(localStorage.getItem(cartKey) || "{}"); }
-    function writeCart(c){ localStorage.setItem(cartKey, JSON.stringify(c)); }
-    function countCart(c){ return Object.values(c).reduce((s,it)=> s + (Number(it.qty)||0), 0); }
-
-    function lineKey(sku, variant){ return variant ? (sku + "::" + variant) : sku; }
-
-    function showToast(){
-      toast.hidden = false;
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(()=> toast.hidden = true, 2200);
-    }
-
-    // Quantity stepper
-    qtyDec.addEventListener("click", ()=>{
-      qtyInput.value = Math.max(1, (Number(qtyInput.value)||1) - 1);
-    });
-    qtyInc.addEventListener("click", ()=>{
-      qtyInput.value = Math.min(99, (Number(qtyInput.value)||1) + 1);
-    });
-
-    // Gallery swap
-    (function(){
-      const main = document.getElementById("mainImage");
-      if(!main) return;
+    // thumbnail switcher (no external JS file)
+    const main = document.getElementById("mainImage");
+    if(main){
       document.querySelectorAll("[data-src]").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           const src = btn.getAttribute("data-src");
@@ -249,51 +124,7 @@
           if(wrap) wrap.href = src;
         });
       });
-    })();
-
-    // Variant price
-    const unitPriceEl = document.getElementById("unitPrice");
-    const variantSelect = document.getElementById("variantSelect");
-
-    function currentVariant(){
-      if(!variantSelect){
-        return { label:"", price: Number("{{ page.price | default: 0 }}") };
-      }
-      const opt = variantSelect.options[variantSelect.selectedIndex];
-      return { label: opt.value, price: Number(opt.dataset.price || 0) };
     }
-    function renderUnitPrice(){
-      const v = currentVariant();
-      unitPriceEl.textContent = new Intl.NumberFormat(undefined,{style:"currency",currency:"CAD"}).format(v.price) + " CAD";
-    }
-    if(variantSelect) variantSelect.addEventListener("change", renderUnitPrice);
-    renderUnitPrice();
-
-    // Load cart count
-    (function(){
-      const c = readCart();
-      cartCountEl.textContent = countCart(c);
-    })();
-
-    // Add to cart
-    document.getElementById("addToCart").addEventListener("click", ()=>{
-      const c = readCart();
-      const v = currentVariant();
-      const qty = Math.max(1, Math.min(99, Number(qtyInput.value)||1));
-
-      const sku = "{{ page.sku | escape }}";
-      const name = "{{ page.name | escape }}";
-      const url = "{{ page.url | relative_url }}";
-      const image = "{{ page.image | default: "" | relative_url }}";
-
-      const key = lineKey(sku, v.label);
-      if(c[key]) c[key].qty += qty;
-      else c[key] = { sku, name, variant: v.label || "", unitPrice: Number(v.price||0), qty, url, image };
-
-      writeCart(c);
-      cartCountEl.textContent = countCart(c);
-      showToast();
-    });
   </script>
 </body>
 </html>
