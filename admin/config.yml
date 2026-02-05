@@ -4,9 +4,7 @@ backend:
   name: github
   repo: premium2supply/Premium
   branch: main
-
-  # We'll replace this AFTER we deploy the proxy:
-  base_url: https://YOUR-PROXY-SUBDOMAIN.workers.dev
+  base_url: https://premium-decap-proxy.bookingsgr1nd00.workers.dev
   auth_endpoint: /auth
 
 media_folder: "assets/uploads"
