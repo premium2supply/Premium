@@ -1,6 +1,4 @@
-title: Premium Supply
-description: Proudly Canadian storefront
-baseurl: "/Premium"   # because repo = Premium
+baseurl: "/Premium"
 
 collections:
   products:
