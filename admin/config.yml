@@ -63,3 +63,11 @@ collections:
         display_fields: ["name", "sku"]
         multiple: true
         required: false
+- { label: "Main image", name: "image", widget: "image", required: false }
+
+- label: "Gallery images (more pictures)"
+  name: "gallery"
+  widget: "list"
+  required: false
+  fields:
+    - { label: "Image", name: "image", widget: "image" }
