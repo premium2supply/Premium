@@ -7,7 +7,7 @@ backend:
 
   # GitHub Pages needs an OAuth proxy (Cloudflare Worker / decap-proxy).
   # Replace this with your real proxy URL when ready.
-  base_url: https://YOUR-PROXY-DOMAIN.workers.dev
+  base_url: https://premium2supply.github.io/Premium/products.html
   auth_endpoint: /auth
 
 media_folder: "assets/uploads"
