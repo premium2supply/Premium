@@ -683,3 +683,16 @@ permalink: /products.html
   </script>
 </body>
 </html>
+<script>
+  document.querySelectorAll(".product").forEach(card => {
+    card.style.cursor = "pointer";
+
+    card.addEventListener("click", (e) => {
+      // If user clicked a button or link inside the card, do not redirect
+      if (e.target.closest("button, a, input, select, textarea, label")) return;
+
+      const url = card.getAttribute("data-url");
+      if (url) window.location.href = url;
+    });
+  });
+</script>
