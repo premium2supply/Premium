@@ -3,77 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Premium Supply — Products (Canada)</title>
+  <title>Premium Supply — All Products (High → Low)</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <!-- =====================================================
-    NO-JS TOGGLES (must be near the top of <body>)
-    1) Promo popup toggle (checked = visible)
-    2) Category drawer toggle (checked = open)
-  ====================================================== -->
-  <input class="toggle toggle--promo" type="checkbox" id="promoToggle" checked>
-  <input class="toggle toggle--drawer" type="checkbox" id="catDrawerToggle">
+  <!-- NO-JS toggles -->
+  <input class="toggle" type="checkbox" id="promoToggle" checked>
+  <input class="toggle" type="checkbox" id="catDrawerToggle">
+  <input class="toggle" type="checkbox" id="searchToggle">
 
-  <!-- =========================
-       PROMO POPUP (closable)
-  ========================== -->
+  <!-- Promo popup -->
   <div class="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+    <label for="promoToggle" class="promo-modal__overlay" aria-hidden="true"></label>
     <div class="promo-modal__panel">
       <div class="promo-modal__head">
-        <div class="promo-modal__badge">
-          <i class="fa-solid fa-maple-leaf"></i> Proudly Canadian
-        </div>
-
-        <!-- Close popup -->
-        <label for="promoToggle" class="promo-modal__close" aria-label="Close promotion">
-          <i class="fa-solid fa-xmark"></i>
-        </label>
+        <div class="promo-modal__badge"><i class="fa-solid fa-maple-leaf"></i> Proudly Canadian</div>
+        <label for="promoToggle" class="promo-modal__close" aria-label="Close"><i class="fa-solid fa-xmark"></i></label>
       </div>
-
       <h2 id="promoTitle" class="promo-modal__title">Welcome to Premium Supply 🇨🇦</h2>
-      <p class="promo-modal__text">
-        Limited-time offer: <strong>Free express shipping in Canada</strong> on qualifying orders.
-        Order by email and pay via <strong>Interac e‑Transfer</strong>.
-      </p>
-
+      <p class="promo-modal__text">Limited promo: <strong>Free express shipping in Canada</strong> on qualifying orders.</p>
       <div class="promo-modal__cta">
-        <a class="btn btn--solid" href="#sale">See sale items</a>
-        <label for="promoToggle" class="btn btn--outline">Continue shopping</label>
+        <a class="btn btn--solid" href="#catalog">Shop now</a>
+        <label for="promoToggle" class="btn btn--outline">Continue</label>
+      </div>
+      <p class="promo-modal__fineprint">Payment via Interac e‑Transfer after order confirmation.</p>
+    </div>
+  </div>
+
+  <!-- Search modal -->
+  <div class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+    <label for="searchToggle" class="search-modal__overlay" aria-hidden="true"></label>
+    <div class="search-modal__panel">
+      <div class="search-modal__head">
+        <h2 class="search-modal__title" id="searchTitle">Search</h2>
+        <label class="icon-btn" for="searchToggle" aria-label="Close search"><i class="fa-solid fa-xmark"></i></label>
       </div>
 
-      <p class="promo-modal__fineprint">
-        No payment processor. We confirm totals by email before payment.
+      <!-- NO-JS “site search” using DuckDuckGo -->
+      <form class="search-form" action="https://duckduckgo.com/" method="get" target="_blank">
+        <label class="sr-only" for="q">Search</label>
+
+        <!-- IMPORTANT: replace premiumsupply.ca with your real domain -->
+        <input id="q" name="q" type="search" value="site:premiumsupply.ca " placeholder="Search products…">
+
+        <button class="btn btn--solid" type="submit">
+          Search <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <p class="muted" style="margin:10px 0 0;">
+        Tip: Keep <span class="mono">site:premiumsupply.ca</span> and type your keywords after it.
       </p>
     </div>
   </div>
 
-  <!-- =========================
-       TOPBAR
-  ========================== -->
+  <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
       <span class="topbar__badge"><i class="fa-solid fa-maple-leaf"></i> 100% Canadian</span>
-      <p class="topbar__text">Browse products • Order by email • Pay via Interac e‑Transfer</p>
-      <a class="topbar__link" href="#trust">Reviews</a>
+      <p class="topbar__text">Shop all products • Sorted High → Low</p>
+      <a class="topbar__link" href="category-flower.html">Shop by category</a>
     </div>
   </div>
 
-  <!-- =========================
-       HEADER (drawer trigger)
-  ========================== -->
+  <!-- Header -->
   <header class="header" role="banner">
     <div class="container header__inner">
-      <!-- Open category drawer -->
       <label class="icon-btn" for="catDrawerToggle" aria-label="Open categories">
         <i class="fa-solid fa-bars"></i>
       </label>
 
       <a class="brand" href="index.html" aria-label="Premium Supply home">
-        <!-- Replace with your real logo -->
         <svg class="brand__logo" viewBox="0 0 64 64" aria-hidden="true">
           <defs>
             <radialGradient id="g2" cx="30%" cy="30%" r="70%">
@@ -88,199 +91,78 @@
 
         <span class="brand__text">
           <span class="brand__name">Premium Supply</span>
-          <span class="brand__tag">Product Catalog</span>
+          <span class="brand__tag">All Products</span>
         </span>
       </a>
 
-      <!-- Cart icon (visual only, no JS) -->
-      <a class="icon-btn cart-btn" href="#order" aria-label="How to order">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span class="cart-badge" aria-label="0 items">0</span>
-      </a>
+      <div class="header__right">
+        <!-- search icon top-right -->
+        <label class="icon-btn" for="searchToggle" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+
+        <!-- optional bag icon -->
+        <a class="icon-btn cart-btn" href="#how" aria-label="How to buy">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- =========================
-       CATEGORY DRAWER (NO JS)
-  ========================== -->
-  <div class="drawer-backdrop" aria-hidden="true"></div>
-
+  <!-- Drawer backdrop + drawer -->
+  <label for="catDrawerToggle" class="drawer-backdrop" aria-hidden="true"></label>
   <aside class="drawer" aria-label="Shop by category">
     <div class="drawer__head">
-      <div class="drawer__title">
-        <i class="fa-solid fa-list"></i> Shop by category
-      </div>
-
-      <label class="icon-btn" for="catDrawerToggle" aria-label="Close categories">
-        <i class="fa-solid fa-xmark"></i>
-      </label>
+      <div class="drawer__title"><i class="fa-solid fa-list"></i> Shop by category</div>
+      <label class="icon-btn" for="catDrawerToggle" aria-label="Close"><i class="fa-solid fa-xmark"></i></label>
     </div>
 
     <nav class="cat-nav">
-      <a class="cat-link" href="#latest">Latest Drop</a>
-      <a class="cat-link" href="#sale">Sale</a>
-      <a class="cat-link" href="#value">Value Picks</a>
-      <a class="cat-link" href="#mix">Mix & Match</a>
-
+      <a class="cat-link" href="products.html">All Products (High → Low)</a>
       <div class="cat-sep"></div>
-
-      <!-- Main categories (expanded like the screenshots) -->
-      <details class="cat-group" open>
-        <summary>Flower</summary>
-        <div class="cat-sub">
-          <a href="#flower-budget">Budget</a>
-          <a href="#flower-indica">Indica</a>
-          <a href="#flower-hybrid">Hybrid</a>
-          <a href="#flower-sativa">Sativa</a>
-          <a href="#flower-tiers">Quality tiers</a>
-          <a href="#flower-prerolls">Pre-Rolls</a>
-          <a href="#flower-shake">Shake</a>
-        </div>
-      </details>
-
-      <details class="cat-group">
-        <summary>Concentrates</summary>
-        <div class="cat-sub">
-          <a href="#con-budder">Budder</a>
-          <a href="#con-caviar">Caviar</a>
-          <a href="#con-diamonds">Diamonds</a>
-          <a href="#con-distillate">Distillate &amp; Syringes</a>
-          <a href="#con-hash">Hash</a>
-          <a href="#con-kief">Kief</a>
-          <a href="#con-live">Live Resin</a>
-          <a href="#con-shatter">Shatter</a>
-          <a href="#con-tinctures">Tinctures</a>
-          <a href="#con-topicals">Topicals</a>
-        </div>
-      </details>
-
-      <a class="cat-link" href="#vape">Vape</a>
-      <a class="cat-link" href="#cbd">CBD</a>
-      <a class="cat-link" href="#edibles">Edibles</a>
-
+      <a class="cat-link" href="category-flower.html">Flower</a>
+      <a class="cat-link" href="category-concentrates.html">Concentrates</a>
+      <a class="cat-link" href="category-edibles.html">Edibles</a>
+      <a class="cat-link" href="category-vape.html">Vape</a>
+      <a class="cat-link" href="category-cbd.html">CBD</a>
       <div class="cat-sep"></div>
-
-      <a class="cat-link" href="#order">How to order</a>
-      <a class="cat-link" href="#trust">Customer reviews</a>
+      <a class="cat-link" href="#how">How to buy</a>
     </nav>
   </aside>
 
-  <!-- =========================
-       MAIN CONTENT
-  ========================== -->
   <main class="section">
     <div class="container">
-      <!-- Big category button (like competitor) -->
-      <label class="cat-cta" for="catDrawerToggle">
-        <i class="fa-solid fa-list"></i>
-        SHOP BY CATEGORY
-      </label>
+      <label class="cat-cta" for="catDrawerToggle"><i class="fa-solid fa-list"></i> SHOP BY CATEGORY</label>
 
-      <!-- LATEST -->
-      <section id="latest" class="block">
+      <section class="block" id="catalog">
         <div class="block__head">
-          <h1 class="block__title">Latest Drop</h1>
-          <p class="block__sub">Fresh inventory — Canada-first ordering.</p>
+          <h1 class="block__title">All Products</h1>
+          <p class="block__sub">Sorted High → Low (manual ordering — no JS needed).</p>
         </div>
 
         <div class="products-grid">
-          <!-- PRODUCT TILE (copy/paste for employee) -->
-          <article class="product-tile">
-            <div class="product-tile__media">
-              <div class="img-square" aria-hidden="true"></div>
-            </div>
+          <!-- High → Low: put your highest priced items first -->
 
-            <div class="product-tile__body">
-              <h2 class="product-tile__title">Aurora Reserve | Premium | Craft</h2>
-
-              <div class="rating">
-                <div class="stars" aria-label="4.8 stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-                <div class="reviews">22 reviews</div>
-              </div>
-
-              <div class="price price--green">$85.00 – $820.00 CAD</div>
-
-              <a class="btn btn--outline btn--full"
-                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Aurora%20Reserve&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Aurora%20Reserve%20%7C%20Premium%20%7C%20Craft%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
-                Order by Email <i class="fa-solid fa-paper-plane"></i>
-              </a>
-            </div>
-          </article>
-
-          <article class="product-tile">
-            <div class="product-tile__media">
-              <div class="img-square img-square--alt" aria-hidden="true"></div>
-            </div>
-
-            <div class="product-tile__body">
-              <h2 class="product-tile__title">Northern Mint | Fresh | Premium</h2>
-
-              <div class="rating">
-                <div class="stars" aria-label="5 stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <div class="reviews">31 reviews</div>
-              </div>
-
-              <div class="price price--green">$85.00 – $820.00 CAD</div>
-
-              <a class="btn btn--outline btn--full"
-                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Northern%20Mint&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Northern%20Mint%20%7C%20Fresh%20%7C%20Premium%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
-                Order by Email <i class="fa-solid fa-paper-plane"></i>
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- SALE -->
-      <section id="sale" class="block">
-        <div class="block__head">
-          <h2 class="block__title">Sale</h2>
-          <p class="block__sub">Limited promos — while stock lasts.</p>
-        </div>
-
-        <div class="products-grid">
           <article class="product-tile">
             <div class="product-tile__media">
               <span class="sale-bubble">Sale!</span>
+              <ul class="tag-stack">
+                <li class="tagchip tagchip--black">Elite</li>
+                <li class="tagchip tagchip--purple">Deep</li>
+                <li class="tagchip tagchip--yellow">Bright</li>
+              </ul>
               <div class="img-square img-square--gold" aria-hidden="true"></div>
+              <div class="type-strip type-strip--indica">Indica</div>
             </div>
 
             <div class="product-tile__body">
-              <h2 class="product-tile__title">Maple Select | Classic | Value</h2>
-
-              <div class="rating">
-                <div class="stars" aria-label="4.6 stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-                </div>
-                <div class="reviews">6 reviews</div>
+              <div class="pill-row">
+                <span class="pill pill--tier">AAAA+ • Premium</span>
+                <span class="pill pill--craft">Craft</span>
               </div>
 
-              <div class="price">
-                <span class="price__was">$175.00</span>
-                <span class="price__now price--green">$148.75 CAD</span>
-              </div>
-
-              <a class="btn btn--outline btn--full"
-                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Maple%20Select%20(Sale)&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Maple%20Select%20%7C%20Classic%20%7C%20Value%20(Sale)%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
-                Order by Email <i class="fa-solid fa-paper-plane"></i>
-              </a>
-
-              <div class="stock in-stock"><i class="fa-solid fa-circle-check"></i> In stock</div>
-            </div>
-          </article>
-
-          <article class="product-tile">
-            <div class="product-tile__media">
-              <span class="sale-bubble">Sale!</span>
-              <div class="img-square img-square--alt" aria-hidden="true"></div>
-            </div>
-
-            <div class="product-tile__body">
-              <h2 class="product-tile__title">Coastal Punch | Premium | Bundle</h2>
+              <h2 class="product-tile__title">Arctic Vault Bundle | Premium</h2>
 
               <div class="rating">
                 <div class="stars" aria-label="4.8 stars">
@@ -289,150 +171,117 @@
                 <div class="reviews">47 reviews</div>
               </div>
 
-              <div class="price">
-                <span class="price__was">$135.00</span>
-                <span class="price__now price--green">$114.75 CAD</span>
-              </div>
-
-              <a class="btn btn--outline btn--full"
-                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Coastal%20Punch%20(Sale)&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Coastal%20Punch%20%7C%20Premium%20%7C%20Bundle%20(Sale)%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
-                Order by Email <i class="fa-solid fa-paper-plane"></i>
-              </a>
-
+              <div class="price"><span class="price__was">$1,050.00</span><span class="price__now price--green">$925.00 CAD</span></div>
               <div class="stock in-stock"><i class="fa-solid fa-circle-check"></i> In stock</div>
+
+              <!-- Buy Now + Quantity (no JS) -->
+              <form class="buy-form"
+                action="mailto:orders@premiumsupply.ca?subject=Premium%20Supply%20Order%20-%20PS-ALL-001"
+                method="post" enctype="text/plain">
+                <input type="hidden" name="SKU" value="PS-ALL-001">
+                <input type="hidden" name="Product" value="Arctic Vault Bundle | Premium">
+                <label class="qty">
+                  <span>Quantity</span>
+                  <input type="number" name="Quantity" min="1" value="1">
+                </label>
+                <button class="btn btn--solid btn--full" type="submit">Buy Now</button>
+                <p class="hint">Payment via Interac e‑Transfer after confirmation.</p>
+              </form>
             </div>
           </article>
-        </div>
-      </section>
 
-      <!-- VALUE PICKS -->
-      <section id="value" class="block">
-        <div class="block__head">
-          <h2 class="block__title">Value Picks</h2>
-          <p class="block__sub">Budget-friendly options that still look premium.</p>
-        </div>
-
-        <div class="products-grid">
           <article class="product-tile">
             <div class="product-tile__media">
-              <div class="img-square" aria-hidden="true"></div>
+              <ul class="tag-stack">
+                <li class="tagchip tagchip--red">Bold</li>
+                <li class="tagchip tagchip--teal">Fresh</li>
+                <li class="tagchip tagchip--pink">Berry</li>
+              </ul>
+              <div class="img-square img-square--alt" aria-hidden="true"></div>
+              <div class="type-strip type-strip--hybrid">Hybrid</div>
             </div>
+
             <div class="product-tile__body">
-              <h2 class="product-tile__title">Everyday Essentials | Value</h2>
+              <div class="pill-row">
+                <span class="pill pill--tier">AAAA • Top Shelf</span>
+                <span class="pill pill--craft">Small Batch</span>
+              </div>
+
+              <h2 class="product-tile__title">Nova Reserve Pack | Top Shelf</h2>
+
               <div class="rating">
-                <div class="stars" aria-label="4.7 stars">
+                <div class="stars" aria-label="5 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="reviews">31 reviews</div>
+              </div>
+
+              <div class="price price--green">$299.00 – $820.00 CAD</div>
+
+              <form class="buy-form"
+                action="mailto:orders@premiumsupply.ca?subject=Premium%20Supply%20Order%20-%20PS-ALL-002"
+                method="post" enctype="text/plain">
+                <input type="hidden" name="SKU" value="PS-ALL-002">
+                <input type="hidden" name="Product" value="Nova Reserve Pack | Top Shelf">
+                <label class="qty">
+                  <span>Quantity</span>
+                  <input type="number" name="Quantity" min="1" value="1">
+                </label>
+                <button class="btn btn--solid btn--full" type="submit">Buy Now</button>
+                <p class="hint">Payment via Interac e‑Transfer after confirmation.</p>
+              </form>
+            </div>
+          </article>
+
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <span class="sale-bubble">Sale!</span>
+              <div class="img-square" aria-hidden="true"></div>
+              <div class="type-strip type-strip--sativa">Sativa</div>
+            </div>
+
+            <div class="product-tile__body">
+              <div class="pill-row">
+                <span class="pill pill--tier">AAA • Value</span>
+                <span class="pill pill--limited">Limited</span>
+              </div>
+
+              <h2 class="product-tile__title">Coastal Spark | Value Deal</h2>
+
+              <div class="rating">
+                <div class="stars" aria-label="4.6 stars">
                   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
                 </div>
-                <div class="reviews">14 reviews</div>
+                <div class="reviews">18 reviews</div>
               </div>
-              <div class="price price--green">$39.00 – $129.00 CAD</div>
-              <a class="btn btn--outline btn--full" href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Everyday%20Essentials&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Everyday%20Essentials%20%7C%20Value%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0A%0AThanks%2C%0AName%3A%20">Order by Email <i class="fa-solid fa-paper-plane"></i></a>
-            </div>
-          </article>
 
-          <article class="product-tile">
-            <div class="product-tile__media">
-              <div class="img-square img-square--gold" aria-hidden="true"></div>
-            </div>
-            <div class="product-tile__body">
-              <h2 class="product-tile__title">Ounce Special | Weekly Deal</h2>
-              <div class="rating">
-                <div class="stars" aria-label="4.5 stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i>
-                </div>
-                <div class="reviews">9 reviews</div>
-              </div>
-              <div class="price price--green">$40.00 – $50.00 CAD</div>
-              <a class="btn btn--outline btn--full" href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Ounce%20Special&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Ounce%20Special%20%7C%20Weekly%20Deal%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0A%0AThanks%2C%0AName%3A%20">Order by Email <i class="fa-solid fa-paper-plane"></i></a>
+              <div class="price"><span class="price__was">$175.00</span><span class="price__now price--green">$148.75 CAD</span></div>
+
+              <form class="buy-form"
+                action="mailto:orders@premiumsupply.ca?subject=Premium%20Supply%20Order%20-%20PS-ALL-003"
+                method="post" enctype="text/plain">
+                <input type="hidden" name="SKU" value="PS-ALL-003">
+                <input type="hidden" name="Product" value="Coastal Spark | Value Deal">
+                <label class="qty">
+                  <span>Quantity</span>
+                  <input type="number" name="Quantity" min="1" value="1">
+                </label>
+                <button class="btn btn--solid btn--full" type="submit">Buy Now</button>
+                <p class="hint">Payment via Interac e‑Transfer after confirmation.</p>
+              </form>
             </div>
           </article>
         </div>
       </section>
 
-      <!-- MIX & MATCH -->
-      <section id="mix" class="block">
+      <section class="block" id="how">
         <div class="block__head">
-          <h2 class="block__title">Mix &amp; Match</h2>
-          <p class="block__sub">Bundle-friendly picks — ask us for a custom quote.</p>
+          <h2 class="block__title">How to buy</h2>
+          <p class="block__sub">No processor — we confirm your order then you pay via Interac e‑Transfer.</p>
         </div>
 
         <div class="notice">
-          <strong>Easy bundles:</strong> Email us 3–5 items and quantities — we’ll confirm totals and shipping.
-        </div>
-      </section>
-
-      <!-- HOW TO ORDER -->
-      <section id="order" class="block">
-        <div class="block__head">
-          <h2 class="block__title">How to order</h2>
-          <p class="block__sub">No processor — Interac e‑Transfer after confirmation.</p>
-        </div>
-
-        <div class="order-steps">
-          <div class="order-step">
-            <div class="order-step__icon"><i class="fa-solid fa-envelope"></i></div>
-            <h3>Email your request</h3>
-            <p>Use the “Order by Email” button and include quantity + city/province.</p>
-          </div>
-          <div class="order-step">
-            <div class="order-step__icon"><i class="fa-solid fa-receipt"></i></div>
-            <h3>We confirm totals</h3>
-            <p>We reply with the confirmed total, shipping, and reference details.</p>
-          </div>
-          <div class="order-step">
-            <div class="order-step__icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
-            <h3>Pay via Interac</h3>
-            <p>Send Interac e‑Transfer to <a class="mono" href="mailto:payments@premiumsupply.ca">payments@premiumsupply.ca</a>.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- TRUST / REVIEWS -->
-      <section id="trust" class="block">
-        <div class="block__head">
-          <h2 class="block__title">Customer reviews</h2>
-          <p class="block__sub">Verified buyer-style snippets (replace with your own real testimonials).</p>
-        </div>
-
-        <div class="trust-cards">
-          <article class="trust-card">
-            <div class="trust-card__top">
-              <div class="avatar">S</div>
-              <div>
-                <strong>Shane J.</strong>
-                <div class="stars stars--small" aria-label="5 stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-            </div>
-            <p>Fast response time, clear instructions, and the packaging felt premium. Great Canada-wide experience.</p>
-          </article>
-
-          <article class="trust-card">
-            <div class="trust-card__top">
-              <div class="avatar">A</div>
-              <div>
-                <strong>Amira K.</strong>
-                <div class="stars stars--small" aria-label="4.5 stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-              </div>
-            </div>
-            <p>Easy ordering by email and quick confirmation. Would buy again.</p>
-          </article>
-
-          <article class="trust-card">
-            <div class="trust-card__top">
-              <div class="avatar">M</div>
-              <div>
-                <strong>Marco L.</strong>
-                <div class="stars stars--small" aria-label="5 stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-            </div>
-            <p>Everything was smooth. The review counts on products make the catalog feel trustworthy.</p>
-          </article>
+          <strong>Note:</strong> “Buy Now” opens your email app with the order details (no JS / no backend required).
         </div>
       </section>
 
@@ -440,16 +289,14 @@
         <div class="footer__inner">
           <div>
             <h3>Premium Supply</h3>
-            <p>Canada-first storefront • Email ordering • Interac e‑Transfer payments</p>
+            <p>Canada-first storefront • Interac e‑Transfer workflow</p>
           </div>
-
           <div class="footer__links">
-            <a href="#latest">Latest Drop</a>
-            <a href="#sale">Sale</a>
-            <a href="#order">How to order</a>
-            <a href="#trust">Reviews</a>
+            <a href="products.html">All Products</a>
+            <a href="category-flower.html">Flower</a>
+            <a href="category-concentrates.html">Concentrates</a>
+            <a href="category-edibles.html">Edibles</a>
           </div>
-
           <p class="footer__fineprint">© 2026 Premium Supply. All rights reserved.</p>
         </div>
       </footer>
