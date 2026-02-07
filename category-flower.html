@@ -9,23 +9,33 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body data-page="listing" data-category="flower">
   <input class="toggle" type="checkbox" id="catDrawerToggle">
   <input class="toggle" type="checkbox" id="searchToggle">
 
+  <!-- Search modal (filters only this category page) -->
   <div class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
     <label for="searchToggle" class="search-modal__overlay" aria-hidden="true"></label>
     <div class="search-modal__panel">
       <div class="search-modal__head">
-        <h2 class="search-modal__title" id="searchTitle">Search</h2>
+        <h2 class="search-modal__title" id="searchTitle">Search Flower</h2>
         <label class="icon-btn" for="searchToggle" aria-label="Close search"><i class="fa-solid fa-xmark"></i></label>
       </div>
-      <form class="search-form" action="https://duckduckgo.com/" method="get" target="_blank">
-        <label class="sr-only" for="q">Search</label>
-        <input id="q" name="q" type="search" value="site:premiumsupply.ca flower " placeholder="Search…">
-        <button class="btn btn--solid" type="submit">Search <i class="fa-solid fa-magnifying-glass"></i></button>
-      </form>
-      <p class="muted" style="margin:10px 0 0;">Replace <span class="mono">premiumsupply.ca</span> with your domain.</p>
+
+      <div class="search-box">
+        <label class="sr-only" for="searchInput">Search</label>
+        <input id="searchInput" type="search" placeholder="Search Flower…" autocomplete="off">
+        <button class="btn btn--outline" type="button" id="clearSearch">Clear</button>
+      </div>
+
+      <div class="sort-row">
+        <span class="muted">Sort:</span>
+        <select id="sortSelect">
+          <option value="price_desc" selected>Price: High → Low</option>
+          <option value="price_asc">Price: Low → High</option>
+          <option value="rating_desc">Rating: High → Low</option>
+        </select>
+      </div>
     </div>
   </div>
 
@@ -43,7 +53,7 @@
 
       <a class="brand" href="index.html" aria-label="Premium Supply home">
         <svg class="brand__logo" viewBox="0 0 64 64" aria-hidden="true">
-          <circle cx="32" cy="32" r="18" fill="#6A2DFF"/>
+          <circle cx="32" cy="32" r="18" fill="#6A2DFF"></circle>
         </svg>
         <span class="brand__text">
           <span class="brand__name">Premium Supply</span>
@@ -53,99 +63,54 @@
 
       <div class="header__right">
         <label class="icon-btn" for="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></label>
-        <a class="icon-btn" href="products.html" aria-label="All products"><i class="fa-solid fa-store"></i></a>
+        <a class="icon-btn cart-btn" href="cart.html" aria-label="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge js-cart-count">0</span>
+        </a>
       </div>
     </div>
   </header>
 
   <label for="catDrawerToggle" class="drawer-backdrop" aria-hidden="true"></label>
-  <aside class="drawer" aria-label="Shop by category">
+  <aside class="drawer">
     <div class="drawer__head">
       <div class="drawer__title"><i class="fa-solid fa-list"></i> Shop by category</div>
       <label class="icon-btn" for="catDrawerToggle" aria-label="Close"><i class="fa-solid fa-xmark"></i></label>
     </div>
     <nav class="cat-nav">
-      <a class="cat-link" href="products.html">All Products (High → Low)</a>
+      <a class="cat-link" href="products.html">All Products</a>
       <div class="cat-sep"></div>
       <a class="cat-link" href="category-flower.html">Flower</a>
       <a class="cat-link" href="category-concentrates.html">Concentrates</a>
       <a class="cat-link" href="category-edibles.html">Edibles</a>
       <a class="cat-link" href="category-vape.html">Vape</a>
       <a class="cat-link" href="category-cbd.html">CBD</a>
+      <div class="cat-sep"></div>
+      <a class="cat-link" href="cart.html">Cart</a>
+      <a class="cat-link" href="checkout.html">Checkout</a>
     </nav>
   </aside>
 
   <main class="section">
     <div class="container">
-      <label class="cat-cta" for="catDrawerToggle"><i class="fa-solid fa-list"></i> SHOP BY CATEGORY</label>
-
       <section class="block">
         <div class="block__head">
           <h1 class="block__title">Flower</h1>
-          <p class="block__sub">Browse this category or use All Products to see everything.</p>
+          <p class="block__sub">Choose quantity → Buy → cart review → checkout.</p>
         </div>
 
-        <div class="products-grid">
-          <!-- Add your flower products here (copy product tiles from products.html) -->
-          <article class="product-tile">
-            <div class="product-tile__media">
-              <ul class="tag-stack">
-                <li class="tagchip tagchip--yellow">Citrus</li>
-                <li class="tagchip tagchip--purple">Deep</li>
-              </ul>
-              <div class="img-square" aria-hidden="true"></div>
-              <div class="type-strip type-strip--hybrid">Hybrid</div>
-            </div>
-
-            <div class="product-tile__body">
-              <div class="pill-row">
-                <span class="pill pill--tier">AAA+ • Premium</span>
-                <span class="pill pill--craft">Craft</span>
-              </div>
-
-              <h2 class="product-tile__title">Aurora Reserve | Premium</h2>
-
-              <div class="rating">
-                <div class="stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-                <div class="reviews">22 reviews</div>
-              </div>
-
-              <div class="price price--green">$85.00 – $820.00 CAD</div>
-
-              <form class="buy-form"
-                action="mailto:orders@premiumsupply.ca?subject=Premium%20Supply%20Order%20-%20PS-FL-001"
-                method="post" enctype="text/plain">
-                <input type="hidden" name="SKU" value="PS-FL-001">
-                <input type="hidden" name="Product" value="Aurora Reserve | Premium">
-                <label class="qty">
-                  <span>Quantity</span>
-                  <input type="number" name="Quantity" min="1" value="1">
-                </label>
-                <button class="btn btn--solid btn--full" type="submit">Buy Now</button>
-                <p class="hint">Payment via Interac e‑Transfer after confirmation.</p>
-              </form>
-            </div>
-          </article>
-        </div>
+        <div class="products-grid" id="productGrid"></div>
       </section>
-
-      <footer class="footer">
-        <div class="footer__inner">
-          <div>
-            <h3>Premium Supply</h3>
-            <p>Canada-first storefront</p>
-          </div>
-          <div class="footer__links">
-            <a href="products.html">All Products</a>
-            <a href="category-concentrates.html">Concentrates</a>
-            <a href="category-edibles.html">Edibles</a>
-          </div>
-          <p class="footer__fineprint">© 2026 Premium Supply. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   </main>
+
+  <div class="toast" id="toast"><span id="toastText">Added to cart.</span> <a href="cart.html">View cart</a></div>
+
+  <!-- SAME INLINE SCRIPT as products.html (copy/paste) -->
+  <script>
+    /* Paste the same <script> block from products.html here.
+       (To keep this message readable, reuse it exactly.)
+       It auto-filters by body[data-category]. */
+  </script>
 </body>
 </html>
