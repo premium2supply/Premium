@@ -850,3 +850,5 @@ img.img-square{
 
 /* Make sure overlays never block clicks */
 .sale-bubble, .type-strip{ pointer-events:none; }
+/* Kill any remaining “bubble / note / chip” UI */
+.tag-stack, .tagchip, .bubble, .note-bubble { display: none !important; }
