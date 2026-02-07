@@ -845,3 +845,75 @@ img{ max-width:100%; display:block; }
 .qty-input{
   width: clamp(46px, 16vw, 58px);
 }
+/* =========================
+   PERFECT CENTERING (Product cards + Product page)
+   Does NOT affect cart rows
+========================= */
+
+/* Buy area: responsive + clean alignment */
+.product-tile .buy-row,
+#detailsCard .buy-row{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items: stretch;
+}
+
+/* When there is room, qty + buy sit side-by-side */
+@media (min-width: 520px){
+  #detailsCard .buy-row{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Center the qty content */
+.product-tile .qty,
+#detailsCard .qty{
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  padding: 12px;
+}
+
+/* Make the "Quantity" text truly centered */
+.product-tile .qty > span,
+#detailsCard .qty > span{
+  width: 100%;
+  text-align: center;
+  justify-self: center;
+}
+
+/* Center the stepper group */
+.product-tile .qty-stepper,
+#detailsCard .qty-stepper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Make Buy fill its grid cell and look aligned */
+.product-tile .buy-row > .btn,
+#detailsCard .buy-row > .btn{
+  width: 100%;
+  height: 100%;
+  min-height: 54px; /* matches qty block vibe */
+}
+
+/* Slightly balance the stepper sizing so it looks centered & premium */
+.product-tile .qty-btn,
+#detailsCard .qty-btn{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+}
+
+.product-tile .qty-input,
+#detailsCard .qty-input{
+  width: 60px;
+  height: 42px;
+  border-radius: 14px;
+}
