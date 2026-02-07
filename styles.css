@@ -646,3 +646,18 @@ a{ color:inherit; text-decoration:none; }
 }
 .kv .label{ color: var(--muted); font-weight: 850; }
 .kv .value{ font-weight: 950; }
+/* ===== Fix product images overflow ===== */
+.product-tile__media{ overflow: hidden; }
+
+.img-square{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  display: block;
+}
+
+/* When img-square is an <img>, force it to behave like a cover image */
+img.img-square{
+  height: 100%;
+  object-fit: cover;
+}
