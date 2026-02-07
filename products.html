@@ -1,716 +1,459 @@
----
-permalink: /products.html
----
 <!doctype html>
 <html lang="en-CA">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Premium Supply — Catalogue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premium Supply — Products (Canada)</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <!-- Always-on promo band -->
-  <div class="adband">
-    <div class="container adband__inner">
-      <div class="adband__tag">PROMO</div>
-      <div class="adband__marquee" aria-label="Promotions">
-        <div class="adband__track">
-          <span>Weekly deals • Limited drops • Canada-wide shipping</span><span class="sep">•</span>
-          <span>Minimum order $75 CAD • Instructions shown after placing order</span><span class="sep">•</span>
-          <span>Earn points & levels • Check Account page</span><span class="sep">•</span>
+  <!-- =====================================================
+    NO-JS TOGGLES (must be near the top of <body>)
+    1) Promo popup toggle (checked = visible)
+    2) Category drawer toggle (checked = open)
+  ====================================================== -->
+  <input class="toggle toggle--promo" type="checkbox" id="promoToggle" checked>
+  <input class="toggle toggle--drawer" type="checkbox" id="catDrawerToggle">
 
-          <span>Weekly deals • Limited drops • Canada-wide shipping</span><span class="sep">•</span>
-          <span>Minimum order $75 CAD • Instructions shown after placing order</span><span class="sep">•</span>
-          <span>Earn points & levels • Check Account page</span><span class="sep">•</span>
+  <!-- =========================
+       PROMO POPUP (closable)
+  ========================== -->
+  <div class="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+    <div class="promo-modal__panel">
+      <div class="promo-modal__head">
+        <div class="promo-modal__badge">
+          <i class="fa-solid fa-maple-leaf"></i> Proudly Canadian
         </div>
+
+        <!-- Close popup -->
+        <label for="promoToggle" class="promo-modal__close" aria-label="Close promotion">
+          <i class="fa-solid fa-xmark"></i>
+        </label>
       </div>
-      <a class="adband__cta" href="account.html">Rewards</a>
+
+      <h2 id="promoTitle" class="promo-modal__title">Welcome to Premium Supply 🇨🇦</h2>
+      <p class="promo-modal__text">
+        Limited-time offer: <strong>Free express shipping in Canada</strong> on qualifying orders.
+        Order by email and pay via <strong>Interac e‑Transfer</strong>.
+      </p>
+
+      <div class="promo-modal__cta">
+        <a class="btn btn--solid" href="#sale">See sale items</a>
+        <label for="promoToggle" class="btn btn--outline">Continue shopping</label>
+      </div>
+
+      <p class="promo-modal__fineprint">
+        No payment processor. We confirm totals by email before payment.
+      </p>
     </div>
   </div>
 
-  <!-- Header -->
-  <header class="header">
+  <!-- =========================
+       TOPBAR
+  ========================== -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span class="topbar__badge"><i class="fa-solid fa-maple-leaf"></i> 100% Canadian</span>
+      <p class="topbar__text">Browse products • Order by email • Pay via Interac e‑Transfer</p>
+      <a class="topbar__link" href="#trust">Reviews</a>
+    </div>
+  </div>
+
+  <!-- =========================
+       HEADER (drawer trigger)
+  ========================== -->
+  <header class="header" role="banner">
     <div class="container header__inner">
-      <a class="brand" href="index.html">
-        <img class="brand__logo" src="assets/brand/logo-round.png" alt="Premium Supply logo">
+      <!-- Open category drawer -->
+      <label class="icon-btn" for="catDrawerToggle" aria-label="Open categories">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+
+      <a class="brand" href="index.html" aria-label="Premium Supply home">
+        <!-- Replace with your real logo -->
+        <svg class="brand__logo" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <radialGradient id="g2" cx="30%" cy="30%" r="70%">
+              <stop offset="0" stop-color="#E6D7FF"/>
+              <stop offset="1" stop-color="#6A2DFF"/>
+            </radialGradient>
+          </defs>
+          <circle cx="32" cy="32" r="18" fill="url(#g2)"/>
+          <path d="M10 34c10 10 34 10 44 0" fill="none" stroke="#B8F3D0" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 28c10-10 30-10 40 0" fill="none" stroke="#F2D48B" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+        </svg>
+
         <span class="brand__text">
           <span class="brand__name">Premium Supply</span>
-          <span class="brand__tag">Catalogue • CAD</span>
+          <span class="brand__tag">Product Catalog</span>
         </span>
       </a>
 
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="products.html" aria-current="page">Catalogue</a>
-        <a href="account.html">Account</a>
-      </nav>
-
-      <div class="header__right">
-        <button class="btn btn--solid" id="openCart" type="button">
-          Cart (<span id="cartCount">0</span>)
-        </button>
-      </div>
-    </div>
-
-    <!-- Category chips -->
-    <div class="container catbar" aria-label="Catalogue categories">
-      <a class="chip" href="#cat-flowers">Flowers</a>
-      <a class="chip" href="#cat-oil">Oil</a>
-      <a class="chip" href="#cat-vapes">Vapes</a>
-      <a class="chip" href="#cat-extracts">Extracts</a>
-      <a class="chip" href="#cat-mushroom">Mushroom</a>
-      <a class="chip" href="#cat-accessories">Accessories</a>
-      <a class="chip" href="#cat-male-enhancers">Male Enhancers</a>
+      <!-- Cart icon (visual only, no JS) -->
+      <a class="icon-btn cart-btn" href="#order" aria-label="How to order">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" aria-label="0 items">0</span>
+      </a>
     </div>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <!-- Universal-style billboard -->
-      <div class="billboard">
-        <img class="billboard__img" src="assets/brand/logo-universal.png" alt="Premium Supply">
-        <div class="billboard__overlay" aria-hidden="true"></div>
-        <div class="billboard__content">
-          <div>
-            <p class="billboard__headline">Browse → Cart → Summary → Checkout</p>
-            <p class="billboard__sub">Minimum order is <strong>$75 CAD</strong>. Payment instructions appear only after you place the order.</p>
-          </div>
-          <a class="btn btn--outline" href="account.html">Points</a>
-        </div>
+  <!-- =========================
+       CATEGORY DRAWER (NO JS)
+  ========================== -->
+  <div class="drawer-backdrop" aria-hidden="true"></div>
+
+  <aside class="drawer" aria-label="Shop by category">
+    <div class="drawer__head">
+      <div class="drawer__title">
+        <i class="fa-solid fa-list"></i> Shop by category
       </div>
 
-      {% assign categories = "Flowers|Oil|Vapes|Extracts|Mushroom|Accessories|Male Enhancers" | split: "|" %}
+      <label class="icon-btn" for="catDrawerToggle" aria-label="Close categories">
+        <i class="fa-solid fa-xmark"></i>
+      </label>
+    </div>
 
-      {% for cat in categories %}
-        {% assign cat_id = cat | downcase | replace: " ", "-" %}
-        {% assign items = site.products | where: "active", true | where: "category", cat %}
+    <nav class="cat-nav">
+      <a class="cat-link" href="#latest">Latest Drop</a>
+      <a class="cat-link" href="#sale">Sale</a>
+      <a class="cat-link" href="#value">Value Picks</a>
+      <a class="cat-link" href="#mix">Mix & Match</a>
 
-        <section class="catsec" id="cat-{{ cat_id }}">
-          <div class="catsec__head">
-            <h2 class="catsec__title">{{ cat }}</h2>
-            <p class="catsec__note">Updated regularly • CAD pricing</p>
-          </div>
+      <div class="cat-sep"></div>
 
-          {% if items and items.size > 0 %}
-            <div class="grid">
-              {% for p in items %}
-                <article class="card product"
-                  data-url="{{ p.url | relative_url }}"
-                  data-sku="{{ p.sku | escape }}"
-                  data-name="{{ p.name | escape }}"
-                  data-price="{{ p.price | default: 0 }}"
-                  data-category="{{ p.category | escape }}"
-                  data-has-variants="{% if p.variants and p.variants.size > 0 %}1{% else %}0{% endif %}"
-                >
-                  <div class="card__img">
-                    {% if p.image %}
-                      <img src="{{ p.image | escape }}" alt="{{ p.name | escape }}">
-                    {% else %}
-                      <div class="ph" aria-hidden="true"></div>
-                    {% endif %}
-                  </div>
+      <!-- Main categories (expanded like the screenshots) -->
+      <details class="cat-group" open>
+        <summary>Flower</summary>
+        <div class="cat-sub">
+          <a href="#flower-budget">Budget</a>
+          <a href="#flower-indica">Indica</a>
+          <a href="#flower-hybrid">Hybrid</a>
+          <a href="#flower-sativa">Sativa</a>
+          <a href="#flower-tiers">Quality tiers</a>
+          <a href="#flower-prerolls">Pre-Rolls</a>
+          <a href="#flower-shake">Shake</a>
+        </div>
+      </details>
 
-                  <div class="card__body">
-                    <div class="meta">
-                      <span class="badge">{% if p.badge %}{{ p.badge }}{% else %}Standard{% endif %}</span>
-                      <span class="sku">SKU: {{ p.sku }}</span>
-                    </div>
+      <details class="cat-group">
+        <summary>Concentrates</summary>
+        <div class="cat-sub">
+          <a href="#con-budder">Budder</a>
+          <a href="#con-caviar">Caviar</a>
+          <a href="#con-diamonds">Diamonds</a>
+          <a href="#con-distillate">Distillate &amp; Syringes</a>
+          <a href="#con-hash">Hash</a>
+          <a href="#con-kief">Kief</a>
+          <a href="#con-live">Live Resin</a>
+          <a href="#con-shatter">Shatter</a>
+          <a href="#con-tinctures">Tinctures</a>
+          <a href="#con-topicals">Topicals</a>
+        </div>
+      </details>
 
-                    <h3 class="card__title">{{ p.name }}</h3>
-                    <p class="card__desc">{% if p.description %}{{ p.description }}{% else %}Premium-grade product with consistent packaging standards.{% endif %}</p>
+      <a class="cat-link" href="#vape">Vape</a>
+      <a class="cat-link" href="#cbd">CBD</a>
+      <a class="cat-link" href="#edibles">Edibles</a>
 
-                    <div class="foot">
-                      <div class="price">
-                        {% if p.variants and p.variants.size > 0 %}
-                          <strong>From ${{ p.variants[0].price }} CAD</strong>
-                        {% else %}
-                          <strong>${{ p.price }} CAD</strong>
-                        {% endif %}
-                        {% if p.price_note %}<span class="muted small">{{ p.price_note }}</span>{% endif %}
-                      </div>
+      <div class="cat-sep"></div>
 
-                      {% if p.variants and p.variants.size > 0 %}
-                        <!-- Flowers / variant products: choose size on product page -->
-                        <a class="btn btn--outline" href="{{ p.url | relative_url }}">Choose size</a>
-                      {% else %}
-                        <!-- Non-variant products: quick add -->
-                        <button class="btn btn--outline addBtn" type="button">Add</button>
-                      {% endif %}
-                    </div>
-                  </div>
-                </article>
-              {% endfor %}
+      <a class="cat-link" href="#order">How to order</a>
+      <a class="cat-link" href="#trust">Customer reviews</a>
+    </nav>
+  </aside>
+
+  <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+  <main class="section">
+    <div class="container">
+      <!-- Big category button (like competitor) -->
+      <label class="cat-cta" for="catDrawerToggle">
+        <i class="fa-solid fa-list"></i>
+        SHOP BY CATEGORY
+      </label>
+
+      <!-- LATEST -->
+      <section id="latest" class="block">
+        <div class="block__head">
+          <h1 class="block__title">Latest Drop</h1>
+          <p class="block__sub">Fresh inventory — Canada-first ordering.</p>
+        </div>
+
+        <div class="products-grid">
+          <!-- PRODUCT TILE (copy/paste for employee) -->
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <div class="img-square" aria-hidden="true"></div>
             </div>
-          {% else %}
-            <div class="adcard">
-              <h3>No products yet in {{ cat }}</h3>
-              <p>Your employee can add products using the admin panel.</p>
-              <div class="adcard__actions">
-                <a class="btn btn--outline" href="admin/">Open admin</a>
+
+            <div class="product-tile__body">
+              <h2 class="product-tile__title">Aurora Reserve | Premium | Craft</h2>
+
+              <div class="rating">
+                <div class="stars" aria-label="4.8 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <div class="reviews">22 reviews</div>
+              </div>
+
+              <div class="price price--green">$85.00 – $820.00 CAD</div>
+
+              <a class="btn btn--outline btn--full"
+                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Aurora%20Reserve&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Aurora%20Reserve%20%7C%20Premium%20%7C%20Craft%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
+                Order by Email <i class="fa-solid fa-paper-plane"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <div class="img-square img-square--alt" aria-hidden="true"></div>
+            </div>
+
+            <div class="product-tile__body">
+              <h2 class="product-tile__title">Northern Mint | Fresh | Premium</h2>
+
+              <div class="rating">
+                <div class="stars" aria-label="5 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="reviews">31 reviews</div>
+              </div>
+
+              <div class="price price--green">$85.00 – $820.00 CAD</div>
+
+              <a class="btn btn--outline btn--full"
+                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Northern%20Mint&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Northern%20Mint%20%7C%20Fresh%20%7C%20Premium%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
+                Order by Email <i class="fa-solid fa-paper-plane"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SALE -->
+      <section id="sale" class="block">
+        <div class="block__head">
+          <h2 class="block__title">Sale</h2>
+          <p class="block__sub">Limited promos — while stock lasts.</p>
+        </div>
+
+        <div class="products-grid">
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <span class="sale-bubble">Sale!</span>
+              <div class="img-square img-square--gold" aria-hidden="true"></div>
+            </div>
+
+            <div class="product-tile__body">
+              <h2 class="product-tile__title">Maple Select | Classic | Value</h2>
+
+              <div class="rating">
+                <div class="stars" aria-label="4.6 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                </div>
+                <div class="reviews">6 reviews</div>
+              </div>
+
+              <div class="price">
+                <span class="price__was">$175.00</span>
+                <span class="price__now price--green">$148.75 CAD</span>
+              </div>
+
+              <a class="btn btn--outline btn--full"
+                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Maple%20Select%20(Sale)&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Maple%20Select%20%7C%20Classic%20%7C%20Value%20(Sale)%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
+                Order by Email <i class="fa-solid fa-paper-plane"></i>
+              </a>
+
+              <div class="stock in-stock"><i class="fa-solid fa-circle-check"></i> In stock</div>
+            </div>
+          </article>
+
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <span class="sale-bubble">Sale!</span>
+              <div class="img-square img-square--alt" aria-hidden="true"></div>
+            </div>
+
+            <div class="product-tile__body">
+              <h2 class="product-tile__title">Coastal Punch | Premium | Bundle</h2>
+
+              <div class="rating">
+                <div class="stars" aria-label="4.8 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <div class="reviews">47 reviews</div>
+              </div>
+
+              <div class="price">
+                <span class="price__was">$135.00</span>
+                <span class="price__now price--green">$114.75 CAD</span>
+              </div>
+
+              <a class="btn btn--outline btn--full"
+                 href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Coastal%20Punch%20(Sale)&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Coastal%20Punch%20%7C%20Premium%20%7C%20Bundle%20(Sale)%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0APhone%3A%20%0A%0AThanks%2C%0AName%3A%20">
+                Order by Email <i class="fa-solid fa-paper-plane"></i>
+              </a>
+
+              <div class="stock in-stock"><i class="fa-solid fa-circle-check"></i> In stock</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- VALUE PICKS -->
+      <section id="value" class="block">
+        <div class="block__head">
+          <h2 class="block__title">Value Picks</h2>
+          <p class="block__sub">Budget-friendly options that still look premium.</p>
+        </div>
+
+        <div class="products-grid">
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <div class="img-square" aria-hidden="true"></div>
+            </div>
+            <div class="product-tile__body">
+              <h2 class="product-tile__title">Everyday Essentials | Value</h2>
+              <div class="rating">
+                <div class="stars" aria-label="4.7 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                </div>
+                <div class="reviews">14 reviews</div>
+              </div>
+              <div class="price price--green">$39.00 – $129.00 CAD</div>
+              <a class="btn btn--outline btn--full" href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Everyday%20Essentials&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Everyday%20Essentials%20%7C%20Value%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0A%0AThanks%2C%0AName%3A%20">Order by Email <i class="fa-solid fa-paper-plane"></i></a>
+            </div>
+          </article>
+
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <div class="img-square img-square--gold" aria-hidden="true"></div>
+            </div>
+            <div class="product-tile__body">
+              <h2 class="product-tile__title">Ounce Special | Weekly Deal</h2>
+              <div class="rating">
+                <div class="stars" aria-label="4.5 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i>
+                </div>
+                <div class="reviews">9 reviews</div>
+              </div>
+              <div class="price price--green">$40.00 – $50.00 CAD</div>
+              <a class="btn btn--outline btn--full" href="mailto:orders@premiumsupply.ca?subject=Order%20Request%20-%20Ounce%20Special&body=Hi%20Premium%20Supply%2C%0A%0AI%27d%20like%20to%20order%3A%0A-%20Ounce%20Special%20%7C%20Weekly%20Deal%0AQuantity%3A%20%0AShipping%20City%2FProvince%3A%20%0A%0AThanks%2C%0AName%3A%20">Order by Email <i class="fa-solid fa-paper-plane"></i></a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- MIX & MATCH -->
+      <section id="mix" class="block">
+        <div class="block__head">
+          <h2 class="block__title">Mix &amp; Match</h2>
+          <p class="block__sub">Bundle-friendly picks — ask us for a custom quote.</p>
+        </div>
+
+        <div class="notice">
+          <strong>Easy bundles:</strong> Email us 3–5 items and quantities — we’ll confirm totals and shipping.
+        </div>
+      </section>
+
+      <!-- HOW TO ORDER -->
+      <section id="order" class="block">
+        <div class="block__head">
+          <h2 class="block__title">How to order</h2>
+          <p class="block__sub">No processor — Interac e‑Transfer after confirmation.</p>
+        </div>
+
+        <div class="order-steps">
+          <div class="order-step">
+            <div class="order-step__icon"><i class="fa-solid fa-envelope"></i></div>
+            <h3>Email your request</h3>
+            <p>Use the “Order by Email” button and include quantity + city/province.</p>
+          </div>
+          <div class="order-step">
+            <div class="order-step__icon"><i class="fa-solid fa-receipt"></i></div>
+            <h3>We confirm totals</h3>
+            <p>We reply with the confirmed total, shipping, and reference details.</p>
+          </div>
+          <div class="order-step">
+            <div class="order-step__icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
+            <h3>Pay via Interac</h3>
+            <p>Send Interac e‑Transfer to <a class="mono" href="mailto:payments@premiumsupply.ca">payments@premiumsupply.ca</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRUST / REVIEWS -->
+      <section id="trust" class="block">
+        <div class="block__head">
+          <h2 class="block__title">Customer reviews</h2>
+          <p class="block__sub">Verified buyer-style snippets (replace with your own real testimonials).</p>
+        </div>
+
+        <div class="trust-cards">
+          <article class="trust-card">
+            <div class="trust-card__top">
+              <div class="avatar">S</div>
+              <div>
+                <strong>Shane J.</strong>
+                <div class="stars stars--small" aria-label="5 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
               </div>
             </div>
-          {% endif %}
-        </section>
-      {% endfor %}
+            <p>Fast response time, clear instructions, and the packaging felt premium. Great Canada-wide experience.</p>
+          </article>
+
+          <article class="trust-card">
+            <div class="trust-card__top">
+              <div class="avatar">A</div>
+              <div>
+                <strong>Amira K.</strong>
+                <div class="stars stars--small" aria-label="4.5 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+              </div>
+            </div>
+            <p>Easy ordering by email and quick confirmation. Would buy again.</p>
+          </article>
+
+          <article class="trust-card">
+            <div class="trust-card__top">
+              <div class="avatar">M</div>
+              <div>
+                <strong>Marco L.</strong>
+                <div class="stars stars--small" aria-label="5 stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>Everything was smooth. The review counts on products make the catalog feel trustworthy.</p>
+          </article>
+        </div>
+      </section>
 
       <footer class="footer">
-        <div class="container footer__inner">
-          <span>© Premium Supply • Catalogue</span>
-          <span class="muted small">Cart → Summary → Checkout (fixed)</span>
+        <div class="footer__inner">
+          <div>
+            <h3>Premium Supply</h3>
+            <p>Canada-first storefront • Email ordering • Interac e‑Transfer payments</p>
+          </div>
+
+          <div class="footer__links">
+            <a href="#latest">Latest Drop</a>
+            <a href="#sale">Sale</a>
+            <a href="#order">How to order</a>
+            <a href="#trust">Reviews</a>
+          </div>
+
+          <p class="footer__fineprint">© 2026 Premium Supply. All rights reserved.</p>
         </div>
       </footer>
     </div>
   </main>
-
-  <!-- Backdrop (shared) -->
-  <div class="backdrop" id="backdrop" hidden></div>
-
-  <!-- Cart drawer -->
-  <aside class="drawer" id="drawer" aria-hidden="true">
-    <div class="drawer__head">
-      <strong>Your Cart</strong>
-      <button class="btn btn--outline" id="closeCart" type="button">Close</button>
-    </div>
-
-    <div class="drawer__body" id="cartItems"></div>
-
-    <div class="drawer__foot">
-      <div class="row">
-        <span>Total</span>
-        <strong id="cartTotal">$0.00 CAD</strong>
-      </div>
-
-      <div class="minrule" id="minRule">Minimum order is $75 CAD.</div>
-
-      <button class="btn btn--solid btn--full" id="reviewBtn" type="button">
-        Review cart summary
-      </button>
-
-      <p class="muted small" style="margin:10px 0 0">
-        Payment instructions are shown only after you place the order.
-      </p>
-    </div>
-  </aside>
-
-  <!-- Checkout modal (multi-step) -->
-  <div class="modal" id="modal" hidden>
-    <div class="panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="panel__head">
-        <strong id="modalTitle">Checkout</strong>
-        <button class="btn btn--outline" id="closeModal" type="button">Close</button>
-      </div>
-
-      <div class="panel__body">
-
-        <!-- STEP 0: Cart Summary -->
-        <section id="step0">
-          <p class="muted small">Confirm your order summary before checkout.</p>
-
-          <div id="summaryLines"></div>
-
-          <div class="divider"></div>
-
-          <div class="row">
-            <span>Order total</span>
-            <strong id="summaryTotal">$0.00 CAD</strong>
-          </div>
-
-          <div class="minrule" id="summaryMinRule">Minimum order is $75 CAD.</div>
-
-          <button class="btn btn--solid btn--full" id="toCheckoutBtn" type="button">
-            Continue to checkout
-          </button>
-
-          <button class="btn btn--ghost btn--full" id="backToCartBtn" type="button" style="margin-top:10px">
-            Back to cart
-          </button>
-        </section>
-
-        <!-- STEP 1: Customer Info + Place Order -->
-        <section id="step1" hidden>
-          <p class="muted small">Enter your information, then place the order to generate a confirmation number.</p>
-
-          <div class="formgrid">
-            <label class="field">
-              <span>Full name *</span>
-              <input id="custName" type="text" placeholder="Your name">
-            </label>
-            <label class="field">
-              <span>Phone *</span>
-              <input id="custPhone" type="tel" placeholder="( ___ ) ___-____">
-            </label>
-            <label class="field">
-              <span>City / Province *</span>
-              <input id="custCity" type="text" placeholder="Toronto, ON">
-            </label>
-            <label class="field">
-              <span>Address (optional)</span>
-              <input id="custAddr" type="text" placeholder="Street, unit, postal code">
-            </label>
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="row">
-            <span>Order total</span>
-            <strong id="checkoutTotal">$0.00 CAD</strong>
-          </div>
-
-          <div id="formError" class="danger" hidden>Please fill in: Full name, Phone, City / Province.</div>
-
-          <button class="btn btn--solid btn--full" id="placeOrderBtn" type="button" style="margin-top:10px">
-            Place Order
-          </button>
-
-          <p class="muted small" style="margin:10px 0 0">
-            Payment instructions appear after placing the order.
-          </p>
-        </section>
-
-        <!-- STEP 2: Payment Instructions -->
-        <section id="step2" hidden>
-          <p class="muted small">Order confirmation number</p>
-          <div class="copyrow">
-            <strong id="orderId" class="mono"></strong>
-            <button class="btn btn--outline" id="copyOrderId" type="button">Copy</button>
-          </div>
-
-          <div class="divider"></div>
-
-          <h3 class="h3">Interac e‑Transfer instructions</h3>
-          <ol class="olist">
-            <li>Send an Interac e‑Transfer to: <strong id="payEmail" class="mono"></strong></li>
-            <li>Include your order number in the transfer message/notes.</li>
-            <li>Click the button below to email your order request.</li>
-          </ol>
-
-          <div class="danger">
-            Account will be closed after 24h without payment.
-            <div class="muted small" id="expiryLine"></div>
-          </div>
-
-          <div class="divider"></div>
-
-          <a class="btn btn--solid btn--full" id="emailOrderBtn" href="#">
-            Email order request
-          </a>
-
-          <details class="summary">
-            <summary>View / copy order summary</summary>
-            <pre id="orderSummary"></pre>
-          </details>
-        </section>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="toast" id="toast" hidden>
-    <span>Added to cart</span>
-    <button class="btn btn--outline" id="toastViewCart" type="button">View cart</button>
-  </div>
-
-  <script>
-    // ======================
-    // CONFIG
-    // ======================
-    const ORDER_EMAIL = "orders@premiumsupply.ca";
-    const PAY_USER = "payments";
-    const PAY_DOMAIN = "premiumsupply.ca";
-
-    const MIN_ORDER_CAD = 75;
-    const POINTS_PER_DOLLAR = 1;
-
-    // IMPORTANT: variant-aware cart
-    const cartKey = "ps_cart_v3";
-    const loyaltyKey = "ps_loyalty_v2";
-    // ======================
-
-    const $ = (s) => document.querySelector(s);
-    const fmt = (n) => new Intl.NumberFormat(undefined, { style:"currency", currency:"CAD" }).format(Number(n||0));
-
-    const backdrop = $("#backdrop");
-    const drawer = $("#drawer");
-    const modal = $("#modal");
-
-    const cartCountEl = $("#cartCount");
-    const cartItemsEl = $("#cartItems");
-    const cartTotalEl = $("#cartTotal");
-    const minRuleEl = $("#minRule");
-
-    const summaryLinesEl = $("#summaryLines");
-    const summaryTotalEl = $("#summaryTotal");
-    const summaryMinRuleEl = $("#summaryMinRule");
-
-    const checkoutTotalEl = $("#checkoutTotal");
-    const formErrorEl = $("#formError");
-
-    const toast = $("#toast");
-    const toastViewCart = $("#toastViewCart");
-
-    // ---------- Cart model ----------
-    // cart = { "SKU" or "SKU::Variant": { sku, name, variant, unitPrice, qty } }
-
-    function lineKey(sku, variant){
-      return variant ? (sku + "::" + variant) : sku;
-    }
-
-    function getProductFromDOM(sku){
-      const el = document.querySelector('.product[data-sku="' + CSS.escape(sku) + '"]');
-      if(!el) return null;
-      return {
-        sku,
-        name: el.dataset.name || sku,
-        unitPrice: Number(el.dataset.price || 0)
-      };
-    }
-
-    function readCart(){
-      let raw = {};
-      try{ raw = JSON.parse(localStorage.getItem(cartKey) || "{}"); }catch(e){ raw = {}; }
-
-      // MIGRATION: old format was { sku: qtyNumber }
-      const needsMigration = raw && typeof raw === "object" && Object.values(raw).some(v => typeof v === "number");
-      if(needsMigration){
-        const migrated = {};
-        for(const sku in raw){
-          const qty = Number(raw[sku] || 0);
-          if(qty <= 0) continue;
-          const p = getProductFromDOM(sku);
-          migrated[sku] = {
-            sku,
-            name: p ? p.name : sku,
-            variant: "",
-            unitPrice: p ? p.unitPrice : 0,
-            qty
-          };
-        }
-        raw = migrated;
-        localStorage.setItem(cartKey, JSON.stringify(raw));
-      }
-      return (raw && typeof raw === "object") ? raw : {};
-    }
-
-    function saveCart(cart){
-      localStorage.setItem(cartKey, JSON.stringify(cart));
-    }
-
-    function countItems(cart){
-      return Object.values(cart).reduce((sum, item) => sum + (Number(item.qty)||0), 0);
-    }
-
-    function cartTotal(cart){
-      return Object.values(cart).reduce((sum, item) => sum + (Number(item.unitPrice||0) * (Number(item.qty)||0)), 0);
-    }
-
-    function openDrawer(){
-      drawer.classList.add("is-open");
-      drawer.setAttribute("aria-hidden","false");
-      backdrop.hidden = false;
-    }
-    function closeDrawer(){
-      drawer.classList.remove("is-open");
-      drawer.setAttribute("aria-hidden","true");
-      backdrop.hidden = true;
-    }
-
-    function openModal(){ modal.hidden = false; }
-    function closeModal(){ modal.hidden = true; }
-
-    function showToast(){
-      toast.hidden = false;
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(()=> toast.hidden = true, 2200);
-    }
-
-    let cart = readCart();
-
-    function renderCart(){
-      cartCountEl.textContent = countItems(cart);
-
-      const total = cartTotal(cart);
-      cartTotalEl.textContent = fmt(total) + " CAD";
-
-      if(total < MIN_ORDER_CAD){
-        const diff = MIN_ORDER_CAD - total;
-        minRuleEl.innerHTML = "<strong>Minimum order:</strong> $" + MIN_ORDER_CAD + " CAD. Add " + fmt(diff) + " more.";
-      }else{
-        minRuleEl.textContent = "Minimum order met.";
-      }
-
-      const keys = Object.keys(cart);
-      if(!keys.length){
-        cartItemsEl.innerHTML = '<p class="muted">Your cart is empty.</p>';
-        return;
-      }
-
-      cartItemsEl.innerHTML = keys.map((k)=>{
-        const it = cart[k];
-        const v = it.variant ? ` • Size: ${it.variant}` : "";
-        return `
-          <div class="line">
-            <div>
-              <strong>${it.name}</strong>
-              <div class="muted small">SKU: ${it.sku}${v} • ${fmt(it.unitPrice)} CAD</div>
-            </div>
-            <div class="qty">
-              <button class="qbtn" data-dec="${k}" type="button">−</button>
-              <strong>${it.qty}</strong>
-              <button class="qbtn" data-inc="${k}" type="button">+</button>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      cartItemsEl.querySelectorAll("[data-inc]").forEach((b)=>{
-        b.addEventListener("click", ()=>{
-          const key = b.getAttribute("data-inc");
-          cart[key].qty += 1;
-          saveCart(cart);
-          renderCart();
-        });
-      });
-
-      cartItemsEl.querySelectorAll("[data-dec]").forEach((b)=>{
-        b.addEventListener("click", ()=>{
-          const key = b.getAttribute("data-dec");
-          cart[key].qty -= 1;
-          if(cart[key].qty <= 0) delete cart[key];
-          saveCart(cart);
-          renderCart();
-        });
-      });
-    }
-
-    function renderSummary(){
-      const keys = Object.keys(cart);
-      const total = cartTotal(cart);
-
-      summaryTotalEl.textContent = fmt(total) + " CAD";
-      checkoutTotalEl.textContent = fmt(total) + " CAD";
-
-      if(!keys.length){
-        summaryLinesEl.innerHTML = '<p class="muted">No items in your cart.</p>';
-        $("#toCheckoutBtn").disabled = true;
-        summaryMinRuleEl.textContent = "Add items to continue.";
-        return;
-      }
-
-      summaryLinesEl.innerHTML = keys.map((k)=>{
-        const it = cart[k];
-        const v = it.variant ? ` • Size: ${it.variant}` : "";
-        return `
-          <div class="line">
-            <div>
-              <strong>${it.name}</strong>
-              <div class="muted small">SKU: ${it.sku}${v} • Qty: ${it.qty}</div>
-            </div>
-            <div class="mono">${fmt(it.unitPrice * it.qty)}</div>
-          </div>
-        `;
-      }).join("");
-
-      if(total < MIN_ORDER_CAD){
-        const diff = MIN_ORDER_CAD - total;
-        summaryMinRuleEl.innerHTML = "<strong>Minimum order:</strong> $" + MIN_ORDER_CAD + " CAD. Add " + fmt(diff) + " more.";
-        $("#toCheckoutBtn").disabled = true;
-      }else{
-        summaryMinRuleEl.textContent = "Minimum order met.";
-        $("#toCheckoutBtn").disabled = false;
-      }
-    }
-
-    function makeOrderId(){
-      const d = new Date();
-      const pad = (x) => String(x).padStart(2,"0");
-      const r = Math.floor(Math.random()*9000)+1000;
-      return `PS-${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}-${r}`;
-    }
-
-    function addLoyaltyPoints(total){
-      const earned = Math.floor(total * POINTS_PER_DOLLAR);
-      const data = JSON.parse(localStorage.getItem(loyaltyKey) || "{}");
-      data.points = Number(data.points || 0) + earned;
-      data.spend = Number(data.spend || 0) + total;
-      data.orders = Number(data.orders || 0) + 1;
-      data.updatedAt = Date.now();
-      localStorage.setItem(loyaltyKey, JSON.stringify(data));
-      return earned;
-    }
-
-    function buildOrderEmail(orderId, expiresAt, payEmail){
-      const lines = [];
-      lines.push("Premium Supply — Order Request");
-      lines.push("Order #: " + orderId);
-      lines.push("Expires: " + new Date(expiresAt).toLocaleString());
-      lines.push("");
-      lines.push("Customer:");
-      lines.push("- Name: " + ($("#custName").value || ""));
-      lines.push("- Phone: " + ($("#custPhone").value || ""));
-      lines.push("- City/Province: " + ($("#custCity").value || ""));
-      lines.push("- Address: " + ($("#custAddr").value || ""));
-      lines.push("");
-      lines.push("Items:");
-
-      let total = 0;
-      for(const k in cart){
-        const it = cart[k];
-        total += (it.unitPrice * it.qty);
-        const v = it.variant ? (" [" + it.variant + "]") : "";
-        lines.push("- " + it.name + " (SKU: " + it.sku + ")" + v + " x" + it.qty + " — " + fmt(it.unitPrice) + " CAD each");
-      }
-
-      lines.push("");
-      lines.push("Total: " + fmt(total) + " CAD");
-      lines.push("");
-      lines.push("Payment: Interac e-Transfer");
-      lines.push("Send to: " + payEmail);
-      lines.push("Include Order # in transfer notes: " + orderId);
-      lines.push("");
-      lines.push("Account will be closed after 24h without payment.");
-
-      return { body: lines.join("\\n"), total };
-    }
-
-    // ---------- Events ----------
-
-    // Quick add (non-variant items only)
-    document.querySelectorAll(".addBtn").forEach((btn)=>{
-      btn.addEventListener("click", ()=>{
-        const card = btn.closest(".product");
-        const sku = card.dataset.sku;
-        const name = card.dataset.name;
-        const unitPrice = Number(card.dataset.price || 0);
-
-        const key = lineKey(sku, "");
-        if(cart[key]) cart[key].qty += 1;
-        else cart[key] = { sku, name, variant:"", unitPrice, qty: 1 };
-
-        saveCart(cart);
-        renderCart();
-        showToast();
-      });
-    });
-
-    // Card click -> go to product page (unless clicking a button/link)
-    document.querySelectorAll(".product").forEach(card => {
-      card.style.cursor = "pointer";
-      card.addEventListener("click", (e) => {
-        if (e.target.closest("button, a, input, select, textarea, label")) return;
-        const url = card.getAttribute("data-url");
-        if (url) window.location.href = url;
-      });
-    });
-
-    // Toast opens cart
-    toastViewCart.addEventListener("click", ()=>{
-      toast.hidden = true;
-      renderCart();
-      openDrawer();
-    });
-
-    // Cart open/close
-    $("#openCart").addEventListener("click", ()=>{
-      renderCart();
-      openDrawer();
-    });
-    $("#closeCart").addEventListener("click", closeDrawer);
-
-    backdrop.addEventListener("click", ()=>{
-      closeDrawer();
-      closeModal();
-    });
-
-    // Review cart summary (opens step0)
-    $("#reviewBtn").addEventListener("click", ()=>{
-      renderSummary();
-      $("#step0").hidden = false;
-      $("#step1").hidden = true;
-      $("#step2").hidden = true;
-      openModal();
-    });
-
-    $("#closeModal").addEventListener("click", closeModal);
-
-    $("#backToCartBtn").addEventListener("click", ()=>{
-      closeModal();
-      renderCart();
-      openDrawer();
-    });
-
-    $("#toCheckoutBtn").addEventListener("click", ()=>{
-      renderSummary();
-      if($("#toCheckoutBtn").disabled) return;
-
-      formErrorEl.hidden = true;
-      $("#step0").hidden = true;
-      $("#step1").hidden = false;
-      $("#step2").hidden = true;
-      checkoutTotalEl.textContent = fmt(cartTotal(cart)) + " CAD";
-    });
-
-    $("#placeOrderBtn").addEventListener("click", ()=>{
-      const total = cartTotal(cart);
-      if(total < MIN_ORDER_CAD){
-        formErrorEl.hidden = false;
-        formErrorEl.textContent = "Minimum order is $75 CAD.";
-        return;
-      }
-
-      const name = $("#custName").value.trim();
-      const phone = $("#custPhone").value.trim();
-      const city = $("#custCity").value.trim();
-      if(!name || !phone || !city){
-        formErrorEl.hidden = false;
-        return;
-      }
-      formErrorEl.hidden = true;
-
-      const orderId = makeOrderId();
-      const expiresAt = Date.now() + 24*60*60*1000;
-      const payEmail = PAY_USER + "@" + PAY_DOMAIN;
-
-      const built = buildOrderEmail(orderId, expiresAt, payEmail);
-      addLoyaltyPoints(built.total);
-
-      $("#orderId").textContent = orderId;
-      $("#payEmail").textContent = payEmail;
-      $("#expiryLine").textContent = "Pay before: " + new Date(expiresAt).toLocaleString();
-      $("#orderSummary").textContent = built.body;
-
-      const subject = "Order Confirmation " + orderId;
-      const mailto = "mailto:" + encodeURIComponent(ORDER_EMAIL)
-        + "?subject=" + encodeURIComponent(subject)
-        + "&body=" + encodeURIComponent(built.body);
-
-      $("#emailOrderBtn").setAttribute("href", mailto);
-
-      // Clear cart AFTER placing order
-      cart = {};
-      saveCart(cart);
-      renderCart();
-
-      $("#step0").hidden = true;
-      $("#step1").hidden = true;
-      $("#step2").hidden = false;
-    });
-
-    $("#copyOrderId").addEventListener("click", async ()=>{
-      try{
-        await navigator.clipboard.writeText($("#orderId").textContent);
-        $("#copyOrderId").textContent = "Copied";
-        setTimeout(()=> $("#copyOrderId").textContent = "Copy", 1200);
-      }catch(e){
-        $("#copyOrderId").textContent = "Copy failed";
-        setTimeout(()=> $("#copyOrderId").textContent = "Copy", 1200);
-      }
-    });
-
-    // Init
-    renderCart();
-  </script>
 </body>
 </html>
