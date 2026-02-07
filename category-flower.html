@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premium Supply — Flower</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <input class="toggle" type="checkbox" id="catDrawerToggle">
+  <input class="toggle" type="checkbox" id="searchToggle">
+
+  <div class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+    <label for="searchToggle" class="search-modal__overlay" aria-hidden="true"></label>
+    <div class="search-modal__panel">
+      <div class="search-modal__head">
+        <h2 class="search-modal__title" id="searchTitle">Search</h2>
+        <label class="icon-btn" for="searchToggle" aria-label="Close search"><i class="fa-solid fa-xmark"></i></label>
+      </div>
+      <form class="search-form" action="https://duckduckgo.com/" method="get" target="_blank">
+        <label class="sr-only" for="q">Search</label>
+        <input id="q" name="q" type="search" value="site:premiumsupply.ca flower " placeholder="Search…">
+        <button class="btn btn--solid" type="submit">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+      <p class="muted" style="margin:10px 0 0;">Replace <span class="mono">premiumsupply.ca</span> with your domain.</p>
+    </div>
+  </div>
+
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span class="topbar__badge"><i class="fa-solid fa-maple-leaf"></i> 100% Canadian</span>
+      <p class="topbar__text">Category: Flower</p>
+      <a class="topbar__link" href="products.html">All products</a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <label class="icon-btn" for="catDrawerToggle" aria-label="Open categories"><i class="fa-solid fa-bars"></i></label>
+
+      <a class="brand" href="index.html" aria-label="Premium Supply home">
+        <svg class="brand__logo" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="18" fill="#6A2DFF"/>
+        </svg>
+        <span class="brand__text">
+          <span class="brand__name">Premium Supply</span>
+          <span class="brand__tag">Flower</span>
+        </span>
+      </a>
+
+      <div class="header__right">
+        <label class="icon-btn" for="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></label>
+        <a class="icon-btn" href="products.html" aria-label="All products"><i class="fa-solid fa-store"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <label for="catDrawerToggle" class="drawer-backdrop" aria-hidden="true"></label>
+  <aside class="drawer" aria-label="Shop by category">
+    <div class="drawer__head">
+      <div class="drawer__title"><i class="fa-solid fa-list"></i> Shop by category</div>
+      <label class="icon-btn" for="catDrawerToggle" aria-label="Close"><i class="fa-solid fa-xmark"></i></label>
+    </div>
+    <nav class="cat-nav">
+      <a class="cat-link" href="products.html">All Products (High → Low)</a>
+      <div class="cat-sep"></div>
+      <a class="cat-link" href="category-flower.html">Flower</a>
+      <a class="cat-link" href="category-concentrates.html">Concentrates</a>
+      <a class="cat-link" href="category-edibles.html">Edibles</a>
+      <a class="cat-link" href="category-vape.html">Vape</a>
+      <a class="cat-link" href="category-cbd.html">CBD</a>
+    </nav>
+  </aside>
+
+  <main class="section">
+    <div class="container">
+      <label class="cat-cta" for="catDrawerToggle"><i class="fa-solid fa-list"></i> SHOP BY CATEGORY</label>
+
+      <section class="block">
+        <div class="block__head">
+          <h1 class="block__title">Flower</h1>
+          <p class="block__sub">Browse this category or use All Products to see everything.</p>
+        </div>
+
+        <div class="products-grid">
+          <!-- Add your flower products here (copy product tiles from products.html) -->
+          <article class="product-tile">
+            <div class="product-tile__media">
+              <ul class="tag-stack">
+                <li class="tagchip tagchip--yellow">Citrus</li>
+                <li class="tagchip tagchip--purple">Deep</li>
+              </ul>
+              <div class="img-square" aria-hidden="true"></div>
+              <div class="type-strip type-strip--hybrid">Hybrid</div>
+            </div>
+
+            <div class="product-tile__body">
+              <div class="pill-row">
+                <span class="pill pill--tier">AAA+ • Premium</span>
+                <span class="pill pill--craft">Craft</span>
+              </div>
+
+              <h2 class="product-tile__title">Aurora Reserve | Premium</h2>
+
+              <div class="rating">
+                <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <div class="reviews">22 reviews</div>
+              </div>
+
+              <div class="price price--green">$85.00 – $820.00 CAD</div>
+
+              <form class="buy-form"
+                action="mailto:orders@premiumsupply.ca?subject=Premium%20Supply%20Order%20-%20PS-FL-001"
+                method="post" enctype="text/plain">
+                <input type="hidden" name="SKU" value="PS-FL-001">
+                <input type="hidden" name="Product" value="Aurora Reserve | Premium">
+                <label class="qty">
+                  <span>Quantity</span>
+                  <input type="number" name="Quantity" min="1" value="1">
+                </label>
+                <button class="btn btn--solid btn--full" type="submit">Buy Now</button>
+                <p class="hint">Payment via Interac e‑Transfer after confirmation.</p>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <div>
+            <h3>Premium Supply</h3>
+            <p>Canada-first storefront</p>
+          </div>
+          <div class="footer__links">
+            <a href="products.html">All Products</a>
+            <a href="category-concentrates.html">Concentrates</a>
+            <a href="category-edibles.html">Edibles</a>
+          </div>
+          <p class="footer__fineprint">© 2026 Premium Supply. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
