@@ -786,3 +786,62 @@ img{ max-width:100%; display:block; }
 
 /* HARD KILL any bubble/notes UI (if older code existed) */
 .tag-stack, .tagchip, .bubble, .note-bubble { display:none !important; }
+/* =========================
+   Dynamic qty + buy layout
+   (prevents overflow, adapts to card width)
+========================= */
+
+/* Make the buy section responsive: row when possible, stack when needed */
+.buy-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:stretch;
+}
+
+/* Quantity block grows, but can wrap */
+.buy-row .qty{
+  flex: 1 1 210px;     /* grows, but tries to stay wide */
+  min-width: 190px;    /* prevents ugly squish */
+}
+
+/* Buy button becomes a “column” next to qty, but can wrap */
+.buy-row > .btn{
+  flex: 1 1 140px;
+  min-width: 140px;
+
+  /* stretch to match qty height when side-by-side */
+  height: auto;
+  min-height: 46px;
+}
+
+/* On very small screens: stack both full width */
+@media (max-width: 420px){
+  .buy-row .qty,
+  .buy-row > .btn{
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+}
+
+/* Qty bar: allow wrap so text never forces overflow */
+.qty{
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* Let label shrink nicely */
+.qty span{
+  flex: 1 1 90px;
+}
+
+/* Stepper stays together */
+.qty-stepper{
+  flex: 0 0 auto;
+}
+
+/* Make the number field responsive (not a hard fixed width) */
+.qty-input{
+  width: clamp(46px, 16vw, 58px);
+}
