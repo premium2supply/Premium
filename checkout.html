@@ -10,6 +10,7 @@
 </head>
 
 <body data-page="checkout">
+  <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
       <span class="topbar__badge"><i class="fa-solid fa-maple-leaf"></i> 100% Canadian</span>
@@ -21,73 +22,82 @@
   <main class="section">
     <div class="container">
       <div class="cart-layout">
+        <!-- LEFT: actions + confirmation -->
         <section class="card">
-          <h1 class="block__title" style="margin:0 0 10px;">Delivery details</h1>
+          <h1 class="block__title" style="margin:0 0 8px;">Place your order</h1>
+          <p class="muted" style="margin:0 0 12px;">
+            Review your cart on the right. When you click <strong>Place order</strong>, we’ll generate an Order ID and show your order summary + payment instructions.
+            <br><br>
+            <strong>No external services are used.</strong> Your confirmation is stored on this device/browser.
+          </p>
 
-          <form class="checkout-form" id="checkoutForm">
-            <div class="field">
-              <label for="fullName">Full name</label>
-              <input id="fullName" name="fullName" required>
+          <button class="btn btn--solid btn--full" id="placeOrderBtn" type="button">
+            Place order
+          </button>
+
+          <a class="btn btn--outline btn--full" href="products.html" style="margin-top:10px;">
+            Continue shopping
+          </a>
+
+          <!-- Confirmation panel -->
+          <div id="confirmWrap" style="display:none; margin-top:14px;">
+            <div class="alert-danger" id="policyWarning">
+              If you don't pay in the next 24 hours for the order your account will be closed in 48 hours
             </div>
 
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required>
+            <div class="kv">
+              <span class="label">Order ID:</span>
+              <span class="value mono" id="orderIdText">—</span>
             </div>
 
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" required>
+            <div class="kv">
+              <span class="label">Pay by:</span>
+              <span class="value" id="payByText">—</span>
             </div>
 
-            <div class="field">
-              <label for="address">Address</label>
-              <input id="address" name="address" required>
+            <div class="kv">
+              <span class="label">Time left:</span>
+              <span class="value" id="timeLeftText">—</span>
             </div>
 
-            <div class="field">
-              <label for="city">City</label>
-              <input id="city" name="city" required>
+            <div class="card" style="margin-top:12px;">
+              <h2 class="block__title" style="margin:0 0 8px; font-size:1.15rem;">Payment instructions</h2>
+              <p class="muted" style="margin:0;">
+                Send <strong>Interac e‑Transfer</strong> to:
+                <span class="mono" id="payEmail">payments@premiumsupply.ca</span>
+                <br>
+                Use your <strong>Order ID</strong> as the reference/message:
+                <span class="mono" id="payRef">—</span>
+              </p>
             </div>
 
-            <div class="field">
-              <label for="province">Province</label>
-              <select id="province" name="province" required>
-                <option value="">Select…</option>
-                <option>AB</option><option>BC</option><option>MB</option><option>NB</option><option>NL</option>
-                <option>NS</option><option>NT</option><option>NU</option><option>ON</option><option>PE</option>
-                <option>QC</option><option>SK</option><option>YT</option>
-              </select>
+            <h3 class="block__title" style="margin:14px 0 8px; font-size:1.05rem;">Order summary</h3>
+            <div class="codebox" id="summaryBox">—</div>
+
+            <div class="confirm-actions">
+              <button class="btn btn--outline" type="button" id="copySummaryBtn">
+                Copy summary
+              </button>
+              <button class="btn btn--outline" type="button" id="downloadSummaryBtn">
+                Download summary
+              </button>
+              <button class="btn btn--outline" type="button" id="restoreCartBtn">
+                Restore cart
+              </button>
+              <a class="btn btn--solid" href="products.html">
+                Done
+              </a>
             </div>
 
-            <div class="field">
-              <label for="postal">Postal code</label>
-              <input id="postal" name="postal" required>
-            </div>
-
-            <div class="field">
-              <label for="notes">Order notes (optional)</label>
-              <textarea id="notes" name="notes" rows="4"></textarea>
-            </div>
-
-            <!-- filled by JS -->
-            <input type="hidden" name="orderId" id="orderId">
-            <textarea class="sr-only" name="orderSummary" id="orderSummary"></textarea>
-
-            <button class="btn btn--solid btn--full" type="submit">Place order</button>
             <p class="muted" style="margin:10px 0 0;">
-              Payment: Interac e‑Transfer after confirmation (details shown after you place the order).
+              Tip: screenshot this page or download the summary for your records.
             </p>
-          </form>
-
-          <div id="checkoutResult" class="card" style="display:none; margin-top:14px;">
-            <h2 class="block__title" style="margin:0 0 6px;">Order placed ✅</h2>
-            <p class="muted" id="resultText" style="margin:0;"></p>
           </div>
         </section>
 
+        <!-- RIGHT: review -->
         <aside class="card">
-          <h2 class="block__title" style="margin:0 0 8px;">Order review</h2>
+          <h2 class="block__title" style="margin:0 0 8px;">Review</h2>
           <div id="reviewItems"></div>
 
           <div class="hr"></div>
@@ -96,7 +106,7 @@
           <div class="summary-row"><span>Total</span> <strong id="total">$0.00</strong></div>
 
           <p class="muted" style="margin:10px 0 0;">
-            Proudly Canadian. We confirm totals + payment instructions after checkout.
+            Need to change quantity or remove items? <a href="cart.html" style="text-decoration:underline; font-weight:950;">Edit cart</a>.
           </p>
         </aside>
       </div>
@@ -107,12 +117,12 @@
     const PS = {
       currency: "CAD",
       cartKey: "ps_cart_v1",
+      lastOrderKey: "ps_last_order_v1",
+      // Update this to your real Interac email:
+      paymentEmail: "payments@premiumsupply.ca",
+      // optional shipping logic:
       freeShipOver: 150,
-      flatShip: 15,
-
-      // ✅ Replace this with your Formspree endpoint:
-      // Example: "https://formspree.io/f/abcdwxyz"
-      FORMSPREE_ENDPOINT: ""
+      flatShip: 15
     };
 
     const $ = (s, el=document) => el.querySelector(s);
@@ -120,6 +130,9 @@
 
     function readCart(){ try { return JSON.parse(localStorage.getItem(PS.cartKey) || "{}"); } catch { return {}; } }
     function writeCart(cart){ localStorage.setItem(PS.cartKey, JSON.stringify(cart)); }
+
+    function readLastOrder(){ try { return JSON.parse(localStorage.getItem(PS.lastOrderKey) || "null"); } catch { return null; } }
+    function writeLastOrder(order){ localStorage.setItem(PS.lastOrderKey, JSON.stringify(order)); }
 
     function calc(cart){
       const items = Object.values(cart);
@@ -135,23 +148,37 @@
       return `PS-${now}-${rnd}`;
     }
 
-    function buildSummary(orderId, cart, totals, formData){
+    function fmtDateTime(ms){
+      return new Intl.DateTimeFormat("en-CA", { dateStyle:"medium", timeStyle:"short" }).format(new Date(ms));
+    }
+
+    function fmtCountdown(msLeft){
+      const s = Math.max(0, Math.floor(msLeft / 1000));
+      const h = Math.floor(s / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+      return `${h}h ${m}m ${sec}s`;
+    }
+
+    function buildSummary(order){
       const lines = [];
-      lines.push(`Order ID: ${orderId}`);
-      lines.push(`Name: ${formData.fullName}`);
-      lines.push(`Email: ${formData.email}`);
-      lines.push(`Phone: ${formData.phone}`);
-      lines.push(`Address: ${formData.address}, ${formData.city}, ${formData.province}, ${formData.postal}`);
-      if(formData.notes) lines.push(`Notes: ${formData.notes}`);
+      lines.push(`Premium Supply — Order Summary`);
+      lines.push(`Order ID: ${order.orderId}`);
+      lines.push(`Created: ${fmtDateTime(order.createdAt)}`);
+      lines.push(`Pay by: ${fmtDateTime(order.payByAt)} (24 hours)`);
+      lines.push(`Account closure time: ${fmtDateTime(order.closeAt)} (48 hours)`);
       lines.push("");
       lines.push("Items:");
-      totals.items.forEach(i => {
+      order.items.forEach(i => {
         lines.push(`- ${i.qty} x ${i.name} @ ${money(i.price)} (${i.category} • ${i.tier} • ${i.type})`);
       });
       lines.push("");
-      lines.push(`Subtotal: ${money(totals.subtotal)}`);
-      lines.push(`Shipping: ${money(totals.shipping)}`);
-      lines.push(`Total: ${money(totals.total)}`);
+      lines.push(`Subtotal: ${money(order.subtotal)}`);
+      lines.push(`Shipping: ${money(order.shipping)}`);
+      lines.push(`Total: ${money(order.total)}`);
+      lines.push("");
+      lines.push(`Payment: Interac e‑Transfer to ${PS.paymentEmail}`);
+      lines.push(`Reference/Message: ${order.orderId}`);
       return lines.join("\n");
     }
 
@@ -159,84 +186,138 @@
       const cart = readCart();
       const totals = calc(cart);
 
-      $("#reviewItems").innerHTML = totals.items.length
-        ? totals.items.map(i => `
-            <div class="cart-item" style="grid-template-columns: 60px 1fr;">
-              <div class="cart-thumb" style="width:60px;height:60px;"></div>
-              <div class="cart-meta">
-                <h3 style="margin:0;font-size:.98rem;">${i.name}</h3>
-                <div class="meta">${i.category} • ${i.tier} • ${i.type}</div>
-                <div class="meta"><strong>${i.qty}</strong> × ${money(i.price)}</div>
-              </div>
-            </div>
-          `).join("")
-        : `<p class="muted">Your cart is empty. <a href="products.html" style="text-decoration:underline;font-weight:900;">Shop products</a></p>`;
-
       $("#subtotal").textContent = money(totals.subtotal);
       $("#shipping").textContent = money(totals.shipping);
       $("#total").textContent = money(totals.total);
+
+      if(!totals.items.length){
+        $("#reviewItems").innerHTML =
+          `<p class="muted">Your cart is empty. <a href="products.html" style="text-decoration:underline;font-weight:950;">Shop products</a>.</p>`;
+        $("#placeOrderBtn").disabled = true;
+        $("#placeOrderBtn").style.opacity = ".6";
+        $("#placeOrderBtn").style.cursor = "not-allowed";
+        return;
+      }
+
+      $("#placeOrderBtn").disabled = false;
+      $("#placeOrderBtn").style.opacity = "1";
+      $("#placeOrderBtn").style.cursor = "pointer";
+
+      $("#reviewItems").innerHTML = totals.items.map(i => `
+        <div class="cart-item" style="grid-template-columns: 60px 1fr;">
+          <div class="cart-thumb" style="width:60px;height:60px;" aria-hidden="true"></div>
+          <div class="cart-meta">
+            <h3 style="margin:0;font-size:.98rem;">${i.name}</h3>
+            <div class="meta">${i.category} • ${i.tier} • ${i.type}</div>
+            <div class="meta"><strong>${i.qty}</strong> × ${money(i.price)}</div>
+          </div>
+        </div>
+      `).join("");
     }
 
-    renderReview();
+    let countdownTimer = null;
 
-    $("#checkoutForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+    function showConfirmation(order){
+      // stop old timer
+      if(countdownTimer) window.clearInterval(countdownTimer);
 
+      $("#confirmWrap").style.display = "block";
+      $("#orderIdText").textContent = order.orderId;
+      $("#payByText").textContent = fmtDateTime(order.payByAt);
+      $("#payEmail").textContent = PS.paymentEmail;
+      $("#payRef").textContent = order.orderId;
+
+      const summary = buildSummary(order);
+      $("#summaryBox").textContent = summary;
+
+      // live countdown
+      function tick(){
+        const msLeft = order.payByAt - Date.now();
+        $("#timeLeftText").textContent = fmtCountdown(msLeft);
+      }
+      tick();
+      countdownTimer = window.setInterval(tick, 1000);
+
+      // Copy
+      $("#copySummaryBtn").onclick = async () => {
+        try{
+          await navigator.clipboard.writeText(summary);
+          $("#copySummaryBtn").textContent = "Copied ✓";
+          setTimeout(() => $("#copySummaryBtn").textContent = "Copy summary", 1200);
+        }catch{
+          alert("Copy failed on this browser. Please select and copy manually.");
+        }
+      };
+
+      // Download
+      $("#downloadSummaryBtn").onclick = () => {
+        const blob = new Blob([summary], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${order.orderId}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      };
+
+      // Restore cart
+      $("#restoreCartBtn").onclick = () => {
+        if(order.cartSnapshot){
+          writeCart(order.cartSnapshot);
+          location.href = "cart.html";
+        } else {
+          alert("No cart snapshot found to restore.");
+        }
+      };
+    }
+
+    // Place order action
+    $("#placeOrderBtn").addEventListener("click", () => {
       const cart = readCart();
       const totals = calc(cart);
+
       if(!totals.items.length){
         alert("Your cart is empty.");
         return;
       }
 
-      const orderId = makeOrderId();
-      $("#orderId").value = orderId;
+      const createdAt = Date.now();
+      const order = {
+        orderId: makeOrderId(),
+        createdAt,
+        payByAt: createdAt + 24 * 60 * 60 * 1000,
+        closeAt: createdAt + 48 * 60 * 60 * 1000,
 
-      const formData = {
-        fullName: $("#fullName").value.trim(),
-        email: $("#email").value.trim(),
-        phone: $("#phone").value.trim(),
-        address: $("#address").value.trim(),
-        city: $("#city").value.trim(),
-        province: $("#province").value,
-        postal: $("#postal").value.trim(),
-        notes: $("#notes").value.trim()
+        items: totals.items,
+        subtotal: totals.subtotal,
+        shipping: totals.shipping,
+        total: totals.total,
+
+        // store cart snapshot so the user can restore it
+        cartSnapshot: cart
       };
 
-      const summary = buildSummary(orderId, cart, totals, formData);
-      $("#orderSummary").value = summary;
+      // Save "last order" locally
+      writeLastOrder(order);
 
-      if(!PS.FORMSPREE_ENDPOINT){
-        alert("Checkout endpoint not configured. Set FORMSPREE_ENDPOINT in checkout.html to receive orders.");
-        return;
-      }
+      // Optional: clear cart after placing order (typical checkout UX)
+      writeCart({});
 
-      // send to Formspree
-      const fd = new FormData($("#checkoutForm"));
-
-      try{
-        const res = await fetch(PS.FORMSPREE_ENDPOINT, {
-          method: "POST",
-          headers: { "Accept": "application/json" },
-          body: fd
-        });
-
-        if(!res.ok) throw new Error("Order submission failed.");
-
-        // clear cart
-        writeCart({});
-
-        $("#checkoutResult").style.display = "block";
-        $("#resultText").textContent =
-          `Order ${orderId} submitted. Next step: you'll receive confirmation + Interac e‑Transfer instructions.`;
-
-        // refresh review UI
-        renderReview();
-      }catch(err){
-        console.error(err);
-        alert("Could not submit the order. Please try again.");
-      }
+      renderReview();
+      showConfirmation(order);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    // On load: render review + show last saved order (if exists)
+    renderReview();
+
+    const last = readLastOrder();
+    if(last && last.orderId){
+      // If there is a saved order, show it so refresh doesn't lose it
+      showConfirmation(last);
+    }
   </script>
 </body>
 </html>
