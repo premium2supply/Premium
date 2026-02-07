@@ -661,3 +661,110 @@ img.img-square{
   height: 100%;
   object-fit: cover;
 }
+/* =====================================================
+   PURPLE SPACE THEME OVERRIDE (stick to brand)
+   Paste at the very bottom of styles.css
+===================================================== */
+
+:root{
+  --bg: #05020c;
+  --surface: rgba(255,255,255,.06);
+  --text: #f6f7fb;
+  --muted: rgba(246,247,251,.70);
+  --border: rgba(255,255,255,.14);
+
+  --brand-900:#12051f;
+  --brand-700:#2b0c4a;
+  --brand-600:#43106b;
+
+  --accent-gold:#d9b56b;
+  --accent-mint:#6ee7b7;
+
+  --shadow: 0 18px 60px rgba(0,0,0,.45);
+}
+
+body{
+  color: var(--text);
+  background:
+    radial-gradient(1200px 900px at 25% 15%, rgba(106,45,255,.25), transparent 60%),
+    radial-gradient(900px 700px at 80% 70%, rgba(217,181,107,.14), transparent 60%),
+    linear-gradient(180deg, #04010a, #0a0314 40%, #04010a) !important;
+}
+
+a{ color: var(--text); }
+
+.topbar{
+  background: linear-gradient(90deg, rgba(43,12,74,.95), rgba(67,16,107,.95)) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+
+.header{
+  background: rgba(12,4,22,.72) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.icon-btn{
+  background: rgba(255,255,255,.06) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+.brand__tag{ color: var(--muted) !important; }
+
+.drawer{
+  background: rgba(10,4,18,.92) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+.cat-link{
+  background: rgba(255,255,255,.06) !important;
+  border-color: rgba(255,255,255,.10) !important;
+}
+.cat-link:hover{ background: rgba(255,255,255,.10) !important; }
+
+.card,
+.product-tile,
+.search-modal__panel,
+.promo-modal__panel{
+  background: rgba(255,255,255,.06) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.pill{
+  background: rgba(255,255,255,.06) !important;
+  border-color: rgba(255,255,255,.14) !important;
+  color: var(--text) !important;
+}
+.pill--tier{
+  background: rgba(217,181,107,.16) !important;
+  border-color: rgba(217,181,107,.35) !important;
+  color: #f6e9c9 !important;
+}
+.pill--tag{
+  background: rgba(201,177,255,.14) !important;
+  border-color: rgba(201,177,255,.28) !important;
+  color: #eadfff !important;
+}
+
+.qty{
+  background: rgba(0,0,0,.25) !important;
+  border-color: rgba(255,255,255,.14) !important;
+}
+.qty-btn,
+.qty-input,
+.search-box input[type="search"],
+.field input, .field select, .field textarea{
+  background: rgba(0,0,0,.28) !important;
+  border-color: rgba(255,255,255,.16) !important;
+  color: var(--text) !important;
+}
+
+::placeholder{ color: rgba(246,247,251,.55) !important; }
+
+.price{ color: var(--accent-mint) !important; }
+
+.footer{
+  background: rgba(10,4,18,.92) !important;
+  border: 1px solid var(--border) !important;
+}
